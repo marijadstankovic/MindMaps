@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MindMaps.Data.Entities
 {
-    public class User
+    public class User : IEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [MaxLength(100)]
         public string Name { get; set; }
