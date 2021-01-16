@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MindMaps.Data.Entities
 {
-    public class RoomUser
+    public class RoomUser : IEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public int RoomID { get; set; }
 

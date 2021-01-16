@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MindMaps.Data.Entities
 {
-    public class MindMap
+    public class MindMap : IEntity
     {
         public int Id { set; get; }
         public String Name;

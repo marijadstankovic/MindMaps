@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MindMaps.Data.Entities
 {
-    public class Node
+    public class Node : IEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string XMLText { get; set; }
 

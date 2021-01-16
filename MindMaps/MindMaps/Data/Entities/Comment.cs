@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MindMaps.Data.Entities
 {
-    public class Comment
+    public class Comment : IEntity
     {
         public int Id { set; get; }
         [StringLength(100)]
