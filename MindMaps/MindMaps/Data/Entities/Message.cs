@@ -12,7 +12,7 @@ namespace MindMaps.Data.Entities
         public int Id { get; set; }
         public User User { get; set; }
 
-        [StringLength(60)]
+        [StringLength(100)]
         public String Text { get; set; }
         public DateTime DataTime { get; set; }
         public Chat Chat { set; get; }
