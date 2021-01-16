@@ -7,5 +7,8 @@ namespace MindMaps.Data.Entities
 {
     public class Chat
     {
+        public int Id { get; set; }
+        public Room Room { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }
