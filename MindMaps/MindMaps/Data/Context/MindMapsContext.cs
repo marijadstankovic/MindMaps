@@ -22,7 +22,7 @@ namespace MindMaps.Data.Context
         public MindMapsContext(DbContextOptions<MindMapsContext> options) : base(options)
         {
         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -37,11 +37,17 @@ namespace MindMaps.Data.Context
                     Password = "admin@admin",
                 }
                 );
+            modelBuilder.Entity<Chat>().HasData(
+                new Chat{ 
+                    Id = 1
+                }
+                );
             Room room = new Room
             {
                 Id = 1,
                 Name = "soba",
                 DateOfCreation = DateTime.Now,
+                ChatID =1
             };
 
             modelBuilder.Entity<Room>().HasData(
@@ -52,7 +58,6 @@ namespace MindMaps.Data.Context
                 new MindMap
                 {
                     Id = 1,
-                    Room = room,
                     DateOfCreation = DateTime.Now,
                     Name = "prva mm"
                 }

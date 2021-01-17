@@ -29,6 +29,12 @@ namespace MindMaps.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Chats");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        });
                 });
 
             modelBuilder.Entity("MindMaps.Data.Entities.Comment", b =>
@@ -107,6 +113,13 @@ namespace MindMaps.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("MindMaps");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfCreation = new DateTime(2021, 1, 17, 14, 57, 35, 143, DateTimeKind.Local).AddTicks(4850)
+                        });
                 });
 
             modelBuilder.Entity("MindMaps.Data.Entities.Node", b =>
@@ -135,6 +148,24 @@ namespace MindMaps.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Nodes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MindMapID = 1,
+                            UserID = 1,
+                            XMLID = 2,
+                            XMLText = "<Rect label='Rectangle' href='' id='2'> < mxCell vertex = '1' parent = '1' >   < mxGeometry x = '120' y = '140' width = '80' height = '40' as= 'geometry' /></ mxCell ></ Rect > "
+                        },
+                        new
+                        {
+                            Id = 2,
+                            MindMapID = 1,
+                            UserID = 1,
+                            XMLID = 3,
+                            XMLText = " <Shape label='Shape' href='' id='3'> < mxCell style = 'ellipse' vertex = '1' parent = '1' >  < mxGeometry x = '340' y = '160' width = '60' height = '60' as= 'geometry' />  </ mxCell >    </ Shape > "
+                        });
                 });
 
             modelBuilder.Entity("MindMaps.Data.Entities.Room", b =>
@@ -160,6 +191,15 @@ namespace MindMaps.Migrations
                         .IsUnique();
 
                     b.ToTable("Rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ChatID = 1,
+                            DateOfCreation = new DateTime(2021, 1, 17, 14, 57, 35, 137, DateTimeKind.Local).AddTicks(9218),
+                            Name = "soba"
+                        });
                 });
 
             modelBuilder.Entity("MindMaps.Data.Entities.RoomUser", b =>
@@ -208,6 +248,16 @@ namespace MindMaps.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "admin@admin",
+                            LastName = "Adminovski",
+                            Name = "Admin",
+                            Password = "admin@admin"
+                        });
                 });
 
             modelBuilder.Entity("MindMaps.Data.Entities.Comment", b =>
