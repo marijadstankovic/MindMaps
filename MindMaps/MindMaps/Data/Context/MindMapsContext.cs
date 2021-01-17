@@ -22,5 +22,62 @@ namespace MindMaps.Data.Context
         public MindMapsContext(DbContextOptions<MindMapsContext> options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    Name = "Admin",
+                    LastName = "Adminovski",
+                    Email = "admin@admin",
+                    Password = "admin@admin",
+                }
+                );
+            Room room = new Room
+            {
+                Id = 1,
+                Name = "soba",
+                DateOfCreation = DateTime.Now,
+            };
+
+            modelBuilder.Entity<Room>().HasData(
+                room
+                );
+
+            modelBuilder.Entity<MindMap>().HasData(
+                new MindMap
+                {
+                    Id = 1,
+                    Room = room,
+                    DateOfCreation = DateTime.Now,
+                    Name = "prva mm"
+                }
+                );
+
+
+
+            modelBuilder.Entity<Node>().HasData(
+                new Node 
+                { 
+                    Id = 1,
+                    XMLID = 2,
+                    MindMapID = 1,
+                    XMLText = "<Rect label='Rectangle' href='' id='2'> < mxCell vertex = '1' parent = '1' >   < mxGeometry x = '120' y = '140' width = '80' height = '40' as= 'geometry' /></ mxCell ></ Rect > ",
+                    UserID = 1
+                },
+                new Node
+                {
+                    Id = 2,
+                    XMLID = 3,
+                    MindMapID = 1,
+                    XMLText = " <Shape label='Shape' href='' id='3'> < mxCell style = 'ellipse' vertex = '1' parent = '1' >  < mxGeometry x = '340' y = '160' width = '60' height = '60' as= 'geometry' />  </ mxCell >    </ Shape > ",
+                    UserID = 1,
+                }
+                );
+        }
     }
 }
