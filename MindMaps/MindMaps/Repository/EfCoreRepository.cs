@@ -46,7 +46,7 @@ namespace MindMaps.Repository
             return await context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<ICollection<TEntity>> GetAll()
+        public async Task<List<TEntity>> GetAll()
         {
             return await context.Set<TEntity>().ToListAsync();
         }
