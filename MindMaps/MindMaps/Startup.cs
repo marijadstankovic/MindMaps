@@ -9,6 +9,8 @@ using MindMaps.Data.Context;
 using MindMaps.Repository;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
+using MindMaps.Hubs;
 
 namespace MindMaps
 {
@@ -41,6 +43,8 @@ namespace MindMaps
             services.AddScoped<RoomRepository>();
             services.AddScoped<RoomUserRepository>();
             services.AddScoped<UserRepository>();
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,8 +73,10 @@ namespace MindMaps
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                        name: "default",
+                        pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapHub<ChatHub>("/ChatHub");
             });
 
             app.UseSpa(spa =>
