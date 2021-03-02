@@ -10,4 +10,6 @@ import { ChatComponent } from './chat/chat.component';
     CommonModule
   ]
 })
-export class ChatModule { }
+export class ChatModule {
+
+}
