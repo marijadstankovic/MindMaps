@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as signalR from '@microsoft/signalr';
+import * as signalR from '@aspnet/signalr';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,7 +14,11 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
-      .withUrl('http://localhost:44377/ChatHub')
+      .withUrl('https://localhost:5001/ChatHub',
+        {
+          skipNegotiation: true,
+          transport: signalR.HttpTransportType.WebSockets
+        }) //44377
       .build();
 
     connection.start().then(function () {
