@@ -1,6 +1,17 @@
+
 <p>chat works!</p>
 
 <input />
-<button>Posalji</button>
+<button (click)="onClick()">Posalji</button>
 
-<label id="rsvMessage"></label>
+<ul>
+  <li *ngFor="let message of serviceSignalR.bradcastedData">
+
+    <h3>
+      {{ message.Name }}
+    </h3>
+
+  </li>
+</ul>
+
+

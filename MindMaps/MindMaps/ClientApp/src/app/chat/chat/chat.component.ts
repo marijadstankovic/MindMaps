@@ -13,6 +13,11 @@ export class ChatComponent implements OnInit {
 
   constructor(public serviceSignalR: ServiceSignalR, private http: HttpClient) {}
 
+
+  public onClick = (event) => {
+    console.log(event);
+    this.serviceSignalR.broadcastData();
+  }
   ngOnInit() {
    /* const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
@@ -36,12 +41,12 @@ export class ChatComponent implements OnInit {
     */
     this.serviceSignalR.startConnection();
     this.serviceSignalR.addTransferDataListener();
-    this.http.get('https://localhost:5001/api/messages')
+    //this.serviceSignalR.addBroadcastDataListener();
+    this.http.get('https://localhost:5001/api/users')
       .subscribe(res => {
         console.log(res);
       })
-    
-
   }
+
 
 }

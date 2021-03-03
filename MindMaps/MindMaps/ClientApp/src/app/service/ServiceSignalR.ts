@@ -7,7 +7,8 @@ import * as signalR from "@aspnet/signalr";
 })
 
 export class ServiceSignalR {
-  public data: ChatModel[];
+  public data: ChatModel;
+  public bradcastedData: ChatModel[];
 
   private hubConnection: signalR.HubConnection
   public startConnection = () => {
@@ -34,6 +35,18 @@ export class ServiceSignalR {
     });
   }
 
+  public broadcastData = () => {
+    this.hubConnection.invoke('SendMessage', "ime","poruka")
+      .catch(err => console.error(err));
+  }
+  public addBroadcastDataListener = () => {
+    this.hubConnection.on('BroadcastMessage', (data) => {
+      this.bradcastedData = data;
+      console.log(data);
+    })
+  }
+
+  
 
 }
 
