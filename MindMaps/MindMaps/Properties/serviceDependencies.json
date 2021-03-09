@@ -6,6 +6,10 @@
     "mssql1": {
       "type": "mssql",
       "connectionId": "connMindMap"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "LBconnMindMaps"
     }
   }
 }

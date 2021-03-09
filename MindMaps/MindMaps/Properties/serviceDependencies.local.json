@@ -8,6 +8,12 @@
       "type": "mssql.azure",
       "connectionId": "connMindMap",
       "secretStore": "LocalSecretsFile"
+    },
+    "mssql2": {
+      "resourceId": null,
+      "type": "mssql.local",
+      "connectionId": "LBconnMindMaps",
+      "secretStore": "LocalSecretsFile"
     }
   }
 }

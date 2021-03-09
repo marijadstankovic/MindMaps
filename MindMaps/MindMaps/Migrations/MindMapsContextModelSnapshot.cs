@@ -118,7 +118,7 @@ namespace MindMaps.Migrations
                         new
                         {
                             Id = 1,
-                            DateOfCreation = new DateTime(2021, 1, 17, 14, 57, 35, 143, DateTimeKind.Local).AddTicks(4850)
+                            DateOfCreation = new DateTime(2021, 3, 9, 21, 10, 22, 851, DateTimeKind.Local).AddTicks(8545)
                         });
                 });
 
@@ -197,7 +197,7 @@ namespace MindMaps.Migrations
                         {
                             Id = 1,
                             ChatID = 1,
-                            DateOfCreation = new DateTime(2021, 1, 17, 14, 57, 35, 137, DateTimeKind.Local).AddTicks(9218),
+                            DateOfCreation = new DateTime(2021, 3, 9, 21, 10, 22, 847, DateTimeKind.Local).AddTicks(6768),
                             Name = "soba"
                         });
                 });

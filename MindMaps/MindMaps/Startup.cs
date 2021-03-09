@@ -27,7 +27,7 @@ namespace MindMaps
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MindMapsContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("connMindMap")));
+                options.UseSqlServer(Configuration.GetConnectionString("LBconnMindMaps")));
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
