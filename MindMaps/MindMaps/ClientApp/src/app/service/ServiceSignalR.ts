@@ -9,10 +9,12 @@ import * as signalR from "@aspnet/signalr";
 export class ServiceSignalR {
   public data: ChatModel;
   public bradcastedData: ChatModel[];
+  public tekst: string;
 
   private hubConnection: signalR.HubConnection
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
+    
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:5001/ChatHub',
         {
@@ -36,7 +38,7 @@ export class ServiceSignalR {
   }
 
   public broadcastData = () => {
-    this.hubConnection.invoke('SendMessage', "ime","poruka")
+    this.hubConnection.invoke('SendMessage', (document.getElementById("text") as HTMLInputElement).value, "poruka")
       .catch(err => console.error(err));
   }
   public addBroadcastDataListener = () => {

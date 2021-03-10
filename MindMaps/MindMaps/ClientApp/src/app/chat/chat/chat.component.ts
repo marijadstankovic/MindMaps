@@ -15,7 +15,7 @@ export class ChatComponent implements OnInit {
 
 
   public onClick = (event) => {
-    console.log(event);
+    console.log("Kliknuto" + (document.getElementById("text") as HTMLInputElement).value);
     this.serviceSignalR.broadcastData();
   }
   ngOnInit() {
@@ -41,7 +41,7 @@ export class ChatComponent implements OnInit {
     */
     this.serviceSignalR.startConnection();
     this.serviceSignalR.addTransferDataListener();
-    //this.serviceSignalR.addBroadcastDataListener();
+    this.serviceSignalR.addBroadcastDataListener();
     this.http.get('https://localhost:5001/api/users')
       .subscribe(res => {
         console.log(res);
