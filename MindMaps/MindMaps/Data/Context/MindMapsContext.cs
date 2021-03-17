@@ -26,6 +26,14 @@ namespace MindMaps.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            byte[] salt;
+            byte[] hash;
+
+            using (var hmec = new System.Security.Cryptography.HMACSHA512())
+            {
+                salt = hmec.Key;
+                hash = hmec.ComputeHash(System.Text.Encoding.UTF8.GetBytes("admin@admin"));
+            }
 
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -34,7 +42,8 @@ namespace MindMaps.Data.Context
                     Name = "Admin",
                     LastName = "Adminovski",
                     Email = "admin@admin",
-                    Password = "admin@admin",
+                    PasswordHash = hash,
+                    PasswordSalt = salt
                 }
                 );
             modelBuilder.Entity<Chat>().HasData(
