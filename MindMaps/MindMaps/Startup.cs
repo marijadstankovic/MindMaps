@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using MindMaps.Hubs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MindMaps
 {
@@ -34,6 +37,19 @@ namespace MindMaps
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                                .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
             services.AddScoped<ChatRepository>();
             services.AddScoped<CommentRepository>();
@@ -68,6 +84,8 @@ namespace MindMaps
             {
                 app.UseSpaStaticFiles();
             }
+
+            app.UseAuthentication();
 
             app.UseRouting();
 
