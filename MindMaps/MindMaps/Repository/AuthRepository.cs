@@ -1,4 +1,5 @@
-﻿using MindMaps.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using MindMaps.Data.Context;
 using MindMaps.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,28 @@ namespace MindMaps.Repository
             _context = context;
         }
 
-        public Task<User> Login(string username, string password)
+        public async Task<User> Login(string email, string password)
         {
-            throw new NotImplementedException();
+            var user = await _context.User.Where(x => x.Email == email).FirstOrDefaultAsync();
+            if (user == null)
+                return null;
+
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
+            return null;
+        }
+        private bool VerifyPasswordHash(string password, byte[] passHash, byte[] passSalt)
+        {
+            using (var hmec = new System.Security.Cryptography.HMACSHA512(passSalt))
+            {
+                var computedHash = hmec.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != passHash[i])
+                        return false;
+                }
+            }
+            return true;
         }
 
         public async Task<User> Register(User user, string password)
@@ -43,9 +63,11 @@ namespace MindMaps.Repository
             }
         }
 
-        public Task<bool> UserExists(string username)
+        public async Task<bool> UserExists(string email)
         {
-            throw new NotImplementedException();
+            if (await _context.User.AnyAsync(x => x.Email == email))
+                return true;
+            return false;
         }
     }
 }
