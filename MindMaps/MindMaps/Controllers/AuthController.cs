@@ -22,15 +22,15 @@ namespace MindMaps.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(string username, string password)
+        public async Task<IActionResult> Register(string email, string password)
         {
-            username = username.ToLower();
+            email = email.ToLower();
 
-            if (await _repo.UserExists(username))
+            if (await _repo.UserExists(email))
                 return BadRequest("Username already exists");
 
             var userToCreate = new User {
-                Email = username
+                Email = email
             };
 
             var createdUser = await _repo.Register(userToCreate, password);
