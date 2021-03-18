@@ -10,7 +10,11 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { LoginComponent } from './login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './_services/auth.service';
+
+import { MaterialModule } from './login/material.module';
 
 @NgModule({
   declarations: [
@@ -19,9 +23,11 @@ import { AuthService } from './_services/auth.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ChatComponent
+    ChatComponent,
+    LoginComponent
   ],
   imports: [
+    MaterialModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
@@ -30,7 +36,9 @@ import { AuthService } from './_services/auth.service';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'chat', component: ChatComponent },
-    ])
+      { path: 'login', component: LoginComponent }
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService
