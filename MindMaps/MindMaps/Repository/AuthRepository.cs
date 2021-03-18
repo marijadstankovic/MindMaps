@@ -25,7 +25,7 @@ namespace MindMaps.Repository
 
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
-            return null;
+            return user;
         }
         private bool VerifyPasswordHash(string password, byte[] passHash, byte[] passSalt)
         {
