@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import {
   MatCardModule,
@@ -9,7 +10,8 @@ import {
 const modules = [
   MatCardModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTabsModule
 ];
 
 @NgModule({
