@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input,  Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,8 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
+  hide = true;
+  constructor(private authService: AuthService) { }
 
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -17,8 +18,15 @@ export class LoginComponent implements OnInit {
   });
 
   submit() {
+    debugger;
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
+      
+      this.authService.login(this.form).subscribe(response => {
+        console.log('Logged in successfully');
+      }, error => {
+        console.log('Failed to login');
+      })
     }
   }
   @Input() error: string | null;
