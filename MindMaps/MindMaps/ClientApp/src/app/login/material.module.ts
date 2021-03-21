@@ -6,7 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {
   MatCardModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
+  FormsModule
 } from '@angular/material';
 
 const modules = [

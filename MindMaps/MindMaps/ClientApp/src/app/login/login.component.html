@@ -2,18 +2,18 @@
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Login">
       <mat-card-content>
-        <form (ngSubmit)="submit()">
+        <form #loginForm="ngForm" (ngSubmit)="login()">
           <br>
           <p>
             <mat-form-field>
-              <input type="text" matInput placeholder="Username">
+              <input type="text" matInput placeholder="Username" name="email" required [(ngModel)]="model.email">
             </mat-form-field>
           </p>
 
           <p>
             <mat-form-field>
               <mat-label>Enter your password</mat-label>
-              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Password">
+              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Password" name="password" required [(ngModel)]="model.password">
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon class="mat-icon-visibility">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
@@ -25,7 +25,7 @@
           </p>
 
           <div class="button">
-            <button type="submit" mat-button>Login</button>
+            <button [disabled]="!loginForm.valid" type="submit" mat-button>Login</button>
           </div>
 
         </form>

@@ -10,6 +10,7 @@ import { AuthService } from '../_services/auth.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
+  model: any = {};
   constructor(private authService: AuthService) { }
 
   form: FormGroup = new FormGroup({
@@ -17,12 +18,12 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  submit() {
+  login() {
     debugger;
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
-      
-      this.authService.login(this.form).subscribe(response => {
+
+      this.authService.login(this.model).subscribe(response => {
         console.log('Logged in successfully');
       }, error => {
         console.log('Failed to login');
