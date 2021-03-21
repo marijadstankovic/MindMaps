@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 
 import {
   MatCardModule,
@@ -11,7 +13,9 @@ const modules = [
   MatCardModule,
   MatInputModule,
   MatButtonModule,
-  MatTabsModule
+  MatTabsModule,
+  MatFormFieldModule,
+  MatIconModule
 ];
 
 @NgModule({

@@ -26,3 +26,7 @@ mat-card-content {
   display: flex;
   justify-content: flex-end;
 }
+
+.mat-icon-visibility {
+    font-size: large;
+}

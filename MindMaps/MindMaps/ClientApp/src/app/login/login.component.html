@@ -12,7 +12,11 @@
 
           <p>
             <mat-form-field>
-              <input type="password" matInput placeholder="Password">
+              <mat-label>Enter your password</mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon class="mat-icon-visibility">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             </mat-form-field>
           </p>
 
@@ -33,19 +37,30 @@
           <br>
           <p>
             <mat-form-field>
+
               <input type="text" matInput placeholder="Username">
             </mat-form-field>
           </p>
 
           <p>
+           
+          </p>
+
+          <p>
             <mat-form-field>
-              <input type="password" matInput placeholder="Password">
+              <mat-label>Enter your password</mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon class="mat-icon-visibility">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             </mat-form-field>
           </p>
 
           <p *ngIf="error" class="error">
             {{ error }}
           </p>
+
+
 
           <div class="button">
             <button type="submit" mat-button>Sign up</button>
