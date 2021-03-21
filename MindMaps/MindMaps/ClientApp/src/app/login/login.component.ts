@@ -10,7 +10,8 @@ import { AuthService } from '../_services/auth.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  model: any = {};
+  loginModel: any = {};
+  registerModel: any = {};
   constructor(private authService: AuthService) { }
 
   form: FormGroup = new FormGroup({
@@ -19,11 +20,10 @@ export class LoginComponent implements OnInit {
   });
 
   login() {
-    debugger;
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
 
-      this.authService.login(this.model).subscribe(response => {
+      this.authService.login(this.loginModel).subscribe(response => {
         console.log('Logged in successfully');
       }, error => {
         console.log('Failed to login');
@@ -35,6 +35,14 @@ export class LoginComponent implements OnInit {
   @Output() submitEM = new EventEmitter();
 
   ngOnInit() {
+  }
+
+  register(){
+    this.authService.register(this.registerModel).subscribe(() => {
+      console.log('registration successfull');
+    }, error => {
+      console.log(error);
+    })
   }
 
 }
