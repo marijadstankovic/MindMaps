@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Input,  Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +17,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginModel: any = {};
   registerModel: any = {};
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private _snackBar: MatSnackBar) { }
 
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -43,6 +48,14 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Cannonball!!', 'End now', {
+      duration: 500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 
 }
