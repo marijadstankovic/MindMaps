@@ -39,7 +39,9 @@ namespace MindMaps.Controllers
                 return BadRequest("Username already exists");
 
             var userToCreate = new User {
-                Email = userForRegisterDto.Email
+                Email = userForRegisterDto.Email,
+                Name = userForRegisterDto.Name,
+                LastName = userForRegisterDto.LastName
             };
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);

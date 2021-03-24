@@ -24,6 +24,13 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
 
+  registerForm: FormGroup = new FormGroup({
+    name: new FormControl(''),
+    lastName: new FormControl(''),
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
   login() {
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
@@ -43,6 +50,9 @@ export class LoginComponent implements OnInit {
   }
 
   register(){
+    if (!this.registerForm.valid) {
+      return;
+    }
     this.authService.register(this.registerModel).subscribe(() => {
       console.log('registration successfull');
     }, error => {
