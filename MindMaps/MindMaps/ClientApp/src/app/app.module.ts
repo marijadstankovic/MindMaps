@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './_services/auth.service';
 
 import { MaterialModule } from './login/material.module';
+import { NavMenuModule } from './nav-menu/nav-menu.module'; 
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,12 @@ import { MaterialModule } from './login/material.module';
     CounterComponent,
     FetchDataComponent,
     ChatComponent,
-    LoginComponent
+    LoginComponent,
+    MenuComponent
   ],
   imports: [
     MaterialModule,
+    NavMenuModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
