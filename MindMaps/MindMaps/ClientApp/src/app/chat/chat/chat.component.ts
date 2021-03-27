@@ -40,8 +40,14 @@ export class ChatComponent implements OnInit {
     });
     */
     this.serviceSignalR.startConnection();
+    setTimeout( () => {
+      console.log("waiting");
+    this.serviceSignalR.addToGroup();
     this.serviceSignalR.addTransferDataListener();
     this.serviceSignalR.addBroadcastDataListener();
+    },500);
+    
+
     this.http.get('https://localhost:5001/api/users')
       .subscribe(res => {
         console.log(res);

@@ -31,20 +31,25 @@ export class ServiceSignalR {
   }
 
   public addTransferDataListener = () => {
-    this.hubConnection.on('BroadcastMessage', (data) => {
+    this.hubConnection.on('Coonected', (data) => {
       this.data = data;
       console.log(data);
     });
   }
 
+  public addToGroup = () => {
+    this.hubConnection.invoke('AddToGroup', 1)
+      .catch(err => console.error(err));
+  }
+
   public broadcastData = () => {
-    this.hubConnection.invoke('SendMessage', (document.getElementById("text") as HTMLInputElement).value, "poruka")
+    this.hubConnection.invoke('SendMessage', 1, 1, (document.getElementById("text") as HTMLInputElement).value)
       .catch(err => console.error(err));
   }
   public addBroadcastDataListener = () => {
-    this.hubConnection.on('BroadcastMessage', (data) => {
-      this.bradcastedData = data;
-      console.log(data);
+    this.hubConnection.on('BroadcastMessage', (userId, message) => {
+      //this.bradcastedData = data;
+      console.log(userId + " " + message);
     })
   }
 
