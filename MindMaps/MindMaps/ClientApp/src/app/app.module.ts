@@ -17,6 +17,7 @@ import { AuthService } from './_services/auth.service';
 import { MaterialModule } from './login/material.module';
 import { NavMenuModule } from './nav-menu/nav-menu.module'; 
 import { MenuComponent } from './menu/menu.component';
+//import { ChatComponent } from 'src/app/chat/chat/chat.component';
 
 @NgModule({
   declarations: [
