@@ -1,0 +1,20 @@
+<mat-card>
+  
+      <mat-card-content>
+        <form #addRoomForm="ngForm" (ngSubmit)="add()">
+          <br>
+          <p>
+            <mat-form-field>
+              <input type="text" matInput placeholder="name" name="name" required >
+            </mat-form-field>
+          </p>
+          
+
+          <div class="button">
+            <button type="submit" mat-button>Add</button>
+          </div>
+
+        </form>
+      </mat-card-content>
+  
+     </mat-card>

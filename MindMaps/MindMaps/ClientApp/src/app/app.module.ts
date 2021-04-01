@@ -17,6 +17,7 @@ import { AuthService } from './_services/auth.service';
 import { MaterialModule } from './login/material.module';
 import { NavMenuModule } from './nav-menu/nav-menu.module'; 
 import { MenuComponent } from './menu/menu.component';
+import { FormAddRoomComponent } from './form-add-room/form-add-room.component';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MenuComponent } from './menu/menu.component';
     FetchDataComponent,
     ChatComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    FormAddRoomComponent
   ],
   imports: [
     MaterialModule,
