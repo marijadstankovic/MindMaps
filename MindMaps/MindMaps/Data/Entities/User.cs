@@ -23,13 +23,13 @@ namespace MindMaps.Data.Entities
 
         public byte[] PasswordSalt { get; set; }
 
-        public ICollection<RoomUser> RoomUsers { get; set; }
+        public virtual ICollection<RoomUser> RoomUsers { get; set; }
 
-        public ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
 
-        public ICollection<Node> Nodes { get; set; }
+        public virtual ICollection<Node> Nodes { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     
     }
 }

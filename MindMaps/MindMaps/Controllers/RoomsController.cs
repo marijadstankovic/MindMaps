@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MindMaps.Data.Context;
 using MindMaps.Data.Entities;
+using MindMaps.DTOs;
 using MindMaps.Repository;
 
 namespace MindMaps.Controllers
@@ -15,25 +16,31 @@ namespace MindMaps.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        private readonly RoomRepository _repository;
+        private readonly RoomRepository _roomRepository;
+        private readonly ChatRepository _chatRepository;
+        private readonly RoomUserRepository _roomUserRepository;
+        private readonly UserRepository _userRepository;
 
-        public RoomsController(RoomRepository repository)
+        public RoomsController(RoomRepository roomRepository, ChatRepository chatRepository, RoomUserRepository roomUserRepository, UserRepository userRepository)
         {
-            _repository = repository;
+            _roomRepository = roomRepository;
+            _chatRepository = chatRepository;
+            _roomUserRepository = roomUserRepository;
+            _userRepository = userRepository;
         }
 
         // GET: api/Rooms
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
-            return await _repository.GetAll();
+            return await _roomRepository.GetAll();
         }
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Room>> GetRoom(int id)
         {
-            var room = await _repository.Get(id);
+            var room = await _roomRepository.Get(id);
 
             if (room == null)
             {
@@ -56,7 +63,7 @@ namespace MindMaps.Controllers
 
             try
             {
-                await _repository.Update(room);
+                await _roomRepository.Update(room);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -77,18 +84,25 @@ namespace MindMaps.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        public async Task<ActionResult<Room>> PostRoom([FromBody] NewRoomDTO roomDTO)
         {
-            await _repository.Add(room);
+            //var chat = await _chatRepository.Add(new Chat { Messages = new List<Message>() });
 
-            return CreatedAtAction("GetRoom", new { id = room.Id }, room);
+            //Room room = new Room { Name = roomDTO.RoomName, DateOfCreation = DateTime.Now, Chat = chat, ChatID = chat.Id };
+            //await _roomRepository.Add(room);
+
+            var user = await _userRepository.Get(roomDTO.UserUid);
+
+            //await _roomUserRepository.Add(new RoomUser { Room = room, RoomID = room.Id, User = user, UserID = user.Id });
+            return null;
+            //return CreatedAtAction("GetRoom", new { id = room.Id }, room);
         }
 
         // DELETE: api/Rooms/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Room>> DeleteRoom(int id)
         {
-            var result = await _repository.Delete(id);
+            var result = await _roomRepository.Delete(id);
             if (result != null)
             {
                 return result;
@@ -98,7 +112,7 @@ namespace MindMaps.Controllers
 
         private bool RoomExists(int id)
         {
-            return (_repository.Get(id) != null);
+            return (_roomRepository.Get(id) != null);
         }
     }
 }

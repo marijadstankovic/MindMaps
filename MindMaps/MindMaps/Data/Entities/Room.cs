@@ -20,8 +20,8 @@ namespace MindMaps.Data.Entities
 
         public Chat Chat { get; set; }
 
-        public ICollection<RoomUser> RoomUsers { get; set; }
+        public virtual ICollection<RoomUser> RoomUsers { get; set; }
 
-        public ICollection<MindMap> MindMaps { get; set; }
+        public virtual ICollection<MindMap> MindMaps { get; set; }
     }
 }
