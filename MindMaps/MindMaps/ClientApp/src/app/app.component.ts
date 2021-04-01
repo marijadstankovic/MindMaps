@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { AuthService } from './_services/auth.service';
 //import { mxEvent, mxGraph } from 'mxgraph';
 declare var mxGraph: any;
 declare var mxHierarchicalLayout: any;
@@ -16,6 +17,10 @@ declare var mxHierarchicalLayout: any;
 export class AppComponent implements AfterViewInit {
   @ViewChild('graphContainer', { static: true }) graphContainer: ElementRef;
 
+
+  constructor(private authService: AuthService){
+    
+  }
   ngAfterViewInit() {
    // mxEvent.disableContextMenu(this.graphContainer.nativeElement);
    // var mxLoadResources = false;
@@ -39,5 +44,9 @@ export class AppComponent implements AfterViewInit {
       graph.getModel().endUpdate();
       new mxHierarchicalLayout(graph).execute(graph.getDefaultParent());
     }
+  }
+
+  loggedin(){
+    return this.authService.loggedin();
   }
 }

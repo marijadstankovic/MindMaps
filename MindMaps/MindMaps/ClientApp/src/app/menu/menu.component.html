@@ -1,5 +1,5 @@
 <button mat-button [matMenuTriggerFor]="menu">Menu</button>
 <mat-menu #menu="matMenu">
   <button mat-menu-item>My Profile</button>
-  <button mat-menu-item>Log out</button>
+  <button mat-menu-item (click)="logout()">Log out</button>
 </mat-menu>
