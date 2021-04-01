@@ -17,7 +17,7 @@ import { AuthService } from './_services/auth.service';
 import { MaterialModule } from './login/material.module';
 import { NavMenuModule } from './nav-menu/nav-menu.module'; 
 import { MenuComponent } from './menu/menu.component';
-import { FormAddRoomComponent } from './form-add-room/form-add-room.component';
+import { FormRoomComponent } from './form-room/form-room.component';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 
 @NgModule({
@@ -30,7 +30,7 @@ import { FormAddRoomComponent } from './form-add-room/form-add-room.component';
     ChatComponent,
     LoginComponent,
     MenuComponent,
-    FormAddRoomComponent
+    FormRoomComponent
   ],
   imports: [
     MaterialModule,
