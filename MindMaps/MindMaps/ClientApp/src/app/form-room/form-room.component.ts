@@ -20,7 +20,7 @@ export class FormRoomComponent implements OnInit {
   add() {
     const user = localStorage.getItem('token');
     this.decodedToken = this.jwtHelper.decodeToken(user);
-    this.roomModel.UserUid = this.decodedToken.nameid;
+    this.roomModel.UserUid = +this.decodedToken.nameid;
     // 
     this.roomService.add(this.roomModel).subscribe(() => {
       console.log('Create room');
