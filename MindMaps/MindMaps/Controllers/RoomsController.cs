@@ -21,6 +21,8 @@ namespace MindMaps.Controllers
         private readonly RoomUserRepository _roomUserRepository;
         private readonly UserRepository _userRepository;
 
+        private readonly MindMapsContext context;
+
         public RoomsController(RoomRepository roomRepository, ChatRepository chatRepository, RoomUserRepository roomUserRepository, UserRepository userRepository)
         {
             _roomRepository = roomRepository;
@@ -86,16 +88,16 @@ namespace MindMaps.Controllers
         [HttpPost]
         public async Task<ActionResult<Room>> PostRoom([FromBody] NewRoomDTO roomDTO)
         {
-            //var chat = await _chatRepository.Add(new Chat { Messages = new List<Message>() });
+            var chat = await _chatRepository.Add(new Chat { Messages = new List<Message>() });
 
-            //Room room = new Room { Name = roomDTO.RoomName, DateOfCreation = DateTime.Now, Chat = chat, ChatID = chat.Id };
-            //await _roomRepository.Add(room);
+            Room room = new Room { Name = roomDTO.RoomName, DateOfCreation = DateTime.Now, Chat = chat, ChatID = chat.Id };
+            await _roomRepository.Add(room);
 
             var user = await _userRepository.Get(roomDTO.UserUid);
 
-            //await _roomUserRepository.Add(new RoomUser { Room = room, RoomID = room.Id, User = user, UserID = user.Id });
-            return null;
-            //return CreatedAtAction("GetRoom", new { id = room.Id }, room);
+            await _roomUserRepository.Add(new RoomUser { Room = room, RoomID = room.Id, User = user, UserID = user.Id });
+            //return await _roomRepository.Get(room.Id);
+            return CreatedAtAction("GetRoom", new { id = room.Id }, room);
         }
 
         // DELETE: api/Rooms/5
