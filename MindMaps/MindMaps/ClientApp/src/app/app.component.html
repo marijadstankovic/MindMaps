@@ -3,7 +3,9 @@
   <app-nav-menu></app-nav-menu>
   <div class="container">
     <div #graphContainer id="graphContainer"></div>
+
     <app-login [hidden]="loggedin()"></app-login>
+    
     <router-outlet></router-outlet>
   </div>
 </body>

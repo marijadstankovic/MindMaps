@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { FormProfileComponent } from '../form-profile/form-profile.component';
 
 
 @Component({
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   hideAddGroupForm = true;
-  constructor() { }
+  constructor(public dialogProfile: MatDialog) { }
 
   ngOnInit() {
   }
@@ -19,5 +21,18 @@ export class MenuComponent implements OnInit {
 
   openAddGroupForm() {
     this.hideAddGroupForm = false;
+  }
+  
+  openProfile() {
+    const dialogConfig = new MatDialogConfig();
+
+    //dialogConfig.disableClose = true;
+    //dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialogProfile.open(FormProfileComponent, dialogConfig);
+
+    //dialogRef.afterClosed().subscribe(res => {
+      console.log('Dialog result');
+   // });
   }
 }
