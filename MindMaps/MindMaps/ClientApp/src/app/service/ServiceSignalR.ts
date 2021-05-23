@@ -30,6 +30,10 @@ export class ServiceSignalR {
     });
   }
 
+  public stopConnection() {
+    this.hubConnection.stop();
+  }
+
   public addTransferDataListener = () => {
     this.hubConnection.on('Coonected', (data) => {
       this.data = data;
@@ -41,19 +45,25 @@ export class ServiceSignalR {
     this.hubConnection.invoke('AddToGroup', 1)
       .catch(err => console.error(err));
   }
+  
+  public addToAllGroups = () => {
+    var user = JSON.parse(localStorage.getItem('user'));
+    this.hubConnection.invoke('AddToAllGroups', +user.nameid)
+      .catch(err => console.error(err));
+  }
 
-  public broadcastData = () => {
-    this.hubConnection.invoke('SendMessage', 1, 1, (document.getElementById("text") as HTMLInputElement).value)
+  public broadcastData = (chatID: number, message: string) => {
+    var user = JSON.parse(localStorage.getItem('user'));
+    this.hubConnection.invoke('SendMessage', +user.nameid, chatID, message)
       .catch(err => console.error(err));
   }
   public addBroadcastDataListener = () => {
-    this.hubConnection.on('BroadcastMessage', (userId, message) => {
+    this.hubConnection.on('BroadcastMessage', (userId, message, chatId) => {
       //this.bradcastedData = data;
-      console.log(userId + " " + message);
+      // OVDE SE DODAJE FILTER? ? ? ? ? ? ?
+      console.log(userId + " " + message + " " + chatId);
     })
   }
-
-  
 
 }
 

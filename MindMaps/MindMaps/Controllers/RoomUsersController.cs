@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MindMaps.Data.Context;
 using MindMaps.Data.Entities;
+using MindMaps.DTOs;
 using MindMaps.Repository;
 
 namespace MindMaps.Controllers
@@ -15,25 +16,27 @@ namespace MindMaps.Controllers
     [ApiController]
     public class RoomUsersController : ControllerBase
     {
-        private readonly RoomUserRepository _repository;
+        private readonly RoomUserRepository _roomUserRepository;
+        private readonly RoomRepository _roomRepository;
 
-        public RoomUsersController(RoomUserRepository repository)
+        public RoomUsersController(RoomUserRepository repository, RoomRepository roomRepository)
         {
-            _repository = repository;
+            _roomUserRepository = repository;
+            _roomRepository = roomRepository;
         }
 
         // GET: api/RoomUsers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RoomUser>>> GetRoomUsers()
         {
-            return await _repository.GetAll();
+            return await _roomUserRepository.GetAll();
         }
 
         // GET: api/RoomUsers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<RoomUser>> GetRoomUser(int id)
         {
-            var roomUser = await _repository.Get(id);
+            var roomUser = await _roomUserRepository.Get(id);
 
             if (roomUser == null)
             {
@@ -56,7 +59,7 @@ namespace MindMaps.Controllers
 
             try
             {
-                await _repository.Update(roomUser);
+                await _roomUserRepository.Update(roomUser);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -77,18 +80,33 @@ namespace MindMaps.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<RoomUser>> PostRoomUser(RoomUser roomUser)
+        public async Task<ActionResult<RoomUser>> PostRoomUser(AddUserToRoomDto roomUser)
         {
-            await _repository.Add(roomUser);
+            var keys = roomUser.RoomKey.Split('.');
+           // string roomName = keys[0];
+            string roomIdCoded = keys[1]; // dodaj i ostale npr ako je konverzijom 1004 ispalo as.2 to je keys[1-2]
+            //onda tu mora enkodiranje
+            int roomId = int.Parse(roomIdCoded);
 
-            return CreatedAtAction("GetRoomUser", new { id = roomUser.Id }, roomUser);
+            var exits = await _roomUserRepository.Filter(roomId, roomUser.UserUid);
+            if (exits != null)
+            {//korisnik je vec u sobi
+                return null;
+            }
+
+            var RoomUser = new RoomUser() { RoomID = roomId, UserID = roomUser.UserUid}; // treba proveriti i da li ovi postoje i da li postoji njihova kombinacija
+            await _roomUserRepository.Add(RoomUser);
+            
+            return null;
+            //return CreatedAtAction("GetRoomUser", new { id = roomUser.Id }, roomUser);
         }
 
         // DELETE: api/RoomUsers/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<RoomUser>> DeleteRoomUser(int id)
+        [HttpDelete]
+        public async Task<ActionResult<RoomUser>> DeleteRoomUser(int roomID, int userID)
         {
-            var result = await _repository.Delete(id);
+            int id = _roomUserRepository.Filter(roomID, userID).Id;
+            var result = await _roomUserRepository.Delete(id);
             if (result != null)
             {
                 return result;
@@ -98,7 +116,7 @@ namespace MindMaps.Controllers
 
         private bool RoomUserExists(int id)
         {
-            return (_repository.Get(id) != null);
+            return (_roomUserRepository.Get(id) != null);
         }
     }
 }

@@ -20,6 +20,7 @@ import { MenuComponent } from './menu/menu.component';
 import { FormRoomComponent } from './form-room/form-room.component';
 import { FormProfileComponent } from './form-profile/form-profile.component';
 import { CommonModule } from '@angular/common';
+import { JoinGroupComponent } from './join-group/join-group.component';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { CommonModule } from '@angular/common';
     ChatComponent,
     LoginComponent,
     MenuComponent,
-    FormRoomComponent
+    FormRoomComponent,
+    JoinGroupComponent
   ],
   imports: [
     MaterialModule,

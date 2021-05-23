@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { FormProfileComponent } from '../form-profile/form-profile.component';
+import { ServiceSignalR } from '../service/ServiceSignalR';
 
 
 @Component({
@@ -10,13 +11,15 @@ import { FormProfileComponent } from '../form-profile/form-profile.component';
 })
 export class MenuComponent implements OnInit {
   hideAddGroupForm = true;
-  constructor(public dialogProfile: MatDialog) { }
+  hideJoinGroupForm = true;
+  constructor(public serviceSignalR: ServiceSignalR, public dialogProfile: MatDialog) { }
 
   ngOnInit() {
   }
 
   logout(){
     localStorage.removeItem("token");
+    this.serviceSignalR.stopConnection();
   }
 
   openAddGroupForm() {
@@ -34,5 +37,9 @@ export class MenuComponent implements OnInit {
     //dialogRef.afterClosed().subscribe(res => {
       console.log('Dialog result');
    // });
+  }
+
+  joinGroupForm(){
+    this.hideJoinGroupForm = false;
   }
 }

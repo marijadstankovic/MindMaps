@@ -11,5 +11,9 @@ export class RoomService {
   add(model: any) {
     return this.http.post(this.baseUrl + "rooms", model);
   }
+
+  join(model: any) {
+    return this.http.post(this.baseUrl + "roomusers", model);
+  }
 }
 
