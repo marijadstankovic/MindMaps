@@ -23,11 +23,11 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'login', model)
     .pipe(
       map((response: any) => {
-        debugger;
         const user = response;
         if(user){
           localStorage.setItem('token', user.token);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
+          localStorage.setItem('user', JSON.stringify(this.decodedToken));
           console.log(this.decodedToken);
           this.currentUserSource.next(user);
         }

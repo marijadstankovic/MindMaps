@@ -1,0 +1,21 @@
+<mat-card>
+
+    <mat-card-content>
+      <form #joinRoomForm="ngForm" (ngSubmit)="join()">
+        <br>
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="RoomKey" name="RoomKey" required [(ngModel)]="joinRoomModel.RoomKey">
+          </mat-form-field>
+        </p>
+  
+  
+        <div class="button">
+          <button type="submit" mat-button>Join</button>
+        </div>
+  
+      </form>
+    </mat-card-content>
+  
+  </mat-card>
+  

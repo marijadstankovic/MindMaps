@@ -13,7 +13,7 @@ namespace MindMaps.Repository
          where TEntity : class, IEntity
     {
 
-        private readonly MindMapsContext context;
+        protected readonly MindMapsContext context;
 
         public EfCoreRepository(MindMapsContext context)
         {

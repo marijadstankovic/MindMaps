@@ -13,11 +13,6 @@ export class ChatComponent implements OnInit {
 
   constructor(public serviceSignalR: ServiceSignalR, private http: HttpClient) {}
 
-
-  public onClick = (event) => {
-    console.log("Kliknuto" + (document.getElementById("text") as HTMLInputElement).value);
-    this.serviceSignalR.broadcastData();
-  }
   ngOnInit() {
    /* const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
@@ -43,6 +38,7 @@ export class ChatComponent implements OnInit {
     setTimeout( () => {
       console.log("waiting");
     this.serviceSignalR.addToGroup();
+    this.serviceSignalR.addToAllGroups();
     this.serviceSignalR.addTransferDataListener();
     this.serviceSignalR.addBroadcastDataListener();
     },500);
@@ -52,6 +48,12 @@ export class ChatComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
       })
+  }
+
+  public onClick = (event) => {
+    const message: string = (document.getElementById("text") as HTMLInputElement).value;
+    console.log("Kliknuto" + message);
+    this.serviceSignalR.broadcastData(1001, message);
   }
 
 

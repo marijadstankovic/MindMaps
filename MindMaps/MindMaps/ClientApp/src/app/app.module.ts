@@ -18,6 +18,7 @@ import { MaterialModule } from './login/material.module';
 import { NavMenuModule } from './nav-menu/nav-menu.module'; 
 import { MenuComponent } from './menu/menu.component';
 import { FormRoomComponent } from './form-room/form-room.component';
+import { JoinGroupComponent } from './join-group/join-group.component';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FormRoomComponent } from './form-room/form-room.component';
     ChatComponent,
     LoginComponent,
     MenuComponent,
-    FormRoomComponent
+    FormRoomComponent,
+    JoinGroupComponent
   ],
   imports: [
     MaterialModule,
