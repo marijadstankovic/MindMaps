@@ -12,4 +12,5 @@ export class ProfileService {
     return this.http.get(this.baseUrl + "Users/" + index)
       .subscribe(res => { return res; })
   }
+
 }

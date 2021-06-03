@@ -1,0 +1,19 @@
+.profile-form {
+    width: 400px;
+}
+
+.con-form {
+  height: 90%;
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}

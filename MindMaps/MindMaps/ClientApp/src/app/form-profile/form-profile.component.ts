@@ -46,19 +46,31 @@ export class FormProfileComponent implements OnInit {
     
 
     //this.userModel = this.profileService.getUser(this.userModel.UserUid);
-    console.log("Ngfdgt:" + this.userModel);
-    console.log(this.user);
+    //console.log("Ngfdgt:" + this.userModel);
+    //console.log(this.user);
   }
 
   edit() {
-    console.log(this.editUser);
-    //Post zahtev
+    //console.log(this.editUser);
+
+
     this.editHidden = !this.editHidden;
     return this.editHidden;
   }
 
   cancal() {
     this.dialogRef.close();
+  }
+
+  save() {
+    this.http.put<any>(this.baseUrl + "Users/" + this.userModel.UserUid, this.editUser)
+      .subscribe(res => {
+        console.log("Sacuvane su promene usera!!!");
+      });
+    //popup bi bio pozeljan
+
+    
+    this.cancal();
   }
 }
 
