@@ -4,6 +4,7 @@ import { ProfileService } from '../_services/profile.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { SnackBarService } from '../_services/snack-bar.service';
 
 @Component({
   selector: 'app-form-profile',
@@ -28,7 +29,7 @@ export class FormProfileComponent implements OnInit {
   });
 
 
-  constructor(private profileService: ProfileService, private http: HttpClient, public dialogRef: MatDialogRef<FormProfileComponent>) { }
+  constructor(private profileService: ProfileService, private http: HttpClient, public dialogRef: MatDialogRef<FormProfileComponent>, private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     this.editHidden = true;
@@ -52,7 +53,7 @@ export class FormProfileComponent implements OnInit {
 
   edit() {
     //console.log(this.editUser);
-
+    this.snackBarService.openSnackBar("Edit profile", "OK");
 
     this.editHidden = !this.editHidden;
     return this.editHidden;
@@ -60,6 +61,8 @@ export class FormProfileComponent implements OnInit {
 
   cancal() {
     this.dialogRef.close();
+
+    this.snackBarService.openSnackBar("No change", "OK");
   }
 
   save() {
@@ -68,9 +71,9 @@ export class FormProfileComponent implements OnInit {
         console.log("Sacuvane su promene usera!!!");
       });
     //popup bi bio pozeljan
-
+    this.snackBarService.openSnackBar("Save change!", "OK");
     
-    this.cancal();
+    this.dialogRef.close();
   }
 }
 
