@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from "@aspnet/signalr";
+import { EventEmitter } from 'events';
 
 
 @Injectable({
@@ -10,24 +11,31 @@ export class ServiceSignalR {
   public data: ChatModel;
   public bradcastedData: ChatModel[];
   public tekst: string;
+  private emitter: EventEmitter;
 
   private hubConnection: signalR.HubConnection
-  public startConnection = () => {
+
+  public async startConnection(): Promise<void> {
+    const token = localStorage.getItem('token');
     this.hubConnection = new signalR.HubConnectionBuilder()
-    
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:5001/ChatHub',
         {
           skipNegotiation: true,
-          transport: signalR.HttpTransportType.WebSockets
+          transport: signalR.HttpTransportType.WebSockets,
+          accessTokenFactory: () => token
         }) //44377
       .build();
-
-    this.hubConnection.start().then(function () {
-      console.log('SignalR Connected!');
-    }).catch(function (err) {
-      return console.error(err.toString());
-    });
+    
+    await this.hubConnection.start().catch(err => console.error(err.toString()));
+    console.log('SignalR Connected!');
+    this.addToAllGroups();
+    this.addTransferDataListener();
+    this.addBroadcastDataListener();
+    // }).catch(function (err) {
+    //   return console.error(err.toString());
+    // });
+    this.emitter = new EventEmitter();
   }
 
   public stopConnection() {
@@ -62,6 +70,7 @@ export class ServiceSignalR {
       //this.bradcastedData = data;
       // OVDE SE DODAJE FILTER? ? ? ? ? ? ?
       console.log(userId + " " + message + " " + chatId);
+      this.emitter.emit(chatId, message);
     })
   }
 

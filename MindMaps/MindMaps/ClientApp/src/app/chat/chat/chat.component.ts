@@ -34,13 +34,13 @@ export class ChatComponent implements OnInit {
       console.log(message);
     });
     */
-    this.serviceSignalR.startConnection();
+    // this.serviceSignalR.startConnection();
     setTimeout( () => {
       console.log("waiting");
-    this.serviceSignalR.addToGroup();
-    this.serviceSignalR.addToAllGroups();
-    this.serviceSignalR.addTransferDataListener();
-    this.serviceSignalR.addBroadcastDataListener();
+    // this.serviceSignalR.addToGroup();
+    // this.serviceSignalR.addToAllGroups();
+    // this.serviceSignalR.addTransferDataListener();
+    // this.serviceSignalR.addBroadcastDataListener();
     },500);
     
 

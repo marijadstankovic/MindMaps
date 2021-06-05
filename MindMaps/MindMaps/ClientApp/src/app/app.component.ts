@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { ServiceSignalR } from './service/ServiceSignalR';
 import { AuthService } from './_services/auth.service';
 //import { mxEvent, mxGraph } from 'mxgraph';
 declare var mxGraph: any;
@@ -18,7 +19,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('graphContainer', { static: true }) graphContainer: ElementRef;
 
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService, private serviceSignalR: ServiceSignalR){
     
   }
   ngAfterViewInit() {
@@ -44,6 +45,9 @@ export class AppComponent implements AfterViewInit {
       graph.getModel().endUpdate();
       new mxHierarchicalLayout(graph).execute(graph.getDefaultParent());
     }
+
+    if (this.loggedin())
+      this.serviceSignalR.startConnection();
   }
 
   loggedin(){

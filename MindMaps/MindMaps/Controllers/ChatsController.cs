@@ -28,6 +28,11 @@ namespace MindMaps.Controllers
         {
             return await _repository.GetAll();
         }
+        [HttpGet(nameof(GetChatsForLoggedUser))]
+        public async Task<ActionResult<IEnumerable<int>>> GetChatsForLoggedUser(int uid)
+        {
+            return await _repository.ChatsByUserID(uid);
+        }
 
         // GET: api/Chats/5
         [HttpGet("{id}")]

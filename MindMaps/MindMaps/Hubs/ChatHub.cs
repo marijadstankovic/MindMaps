@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using MindMaps.Repository;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MindMaps.Hubs
 {
+    [Authorize]
     public class ChatHub : Hub
     {
         private ChatRepository _chatRepository;

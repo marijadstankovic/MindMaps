@@ -7,6 +7,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { ServiceSignalR } from '../service/ServiceSignalR';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginModel: any = {};
   registerModel: any = {};
-  constructor(private authService: AuthService, private _snackBar: MatSnackBar) { }
+  constructor(private authService: AuthService, private _snackBar: MatSnackBar, private serviceSignalR: ServiceSignalR) { }
 
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
       this.submitEM.emit(this.form.value);
 
       this.authService.login(this.loginModel).subscribe(response => {
+        // this.serviceSignalR.startConnection();
         console.log('Logged in successfully');
       }, error => {
         console.log('Failed to login');

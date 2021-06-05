@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MindMaps.Data.Entities;
 using MindMaps.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace MindMaps.Repository
 {
@@ -23,6 +24,14 @@ namespace MindMaps.Repository
             //context.Chats.Where(x => )
 
             //return null;
+        }
+
+        public async Task<List<int>> ChatsByUserID(int uid)
+        {
+            var result = await context.Rooms
+                .Where(y => context.RoomUsers.Where(x => x.UserID == uid).Select(x => x.RoomID).Contains(y.ChatID))
+                .Select(y => y.ChatID).ToListAsync();
+            return result;
         }
     }
 }
