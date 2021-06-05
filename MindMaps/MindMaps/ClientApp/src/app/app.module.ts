@@ -18,6 +18,8 @@ import { MaterialModule } from './login/material.module';
 import { NavMenuModule } from './nav-menu/nav-menu.module'; 
 import { MenuComponent } from './menu/menu.component';
 import { FormRoomComponent } from './form-room/form-room.component';
+import { FormProfileComponent } from './form-profile/form-profile.component';
+import { CommonModule } from '@angular/common';
 import { JoinGroupComponent } from './join-group/join-group.component';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 
@@ -36,6 +38,7 @@ import { JoinGroupComponent } from './join-group/join-group.component';
   ],
   imports: [
     MaterialModule,
+    CommonModule,
     NavMenuModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
