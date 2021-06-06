@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { ServiceSignalR } from './service/ServiceSignalR';
+import { ServiceSignalR } from './_services/ServiceSignalR';
 import { AuthService } from './_services/auth.service';
 //import { mxEvent, mxGraph } from 'mxgraph';
 declare var mxGraph: any;

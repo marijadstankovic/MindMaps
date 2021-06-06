@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
-import { ServiceSignalR } from 'src/app/service/ServiceSignalR';
+import { ServiceSignalR } from 'src/app/_services/ServiceSignalR';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 

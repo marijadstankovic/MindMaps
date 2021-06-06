@@ -7,7 +7,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { ServiceSignalR } from '../service/ServiceSignalR';
+import { ServiceSignalR } from '../_services/ServiceSignalR';
 
 @Component({
   selector: 'app-login',
