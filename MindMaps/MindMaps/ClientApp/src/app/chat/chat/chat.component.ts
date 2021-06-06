@@ -3,6 +3,8 @@ import * as signalR from '@aspnet/signalr';
 import { ServiceSignalR } from 'src/app/_services/ServiceSignalR';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ChatAdapter } from 'ng-chat';
+import { SignalRGroupAdapter } from '../SignalRGroupAdapter';
 
 @Component({
   selector: 'app-chat',
@@ -11,9 +13,12 @@ import { environment } from 'src/environments/environment';
 })
 export class ChatComponent implements OnInit {
 
+  public adapter: ChatAdapter;
+
   constructor(public serviceSignalR: ServiceSignalR, private http: HttpClient) {}
 
   ngOnInit() {
+    this.adapter = new SignalRGroupAdapter(this.http, this.serviceSignalR);
    /* const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:5001/ChatHub',

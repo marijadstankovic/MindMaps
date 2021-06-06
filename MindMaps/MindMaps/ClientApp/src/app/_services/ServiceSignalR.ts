@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from "@aspnet/signalr";
 import { EventEmitter } from 'events';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ export class ServiceSignalR {
   public bradcastedData: ChatModel[];
   public tekst: string;
   private emitter: EventEmitter;
+  public messageEvent$ = new BehaviorSubject<any>({});
 
   private hubConnection: signalR.HubConnection
 
@@ -69,6 +71,13 @@ export class ServiceSignalR {
     this.hubConnection.on('BroadcastMessage', (userId, message, chatId) => {
       //this.bradcastedData = data;
       // OVDE SE DODAJE FILTER? ? ? ? ? ? ?
+      this.messageEvent$.next(
+        {
+          userId,
+          message,
+          chatId
+        }
+      );
       console.log(userId + " " + message + " " + chatId);
       this.emitter.emit(chatId, message);
     })
