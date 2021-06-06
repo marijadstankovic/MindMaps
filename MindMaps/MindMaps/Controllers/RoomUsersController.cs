@@ -105,7 +105,7 @@ namespace MindMaps.Controllers
         [HttpDelete]
         public async Task<ActionResult<RoomUser>> DeleteRoomUser(int roomID, int userID)
         {
-            int id = _roomUserRepository.Filter(roomID, userID).Id;
+            int id = (await _roomUserRepository.Filter(roomID, userID)).Id;
             var result = await _roomUserRepository.Delete(id);
             if (result != null)
             {
