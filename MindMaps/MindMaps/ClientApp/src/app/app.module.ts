@@ -21,6 +21,10 @@ import { FormRoomComponent } from './form-room/form-room.component';
 import { FormProfileComponent } from './form-profile/form-profile.component';
 import { CommonModule } from '@angular/common';
 import { JoinGroupComponent } from './join-group/join-group.component';
+import { ListRoomsComponent } from './list-rooms/list-rooms.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 
 @NgModule({
@@ -34,7 +38,8 @@ import { JoinGroupComponent } from './join-group/join-group.component';
     LoginComponent,
     MenuComponent,
     FormRoomComponent,
-    JoinGroupComponent
+    JoinGroupComponent,
+    ListRoomsComponent
   ],
   imports: [
     MaterialModule,
@@ -50,7 +55,10 @@ import { JoinGroupComponent } from './join-group/join-group.component';
       { path: 'chat', component: ChatComponent },
       { path: 'login', component: LoginComponent }
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     AuthService
