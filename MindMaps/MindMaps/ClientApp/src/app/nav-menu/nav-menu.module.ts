@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MenuModule } from '../menu/main.module';
+import { MenuModule } from './menu/main.module';
 
 const modules = [MenuModule];
 

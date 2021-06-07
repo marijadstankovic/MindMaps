@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { FormProfileComponent } from '../form-profile/form-profile.component';
-import { ServiceSignalR } from '../_services/ServiceSignalR';
+import { ServiceSignalR } from '../../_services/ServiceSignalR';
 
 
 @Component({

@@ -11,7 +11,7 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
   public userId: string;
 
   private hubConnection: signalR.HubConnection
-  public static serverBaseUrl: string = 'https://ng-chat-api.azurewebsites.net/'; // Set this to 'https://localhost:5001/' if running locally
+  public static serverBaseUrl: string = "https://localhost:5001/";
 
   username: string;
   jwtHelper = new JwtHelperService();

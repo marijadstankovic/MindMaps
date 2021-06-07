@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ProfileService } from '../_services/profile.service';
+import { ProfileService } from '../../_services/profile.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
-import { SnackBarService } from '../_services/snack-bar.service';
+import { SnackBarService } from '../../_services/snack-bar.service';
 
 @Component({
   selector: 'app-form-profile',
