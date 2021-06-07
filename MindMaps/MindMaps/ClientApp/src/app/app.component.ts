@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ServiceSignalR } from './_services/ServiceSignalR';
 import { AuthService } from './_services/auth.service';
-//import { mxEvent, mxGraph } from 'mxgraph';
+//import { mxEditor, mxGraph } from '@mxgraph';
 declare var mxGraph: any;
 declare var mxHierarchicalLayout: any;
 
@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit {
       //const vertex1 = graph.insertVertex(parent, '1', 'Vertex 1', 0, 0, 200, 80);
       //const vertex2 = graph.insertVertex(parent, '2', 'Vertex 2', 0, 0, 200, 80);
       //graph.insertEdge(parent, '', '', vertex1, vertex2);
-
+      //const editor = new mxEditor();
       var v1 = graph.insertVertex(parent, null, 'Process', 60, 60, 90, 40);
       var v2 = graph.insertVertex(v1, null, 'in', 0, 0.5, 20, 20, 'fontSize=9;shape=cylinder;resizable=0;');
       //v2.geometry.offset = new mxPoint(-10, -10);

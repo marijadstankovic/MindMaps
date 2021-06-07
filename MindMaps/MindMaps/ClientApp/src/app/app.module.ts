@@ -25,6 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 import { NgChatModule } from 'ng-chat';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NgChatModule } from 'ng-chat';
     MenuComponent,
     FormRoomComponent,
     JoinGroupComponent,
-    ListRoomsComponent
+    ListRoomsComponent,
+    EditorComponent
   ],
   imports: [
     MaterialModule,
