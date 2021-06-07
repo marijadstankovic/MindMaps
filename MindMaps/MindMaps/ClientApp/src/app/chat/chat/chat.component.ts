@@ -13,7 +13,7 @@ import { SignalRGroupAdapter } from '../SignalRGroupAdapter';
 })
 export class ChatComponent implements OnInit {
 
-  public adapter: ChatAdapter;
+  public adapter: SignalRGroupAdapter;
 
   constructor(public serviceSignalR: ServiceSignalR, private http: HttpClient) {}
 

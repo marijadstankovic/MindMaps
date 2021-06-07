@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
+import { NgChatModule } from 'ng-chat';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatSortModule } from '@angular/material/sort';
     MaterialModule,
     CommonModule,
     NavMenuModule,
+    NgChatModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,

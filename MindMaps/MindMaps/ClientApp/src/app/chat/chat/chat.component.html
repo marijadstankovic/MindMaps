@@ -18,12 +18,11 @@
 
   -->
   <ng-chat *ngIf="adapter && adapter.userId"
-  
+  [adapter]="adapter"
   [groupAdapter]="adapter"
   [userId]="adapter.userId"
   [historyEnabled]="false"
   [pollFriendsList]="true"
-  [theme]="currentTheme"
   (onParticipantClicked)="onEventTriggered('ParticipantClicked triggered')"
   (onParticipantChatOpened)="onEventTriggered('ParticipantChatOpened triggered')"
   (onParticipantChatClosed)="onEventTriggered('ParticipantChatClosed triggered')"

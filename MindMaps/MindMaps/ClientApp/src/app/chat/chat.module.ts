@@ -12,6 +12,9 @@ import { NgChatModule } from 'ng-chat';
   ],
   exports: [
     NgChatModule
+  ],
+  entryComponents: [
+    NgChatModule
   ]
 })
 export class ChatModule {
