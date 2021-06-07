@@ -71,7 +71,7 @@ namespace MindMaps.Hubs
                 Chat = chatEntity
             });
 
-            await Clients.Group(chatId.ToString()).SendAsync("BroadcastMessage", userId, message, chatId);
+            await Clients.GroupExcept(chatId.ToString(), Context.ConnectionId).SendAsync("BroadcastMessage", userId, message, chatId);
             //await Clients.All.SendAsync("BroadcastMessage", userId, message);
 
         }

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import * as signalR from "@aspnet/signalr";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ServiceSignalR } from '../_services/ServiceSignalR';
+// import { MessageType } from 'ng-chat/ng-chat/core/message-type.enum';
 
 export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapter {
   public userId: string;
@@ -53,12 +54,13 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
         }
 
         const message: Message = {
+            type: 1,
             fromId: messageObject.userId,
             toId: this.userId,
             message: messageObject.message,
         }
     
-        this.onMessageReceived(participant, messageObject.message);
+        this.onMessageReceived(participant, message);
     })
 
     // this.hubConnection.on("generatedUserId", (userId) => {
@@ -126,63 +128,63 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
     },
     {
       participantType: ChatParticipantType.User,
-      id: 2,
+      id: 1001,
       displayName: "Cersei Lannister",
       avatar: null,
       status: ChatParticipantStatus.Online
     },
     {
       participantType: ChatParticipantType.User,
-      id: 3,
+      id: 1003,
       displayName: "Daenerys Targaryen",
       avatar: "https://68.media.tumblr.com/avatar_d28d7149f567_128.png",
       status: ChatParticipantStatus.Busy
     },
     {
       participantType: ChatParticipantType.User,
-      id: 4,
+      id: 1004,
       displayName: "Eddard Stark",
       avatar: "https://pbs.twimg.com/profile_images/600707945911844864/MNogF757_400x400.jpg",
       status: ChatParticipantStatus.Offline
     },
     {
       participantType: ChatParticipantType.User,
-      id: 5,
+      id: 1005,
       displayName: "Hodor",
       avatar: "https://pbs.twimg.com/profile_images/378800000449071678/27f2e27edd119a7133110f8635f2c130.jpeg",
       status: ChatParticipantStatus.Offline
     },
     {
       participantType: ChatParticipantType.User,
-      id: 6,
+      id: 1006,
       displayName: "Jaime Lannister",
       avatar: "https://pbs.twimg.com/profile_images/378800000243930208/4fa8efadb63777ead29046d822606a57.jpeg",
       status: ChatParticipantStatus.Busy
     },
     {
       participantType: ChatParticipantType.User,
-      id: 7,
+      id: 1007,
       displayName: "John Snow",
       avatar: "https://pbs.twimg.com/profile_images/3456602315/aad436e6fab77ef4098c7a5b86cac8e3.jpeg",
       status: ChatParticipantStatus.Busy
     },
     {
       participantType: ChatParticipantType.User,
-      id: 8,
+      id: 1008,
       displayName: "Lorde Petyr 'Littlefinger' Baelish",
       avatar: "http://68.media.tumblr.com/avatar_ba75cbb26da7_128.png",
       status: ChatParticipantStatus.Offline
     },
     {
       participantType: ChatParticipantType.User,
-      id: 9,
+      id: 1009,
       displayName: "Sansa Stark",
       avatar: "http://pm1.narvii.com/6201/dfe7ad75cd32130a5c844d58315cbca02fe5b804_128.jpg",
       status: ChatParticipantStatus.Online
     },
     {
       participantType: ChatParticipantType.User,
-      id: 10,
+      id: 1010,
       displayName: "Theon Greyjoy",
       avatar: "https://thumbnail.myheritageimages.com/502/323/78502323/000/000114_884889c3n33qfe004v5024_C_64x64C.jpg",
       status: ChatParticipantStatus.Away

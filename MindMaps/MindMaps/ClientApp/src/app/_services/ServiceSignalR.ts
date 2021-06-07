@@ -78,8 +78,8 @@ export class ServiceSignalR {
           chatId
         }
       );
-      console.log(userId + " " + message + " " + chatId);
-      this.emitter.emit(chatId, message);
+      console.log('message received' + userId + " " + message + " " + chatId);
+      // this.emitter.emit(chatId, message);
     })
   }
 
