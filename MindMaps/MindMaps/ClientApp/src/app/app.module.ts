@@ -51,7 +51,8 @@ import { EditorComponent } from './editor/editor.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'chat', component: ChatComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'editor', component: EditorComponent}
     ]),
     BrowserAnimationsModule,
     MatTableModule,

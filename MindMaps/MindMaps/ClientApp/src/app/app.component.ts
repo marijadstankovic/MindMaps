@@ -12,12 +12,8 @@ declare var mxHierarchicalLayout: any;
 })
 
 
-
-
-
 export class AppComponent implements AfterViewInit {
   @ViewChild('graphContainer', { static: true }) graphContainer: ElementRef;
-
 
   constructor(private authService: AuthService, private serviceSignalR: ServiceSignalR){
     
