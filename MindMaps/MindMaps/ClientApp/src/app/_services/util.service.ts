@@ -695,7 +695,7 @@ export class UtilService {
 
     mxVertexToolHandler.prototype.redrawTools = () => {
       if (this.state != null && this.domNode != null) {
-        const dy = mxClient.IS_VML && document.compatMode === 'CSS1Compat'  //eslint-disable-line
+        const dy = mxgraph.mxClient.IS_VML && document.compatMode === 'CSS1Compat'  //eslint-disable-line
           ? 20
           : 4; //eslint-disable-line
         this.domNode.style.left = `${this.state.x + this.state.width - 56}px`;
@@ -729,7 +729,7 @@ export class UtilService {
 
     // Installs a handler for double click events in the graph
     // that shows an alert box
-    graph.addListener(mxEvent.DOUBLE_CLICK, (sender, evt) => {  //eslint-disable-line
+    graph.addListener(mxgraph.mxEvent.DOUBLE_CLICK, (sender, evt) => {  //eslint-disable-line
       //eslint-disable-line
       const cell = evt.getProperty('cell');
 
@@ -742,7 +742,7 @@ export class UtilService {
   handleClick(config) {
     const { graph, callback } = config;
 
-    graph.addListener(mxEvent.CLICK, (sender, evt) => {  //eslint-disable-line
+    graph.addListener(mxgraph.mxEvent.CLICK, (sender, evt) => {  //eslint-disable-line
       //eslint-disable-line
       const cell = evt.getProperty('cell');
 
@@ -775,7 +775,7 @@ export class UtilService {
   handleChange(config) {
     const { graph, callback } = config;
 
-    graph.getSelectionModel().addListener(mxEvent.CHANGE, (sender, evt) => {  //eslint-disable-line
+    graph.getSelectionModel().addListener(mxgraph.mxEvent.CHANGE, (sender, evt) => {  //eslint-disable-line
       //eslint-disable-line
       // console.log('change', sender, evt);
 
@@ -788,7 +788,7 @@ export class UtilService {
 
     // Defines an icon for creating new connections in the connection handler.
     // This will automatically disable the highlighting of the source vertex.
-    mxConnectionHandler.prototype.connectImage = new mxImage(  //eslint-disable-line
+    mxgraph.mxConnectionHandler.prototype.connectImage = new mxImage(  //eslint-disable-line
       'images/connector.gif',
       16,
       16
@@ -833,7 +833,7 @@ export class UtilService {
       // this.images.push(img);
 
       // Delete
-      const img = mxUtils.createImage(  //eslint-disable-line
+      const img = mxgraph.mxUtils.createImage(  //eslint-disable-line
         'https://img.alicdn.com/tfs/TB1nt90dgHqK1RjSZFkXXX.WFXa-32-32.png'
       ); //eslint-disable-line
       img.setAttribute('title', 'Delete');
@@ -844,22 +844,24 @@ export class UtilService {
       img.style.left = `${state.x + state.width}px`;
       img.style.top = `${state.y - 16}px`;
 
-      mxEvent.addGestureListeners(  //eslint-disable-line
+      mxgraph.mxEvent.addGestureListeners(  //eslint-disable-line
         img, //eslint-disable-line
-        mxUtils.bind(this, (evt) => {  //eslint-disable-line
+        mxgraph.mxUtils.bind(this, (evt) => {  //eslint-disable-line
           //eslint-disable-line
           // Disables dragging the image
-          mxEvent.consume (evt); //eslint-disable-line
-        })
+          mxgraph.mxEvent.consume (evt); //eslint-disable-line
+        }),
+        null,
+        null
       );
 
-      mxEvent.addListener(  //eslint-disable-line
+      mxgraph.mxEvent.addListener(  //eslint-disable-line
         img,
         'click', //eslint-disable-line
-        mxUtils.bind(this, function (evt) {  //eslint-disable-line
+        mxgraph.mxUtils.bind(this, function (evt) {  //eslint-disable-line
           //eslint-disable-line
           graph.removeCells([state.cell]);
-          mxEvent.consume (evt); //eslint-disable-line
+          mxgraph.mxEvent.consume (evt); //eslint-disable-line
           this.destroy();
         })
       );
@@ -901,14 +903,14 @@ export class UtilService {
           && (me.getState() === this.currentState || me.getState() == null)
         ) {
           const tol = iconTolerance;
-          tmp = new mxRectangle(  //eslint-disable-line
+          tmp = new mxgraph.mxRectangle(  //eslint-disable-line
             me.getGraphX () - tol, //eslint-disable-line
             me.getGraphY() - tol,
             2 * tol,
             2 * tol
           );
 
-          if (mxUtils.intersects(tmp, this.currentState)) {  //eslint-disable-line
+          if (mxgraph.mxUtils.intersects(tmp, this.currentState)) {  //eslint-disable-line
             //eslint-disable-line
             return;
           }
@@ -964,7 +966,7 @@ export class UtilService {
     graph.setHtmlLabels(true);
 
     // Creates a user object that stores the state
-    const doc = mxUtils.createXmlDocument (); //eslint-disable-line
+    const doc = mxgraph.mxUtils.createXmlDocument (); //eslint-disable-line
     const obj = doc.createElement('UserObject');
     obj.setAttribute('label', 'Hello, World!');
     obj.setAttribute('checked', 'false');
@@ -973,8 +975,8 @@ export class UtilService {
   initAutoSave(config) {
     const { graph, callback } = config;
 
-    const mgr = new mxAutoSaveManager (graph); //eslint-disable-line
-    mgr.autoSaveDelay = 0; // 自动保存延迟时间设为0
+    const mgr: mxgraph.mxAutoSaveManager = new mxgraph.mxAutoSaveManager (graph); //eslint-disable-line
+    ///mgr.autoSaveDelay = 0; // 自动保存延迟时间设为0       // TODO: was not commented
     mgr.save = () => {
       const xml = this.getGraphXml({
         graph,
@@ -1013,7 +1015,7 @@ export class UtilService {
       // return false;
     }
 
-    const elements = rootEle.children;
+    const elements: Array<HTMLElement> = rootEle.children;      /// ADD : Array<HTMLElement>
 
     const idsArr = [];
 
@@ -1029,7 +1031,7 @@ export class UtilService {
 
       if (element && element.getAttribute('vertex') === '1' && element.getAttribute('edge') === '1') {
         console.warn('cell\'s property vertex and edge cannot both be 1, set property edge to 0', element);
-        element.setAttribute('edge', 0);
+        element.setAttribute('edge', '0');
       }
     });
 
@@ -1048,11 +1050,11 @@ export class UtilService {
     let node = null;
 
     if (ignoreSelection) {
-      const enc = new mxCodec (mxUtils.createXmlDocument ()); //eslint-disable-line
+      const enc: mxgraph.mxCodec = new mxgraph.mxCodec(mxgraph.mxUtils.createXmlDocument ()); //eslint-disable-line
       node = enc.encode(graph.getModel());
     } else {
       node = graph.encodeCells(
-        mxUtils.sortCells(  //eslint-disable-line
+        mxgraph.mxUtils.sortCells(  //eslint-disable-line
           graph.model.getTopmostCells(
             //eslint-disable-line
             graph.getSelectionCells()
@@ -1097,13 +1099,13 @@ export class UtilService {
     const { graph, xml } = config;
 
     // const xml = window.localStorage.getItem('graph-xml');
-    const xmlDocument = mxUtils.parseXml (xml); //eslint-disable-line
+    const xmlDocument = mxgraph.mxUtils.parseXml (xml); //eslint-disable-line
 
     if (
       xmlDocument.documentElement != null
       && xmlDocument.documentElement.nodeName === 'mxGraphModel'
     ) {
-      const decoder = new mxCodec (xmlDocument); //eslint-disable-line
+      const decoder: mxgraph.mxCodec = new mxgraph.mxCodec (xmlDocument); //eslint-disable-line
       const node = xmlDocument.documentElement;
 
       const formatedNode = this.formatXmlNode(node);
@@ -1120,7 +1122,7 @@ export class UtilService {
   initCustomPort(config) {
     const { pic } = config;
     // Replaces the port image
-    mxConstraintHandler.prototype.pointImage = new mxImage (pic, 10, 10); //eslint-disable-line
+    mxgraph.mxConstraintHandler.prototype.pointImage = new mxImage (pic, 10, 10); //eslint-disable-line
   }
 
   /**
@@ -1162,7 +1164,7 @@ export class UtilService {
 
     let newStyle = model.getStyle(cell);
 
-    newStyle = mxUtils.setStyle (newStyle, key, value); //eslint-disable-line
+    newStyle = mxgraph.mxUtils.setStyle (newStyle, key, value); //eslint-disable-line
 
     model.setStyle(cell, newStyle);
 
@@ -1173,17 +1175,17 @@ export class UtilService {
    * 节点重命名监听器
    */
   vertexRenameListener({ callback }) {
-    mxCell.prototype.valueChangedCallback = callback; //eslint-disable-line
+    mxgraph.mxCell.prototype.valueChangedCallback = callback; //eslint-disable-line
 
     // 若没重写过 valueChanged 方法则重写
-    if (!mxCell.prototype.hasRewriteValueChanged) {  //eslint-disable-line
+    if (!mxgraph.mxCell.prototype.hasRewriteValueChanged) {  //eslint-disable-line
       //eslint-disable-line
-      mxCell.prototype.hasRewriteValueChanged = true; //eslint-disable-line
+      mxgraph.mxCell.prototype.hasRewriteValueChanged = true; //eslint-disable-line
 
-      const {valueChanged} = mxCell.prototype; //eslint-disable-line
-      mxCell.prototype.valueChanged = function (newValue) {  //eslint-disable-line
+      const { valueChanged } = mxgraph.mxCell.prototype; //eslint-disable-line
+      mxgraph.mxCell.prototype.valueChanged = function (newValue) {  //eslint-disable-line
         //eslint-disable-line
-        const {valueChangedCallback} = mxCell.prototype; //eslint-disable-line
+        const { valueChangedCallback } = mxgraph.mxCell.prototype; //eslint-disable-line
 
         valueChangedCallback && valueChangedCallback(this, newValue);
         valueChanged.apply(this, [newValue]);
