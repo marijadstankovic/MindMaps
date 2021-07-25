@@ -1,8 +1,9 @@
 import { style } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import util from 'mxgraph-editor/common/util';
+import { UtilService } from '../_services/util.service';
+// import util from 'mxgraph-editor/common/util';
 // import factory from 'mxgraph';
-import Editor from 'mxgraph-editor';
+// import Editor from 'mxgraph-editor';
 // import Sidebar from 'mxgraph-editor';
 // import Toolbar from 'mxgraph-editor';
 
@@ -30,7 +31,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   editor: any;
   graph: any;
 
-  constructor() {
+  constructor(private utilService: UtilService) {
   }
 
   ngOnInit() {

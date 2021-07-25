@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ServiceSignalR } from './_services/ServiceSignalR';
 import { AuthService } from './_services/auth.service';
-import * as mx from 'mxgraph';
+// import * as mx from 'mxgraph';
 //declare var mxGraph: any;
 //declare var mxHierarchicalLayout: any;
 
@@ -16,21 +16,21 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('graphContainer', { static: true }) graphContainer: ElementRef;
 
   constructor(private authService: AuthService, private serviceSignalR: ServiceSignalR) {
-    if (typeof (mx.mxLoadResources) == 'undefined') {
-      console.log("Text");
-    }
+    // if (typeof (mx.mxLoadResources) == 'undefined') {
+    //   console.log("Text");
+    // }
 
   }
   ngAfterViewInit(): void {
-    const graph: mx.mxGraph = new mx.mxGraph(this.graphContainer.nativeElement);
-    const model: mx.mxGraphModel = graph.getModel();
-    model.beginUpdate();
-    try {
-      var v1 = graph.insertVertex(graph.getDefaultParent(), '', 'TEST', 0, 0, 100, 100);
-    } finally {
-      model.endUpdate();
-      new mx.mxHierarchicalLayout(graph).execute(graph.getDefaultParent());
-    }
+    // const graph: mx.mxGraph = new mx.mxGraph(this.graphContainer.nativeElement);
+    // const model: mx.mxGraphModel = graph.getModel();
+    // model.beginUpdate();
+    // try {
+    //   var v1 = graph.insertVertex(graph.getDefaultParent(), '', 'TEST', 0, 0, 100, 100);
+    // } finally {
+    //   model.endUpdate();
+    //   new mx.mxHierarchicalLayout(graph).execute(graph.getDefaultParent());
+    // }
    // mxEvent.disableContextMenu(this.graphContainer.nativeElement);
    //// var mxLoadResources = false;
 
