@@ -18,6 +18,7 @@ export class UtilService {
   deleteListenerFunc2: any;
   domNode: any;
   graph: any;
+  model: any;
   
   constructor() { }
 
@@ -367,27 +368,13 @@ export class UtilService {
       return false;
     };
 
-    // edge animation
-    // const selectCells = mxConnectionHandler.prototype.selectCells;
-
-    // graph.connectionHandler.selectCells = function (edge, target) {
-    //   var state = this.graph.view.getState(edge);
-
-    //   state.shape.node.getElementsByTagName('path')[0].removeAttribute('visibility');
-    //   state.shape.node.getElementsByTagName('path')[0].setAttribute('stroke-width', '6');
-    //   state.shape.node.getElementsByTagName('path')[0].setAttribute('stroke', 'lightGray');
-    //   state.shape.node.getElementsByTagName('path')[1].setAttribute('class', 'flow');
-
-    //   return selectCells.apply(this, arguments);
-    // }
-
-    mxEdgeHandler.prototype.isConnectableCell = function (cell) {  //eslint-disable-line
+    mxgraph.mxEdgeHandler.prototype.isConnectableCell = function (cell) {  //eslint-disable-line
       //eslint-disable-line
       return graph.connectionHandler.isConnectableCell(cell);
     };
 
     // Overridden to define per-shape connection points
-    mxGraph.prototype.getAllConnectionConstraints = function (  //eslint-disable-line
+    mxgraph.mxGraph.prototype.getAllConnectionConstraints = function (  //eslint-disable-line
       terminal,
       source  //eslint-disable-line
     ) {
@@ -453,24 +440,24 @@ export class UtilService {
     };
 
     // Defines the default constraints for all shapes
-    mxgraph.mxShape.prototype.constraints = [  //eslint-disable-line
-      //eslint-disable-line
-      // new mxConnectionConstraint(new mxPoint(0.25, 0), true),
-      new mxgraph.mxConnectionConstraint (new mxPoint (0.5, 0), true), //eslint-disable-line
-      // new mxConnectionConstraint(new mxPoint(0.75, 0), true),
-      // new mxConnectionConstraint(new mxPoint(0, 0.25), true),
-      new mxgraph.mxConnectionConstraint (new mxPoint (0, 0.5), true), //eslint-disable-line
-      // new mxConnectionConstraint(new mxPoint(0, 0.75), true),
-      // new mxConnectionConstraint(new mxPoint(1, 0.25), true),
-      new mxgraph.mxConnectionConstraint (new mxPoint (1, 0.5), true), //eslint-disable-line
-      // new mxConnectionConstraint(new mxPoint(1, 0.75), true),
-      // new mxConnectionConstraint(new mxPoint(0.25, 1), true),
-      new mxgraph.mxConnectionConstraint (new mxPoint (0.5, 1), true), //eslint-disable-line
-      // new mxConnectionConstraint(new mxPoint(0.75, 1), true)
-    ];
+    // mxgraph.mxShape.prototype.constraints = [  //eslint-disable-line
+    //   //eslint-disable-line
+    //   // new mxConnectionConstraint(new mxPoint(0.25, 0), true),
+    //   new mxgraph.mxConnectionConstraint (new mxPoint (0.5, 0), true), //eslint-disable-line
+    //   // new mxConnectionConstraint(new mxPoint(0.75, 0), true),
+    //   // new mxConnectionConstraint(new mxPoint(0, 0.25), true),
+    //   new mxgraph.mxConnectionConstraint (new mxPoint (0, 0.5), true), //eslint-disable-line
+    //   // new mxConnectionConstraint(new mxPoint(0, 0.75), true),
+    //   // new mxConnectionConstraint(new mxPoint(1, 0.25), true),
+    //   new mxgraph.mxConnectionConstraint (new mxPoint (1, 0.5), true), //eslint-disable-line
+    //   // new mxConnectionConstraint(new mxPoint(1, 0.75), true),
+    //   // new mxConnectionConstraint(new mxPoint(0.25, 1), true),
+    //   new mxgraph.mxConnectionConstraint (new mxPoint (0.5, 1), true), //eslint-disable-line
+    //   // new mxConnectionConstraint(new mxPoint(0.75, 1), true)
+    // ];
 
-    // Edges have no connection points
-    mxgraph.mxPolyline.prototype.constraints = null; //eslint-disable-line
+    // // Edges have no connection points
+    // mxgraph.mxPolyline.prototype.constraints = null; //eslint-disable-line
 
     // Enables connect preview for the default edge style
     graph.connectionHandler.createEdgeState = () => {
@@ -554,13 +541,13 @@ export class UtilService {
       mxgraph.mxVertexHandler.apply (this, arguments); //eslint-disable-line
     }
 
-    mxVertexToolHandler.prototype = new mxgraph.mxVertexHandler (state); //eslint-disable-line
+    mxVertexToolHandler.prototype = new mxgraph.mxVertexHandler (state); //TODO state added, but what is it //eslint-disable-line
     mxVertexToolHandler.prototype.constructor = mxVertexToolHandler;
 
     // mxVertexToolHandler.prototype.domNode = null; // TODO was not comented
 
     mxVertexToolHandler.prototype.init = () => {
-      mxVertexHandler.prototype.init.apply (this, arguments); //eslint-disable-line
+      mxgraph.mxVertexHandler.prototype.init.apply (this, arguments); //eslint-disable-line
 
       // In this example we force the use of DIVs for images in IE. This
       // handles transparency in PNG images properly in IE and fixes the
@@ -685,27 +672,27 @@ export class UtilService {
       this.domNode.appendChild(img);
 
       this.graph.container.appendChild(this.domNode);
-      this.redrawTools();
+      // this.redrawTools();
     };
 
     mxVertexToolHandler.prototype.redraw = () => {
-      mxVertexHandler.prototype.redraw.apply (this); //eslint-disable-line
-      this.redrawTools();
+      mxgraph.mxVertexHandler.prototype.redraw.apply (this); //eslint-disable-line
+      // this.redrawTools();
     };
 
-    mxVertexToolHandler.prototype.redrawTools = () => {
-      if (this.state != null && this.domNode != null) {
-        const dy = mxgraph.mxClient.IS_VML && document.compatMode === 'CSS1Compat'  //eslint-disable-line
-          ? 20
-          : 4; //eslint-disable-line
-        this.domNode.style.left = `${this.state.x + this.state.width - 56}px`;
-        this.domNode.style.top = `${this.state.y - dy - 26}px`;
-      }
-    };
+    // mxVertexToolHandler.prototype.redrawTools = () => {
+    //   if (this.state != null && this.domNode != null) {
+    //     const dy = mxgraph.mxClient.IS_VML && document.compatMode === 'CSS1Compat'  //eslint-disable-line
+    //       ? 20
+    //       : 4; //eslint-disable-line
+    //     this.domNode.style.left = `${this.state.x + this.state.width - 56}px`;
+    //     this.domNode.style.top = `${this.state.y - dy - 26}px`;
+    //   }
+    // };
 
-    mxVertexToolHandler.prototype.destroy = function (sender, me) {  //eslint-disable-line
+    mxVertexToolHandler.prototype.destroy = function () {//TODO (sender, me) was in   //eslint-disable-line
       //eslint-disable-line
-      mxVertexHandler.prototype.destroy.apply (this, arguments); //eslint-disable-line
+      mxgraph.mxVertexHandler.prototype.destroy.apply (this, arguments); //eslint-disable-line
 
       if (this.domNode != null) {
         this.domNode.parentNode.removeChild(this.domNode);
@@ -720,7 +707,7 @@ export class UtilService {
         return new mxVertexToolHandler (state); //eslint-disable-line
       }
 
-      return mxGraph.prototype.createHandler.apply (this, arguments); //eslint-disable-line
+      return mxgraph.mxGraph.prototype.createHandler.apply (this, arguments); //eslint-disable-line
     };
   }
 
@@ -1122,7 +1109,7 @@ export class UtilService {
   initCustomPort(config) {
     const { pic } = config;
     // Replaces the port image
-    mxgraph.mxConstraintHandler.prototype.pointImage = new mxImage (pic, 10, 10); //eslint-disable-line
+    mxgraph.mxConstraintHandler.prototype.pointImage = new mxgraph.mxImage (pic, 10, 10); //eslint-disable-line
   }
 
   /**
@@ -1175,22 +1162,22 @@ export class UtilService {
    * 节点重命名监听器
    */
   vertexRenameListener({ callback }) {
-    mxgraph.mxCell.prototype.valueChangedCallback = callback; //eslint-disable-line
+    // mxgraph.mxCell.prototype.valueChangedCallback = callback; //eslint-disable-line
 
-    // 若没重写过 valueChanged 方法则重写
-    if (!mxgraph.mxCell.prototype.hasRewriteValueChanged) {  //eslint-disable-line
-      //eslint-disable-line
-      mxgraph.mxCell.prototype.hasRewriteValueChanged = true; //eslint-disable-line
+    // // 若没重写过 valueChanged 方法则重写
+    // if (!mxgraph.mxCell.prototype.hasRewriteValueChanged) {  //eslint-disable-line
+    //   //eslint-disable-line
+    //   mxgraph.mxCell.prototype.hasRewriteValueChanged = true; //eslint-disable-line
 
-      const { valueChanged } = mxgraph.mxCell.prototype; //eslint-disable-line
-      mxgraph.mxCell.prototype.valueChanged = function (newValue) {  //eslint-disable-line
-        //eslint-disable-line
-        const { valueChangedCallback } = mxgraph.mxCell.prototype; //eslint-disable-line
+    //   const { valueChanged } = mxgraph.mxCell.prototype; //eslint-disable-line
+    //   mxgraph.mxCell.prototype.valueChanged = function (newValue) {  //eslint-disable-line
+    //     //eslint-disable-line
+    //     const { valueChangedCallback } = mxgraph.mxCell.prototype; //eslint-disable-line
 
-        valueChangedCallback && valueChangedCallback(this, newValue);
-        valueChanged.apply(this, [newValue]);
-      };
-    }
+    //     valueChangedCallback && valueChangedCallback(this, newValue);
+    //     valueChanged.apply(this, [newValue]);
+    //   };
+    // }
   }
 
   /**
