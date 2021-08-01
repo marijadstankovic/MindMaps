@@ -12,13 +12,19 @@
         <div *ngFor="let shape of shapes">
         <!-- {SIDEBAR_BASIC_SHAPES.map(shape => ( -->
             <!-- <p>{{ shape | json }}</p> -->
-            <img src={{shape.logo}}>
+            
           <a
+          id={{shape.key}}
+          (onclick)="handleSidebarItems()"
             href="javascript:void(0);"
                 key={`panel_a_${shape.key}`}
             className="geItem custom-sidebar-node common-panel-node"
             data-shape-type="general"
-          > </a>
+            data-shape-name="shape.key"
+            data-shape-label="shape.name"
+            data-shape-width=shape.width
+            data-shape-height=shape.height
+          > <img src={{shape.logo}}><p>{{shape.name}}</p></a>
             <!-- <Tooltip
               placement="top"
               title={shape.name}

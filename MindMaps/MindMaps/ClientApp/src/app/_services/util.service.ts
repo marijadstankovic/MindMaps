@@ -85,16 +85,17 @@ export class UtilService {
 
     sidebarItems
       && sidebarItems.forEach((item) => {
-        const width = item.getAttribute('data-shape-width');
-        const height = item.getAttribute('data-shape-height');
-        const shapeType = item.getAttribute('data-shape-type');
-        const shapeName = item.getAttribute('data-shape-name');
-        const shapeLabel = item.getAttribute('data-shape-label');
-        const shapeContent = item.getAttribute('data-shape-content');
+        const width = item.width;
+        const height = item.height;
+        const shapeType = 'general';
+        const shapeName = item.key;
+        const shapeLabel = item.name;
+        const shapeContent = null; // item.getAttribute('data-shape-content');
         let isEdge = false;
 
         let shapeStyle = shapeName;
 
+        let node = document.getElementById(shapeName);
         
         if (shapeType === 'general') {
           if (GENERAL_SHAPES[shapeName].type === 'edge') {
@@ -106,7 +107,7 @@ export class UtilService {
 
         this.createDragableItem({
           id: `cell${Date.now()}`,
-          node: item,
+          node: node,
           width,
           height,
           shapeName,
@@ -132,7 +133,6 @@ export class UtilService {
       isEdge,
       cellCreatedFunc,
     } = config;
-
     let { width, height } = config;
 
     width = width * 1 || 130;

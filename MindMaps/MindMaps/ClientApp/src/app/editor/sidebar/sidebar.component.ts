@@ -22,17 +22,17 @@ export class SidebarComponent implements OnInit {
     // const { editor } = this.props;
     // this.editorService
     // if (editor && editor.initSidebar) {
-      const sidebarItems = document.querySelectorAll('.custom-sidebar-node');
+      // const sidebarItems = document.querySelectorAll('.custom-sidebar-node');
 
-      const newSidebarItems = Array.from(sidebarItems).filter((item) => {
-        if (!item.classList.contains('has-inited')) {
-          item.classList.add('has-inited');
-          return true;
-        }
-        return false;
-      });
+      // const newSidebarItems = Array.from(sidebarItems).filter((item) => {
+      //   if (!item.classList.contains('has-inited')) {
+      //     item.classList.add('has-inited');
+      //     return true;
+      //   }
+      //   return false;
+      // });
 
-      this.editorService.initSidebar(newSidebarItems);
+      this.editorService.initSidebar(this.shapes);
     // }
   }
 
