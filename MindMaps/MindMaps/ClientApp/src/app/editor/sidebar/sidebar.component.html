@@ -9,18 +9,16 @@
       }}
     > -->
       <div key="common" header="basic">
-        <div *ngFor="let shape of SIDEBAR_BASIC_SHAPES"></div>
+        <div *ngFor="let shape of shapes">
         <!-- {SIDEBAR_BASIC_SHAPES.map(shape => ( -->
+            <!-- <p>{{ shape | json }}</p> -->
+            <img src={{shape.logo}}>
           <a
             href="javascript:void(0);"
-            key={`panel_a_${shape.key}`}
+                key={`panel_a_${shape.key}`}
             className="geItem custom-sidebar-node common-panel-node"
             data-shape-type="general"
-            data-shape-name={shape.key}
-            data-shape-label={shape.name}
-            data-shape-width={shape.width}
-            data-shape-height={shape.height}
-          >
+          > </a>
             <!-- <Tooltip
               placement="top"
               title={shape.name}
@@ -32,10 +30,10 @@
                 {shape.name}
               </span>
             </Tooltip> -->
-          </a>
+         
         <!-- ))} -->
-
       </div>
+    </div>
 
 
 

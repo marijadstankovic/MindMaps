@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import { UtilService } from './util.service';
 
 import { mxgraph, mxgraphFactory } from "ts-mxgraph";
@@ -29,15 +29,21 @@ export class EditorService {
       } = props;
   
   
-      let containerEle;
+      
+      let containerEle: Element;
       if (typeof container === 'string') {
         containerEle = document.querySelector(container);
       } else {
         containerEle = container;
       }
-  
       const graph = new mx.mxGraph(containerEle); // eslint-disable-line
-  
+      const parent = graph.getDefaultParent();
+      graph.getModel().beginUpdate();
+      const vertex1 = graph.insertVertex(parent, '1', 'Vertex 1', 0, 0, 200, 80);
+
+      graph.getModel().endUpdate();
+      new mx.mxHierarchicalLayout(graph).execute(graph.getDefaultParent());
+
       // Disables the built-in context menu
       mx.mxEvent.disableContextMenu(containerEle); // eslint-disable-line
       mx.mxVertexHandler.prototype.rotationEnabled = true; // eslint-disable-line

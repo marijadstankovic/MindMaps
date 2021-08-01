@@ -9,11 +9,13 @@ import SIDEBAR_BASIC_SHAPES from '../../_config/mx-sidebar-basic-shapes';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-
+  shapes = SIDEBAR_BASIC_SHAPES;
   constructor(private editorService: EditorService) { }
 
   ngOnInit() {
     this.onChange();
+
+    // console.log(this.shapes);
   }
 
   handleSidebarItems() {
