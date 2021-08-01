@@ -1037,7 +1037,7 @@ export class UtilService {
     let node = null;
 
     if (ignoreSelection) {
-      const enc: mxgraph.mxCodec = new mx.mxCodec(mxgraph.mxUtils.createXmlDocument ()); //eslint-disable-line
+      const enc: mxgraph.mxCodec = new mx.mxCodec(mx.mxUtils.createXmlDocument ()); //eslint-disable-line
       node = enc.encode(graph.getModel());
     } else {
       node = graph.encodeCells(
