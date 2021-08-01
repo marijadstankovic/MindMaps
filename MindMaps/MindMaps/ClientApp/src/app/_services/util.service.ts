@@ -491,44 +491,44 @@ export class UtilService {
     };
   }
 
-  // //   popmenu
-  // // initPopupMenu(config) {
-  // //   const { graph } = config;
+    popmenu
+  initPopupMenu(config) {
+    const { graph } = config;
 
-  // //   // Installs a popupmenu handler using local function (see below).
-  // //   graph.popupMenuHandler.factoryMethod = (menu, cell, evt) =>
-  // //     createPopupMenu (graph, menu, cell, evt); //eslint-disable-line
+    // Installs a popupmenu handler using local function (see below).
+    graph.popupMenuHandler.factoryMethod = (menu, cell, evt) =>
+      createPopupMenu (graph, menu, cell, evt); //eslint-disable-line
 
-  // //   // Function to create the entries in the popupmenu
-  // //   function createPopupMenu(graph, menu, cell, evt) {  //eslint-disable-line
-  // //     //eslint-disable-line
-  // //     if (cell != null) {
-  // //       menu.addItem(
-  // //         'Cell Item',
-  // //         'https://img.alicdn.com/tfs/TB1xSANXXzqK1RjSZFvXXcB7VXa-22-22.png',
-  // //         () => {
-  // //           mxUtils.alert ('MenuItem1'); //eslint-disable-line
-  // //         }
-  // //       );
-  // //     } else {
-  // //       menu.addItem(
-  // //         'No-Cell Item',
-  // //         'https://img.alicdn.com/tfs/TB1CFkNXmzqK1RjSZPxXXc4tVXa-22-22.png',
-  // //         () => {
-  // //           mxUtils.alert ('MenuItem2'); //eslint-disable-line
-  // //         }
-  // //       );
-  // //     }
-  // //     menu.addSeparator();
-  // //     menu.addItem(
-  // //       'MenuItem3',
-  // //       'https://img.alicdn.com/tfs/TB1CFkNXmzqK1RjSZPxXXc4tVXa-22-22.png',
-  // //       () => {
-  // //         mxUtils.alert (`MenuItem3: ${graph.getSelectionCount ()} selected`); //eslint-disable-line
-  // //       }
-  // //     );
-  // //   }
-  // // },
+    // Function to create the entries in the popupmenu
+    function createPopupMenu(graph, menu, cell, evt) {  //eslint-disable-line
+      //eslint-disable-line
+      if (cell != null) {
+        menu.addItem(
+          'Cell Item',
+          'https://img.alicdn.com/tfs/TB1xSANXXzqK1RjSZFvXXcB7VXa-22-22.png',
+          () => {
+            mx.mxUtils.alert ('MenuItem1'); //eslint-disable-line
+          }
+        );
+      } else {
+        menu.addItem(
+          'No-Cell Item',
+          'https://img.alicdn.com/tfs/TB1CFkNXmzqK1RjSZPxXXc4tVXa-22-22.png',
+          () => {
+            mx.mxUtils.alert ('MenuItem2'); //eslint-disable-line
+          }
+        );
+      }
+      menu.addSeparator();
+      menu.addItem(
+        'MenuItem3',
+        'https://img.alicdn.com/tfs/TB1CFkNXmzqK1RjSZPxXXc4tVXa-22-22.png',
+        () => {
+          mx.mxUtils.alert (`MenuItem3: ${graph.getSelectionCount ()} selected`); //eslint-disable-line
+        }
+      );
+    }
+  }
 
   // init VertexToolHandler
   initVertexToolHandler(config) {

@@ -1,6 +1,7 @@
 import { style } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import Editor from '../_config/editor-base';
+import { EditorService } from '../_services/editor.service';
 import { UtilService } from '../_services/util.service';
 // import util from 'mxgraph-editor/common/util';
 // import factory from 'mxgraph';
@@ -34,7 +35,10 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   state: any;
   graphContainerClickCount: number;
 
-  constructor(private utilService: UtilService) {
+  constructor(
+    // private utilService: UtilService,
+    private editorService: EditorService
+    ) {
   }
 
   ngOnInit() {
@@ -58,9 +62,10 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     // this.mounted = tr ue;
-
-    const editor = new Editor(
-      this.utilService,
+    
+    this.editorService.init(
+    // const editor = new Editor(
+      // this.utilService,
       {
       container: '.graph-content',
       clickFunc: this.clickFunc,
@@ -76,17 +81,17 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       // SVG_SHAPES
     });
 
-    this.editor = editor;
+    // this.editor = editor;
 
-    // window.editor = editor;
+    // window['editor'] = editor;
 
-    editor.initCustomPort('https://gw.alicdn.com/tfs/TB1PqwZzzDpK1RjSZFrXXa78VXa-200-200.png');
+    this.editorService.initCustomPort('https://gw.alicdn.com/tfs/TB1PqwZzzDpK1RjSZFrXXa78VXa-200-200.png');
 
     const xml = window.localStorage.getItem('autosaveXml');
 
-    this.editor.renderGraphFromXml(xml);
+    this.editorService.renderGraphFromXml(xml);
 
-    this.state = { editor };
+    // this.state = { editor };
     
   }
 

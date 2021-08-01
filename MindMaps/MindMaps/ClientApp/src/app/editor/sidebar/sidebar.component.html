@@ -1,0 +1,44 @@
+<p>sidebar works</p>
+<div className="J_Sidebar_Container sidebar-container">
+
+    <!-- <Collapse
+      bordered={false}
+      defaultActiveKey={['common', 'svg', 'picture', 'card']}
+      onChange={() => {
+        this.onChange();
+      }}
+    > -->
+      <div key="common" header="basic">
+        <div *ngFor="let shape of SIDEBAR_BASIC_SHAPES"></div>
+        <!-- {SIDEBAR_BASIC_SHAPES.map(shape => ( -->
+          <a
+            href="javascript:void(0);"
+            key={`panel_a_${shape.key}`}
+            className="geItem custom-sidebar-node common-panel-node"
+            data-shape-type="general"
+            data-shape-name={shape.key}
+            data-shape-label={shape.name}
+            data-shape-width={shape.width}
+            data-shape-height={shape.height}
+          >
+            <!-- <Tooltip
+              placement="top"
+              title={shape.name}
+              key={`panel_${shape.key}`}
+              className="tooltip"
+            >
+              {shape.logo ? <img className="sidebar-node-image" src={shape.logo} alt="" /> : shape.key}
+              <span className="sidebar-node-label">
+                {shape.name}
+              </span>
+            </Tooltip> -->
+          </a>
+        <!-- ))} -->
+
+      </div>
+
+
+
+    <!-- </Collapse> -->
+
+  </div>

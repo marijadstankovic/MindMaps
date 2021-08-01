@@ -26,6 +26,7 @@ import { MatSortModule } from '@angular/material/sort';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 import { NgChatModule } from 'ng-chat';
 import { EditorComponent } from './editor/editor.component';
+import { SidebarComponent } from './editor/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditorComponent } from './editor/editor.component';
     FormRoomComponent,
     JoinGroupComponent,
     ListRoomsComponent,
-    EditorComponent
+    EditorComponent,
+    SidebarComponent
   ],
   imports: [
     MaterialModule,
