@@ -961,9 +961,9 @@ export class UtilService {
 
   initAutoSave(config) {
     const { graph, callback } = config;
-
+// debugger;
     const mgr: mxgraph.mxAutoSaveManager = new mx.mxAutoSaveManager (graph); //eslint-disable-line
-    ///mgr.autoSaveDelay = 0; // 自动保存延迟时间设为0       // TODO: was not commented
+    mgr.autoSaveDelay = 0; // 自动保存延迟时间设为0       // TODO: was not commented
     mgr.save = () => {
       const xml = this.getGraphXml({
         graph,
@@ -985,6 +985,7 @@ export class UtilService {
 
   // check the xmlnode format to avoid error
   formatXmlNode(xmlNode) {
+   //  debugger;
     const rootEle = xmlNode && xmlNode.firstElementChild;
     
     let hasRoot = false;

@@ -75,5 +75,17 @@ namespace MindMaps.Hubs
             //await Clients.All.SendAsync("BroadcastMessage", userId, message);
 
         }
+
+
+
+
+        //functions for new hub, here just for testing
+        public async Task UpdateGraph(string graphXML)
+        {
+            // save to db :D
+
+            //send to all
+            await Clients.All.SendAsync("MindMapGraph", graphXML); // AllExcept(Context.ConnectionId)
+        }
     }
 }

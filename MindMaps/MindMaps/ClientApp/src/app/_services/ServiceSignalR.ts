@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from "@aspnet/signalr";
 import { EventEmitter } from 'events';
 import { BehaviorSubject } from 'rxjs';
+import { EditorService } from './editor.service';
 
 
 @Injectable({
@@ -16,6 +17,12 @@ export class ServiceSignalR {
   public messageEvent$ = new BehaviorSubject<any>({});
 
   private hubConnection: signalR.HubConnection
+
+  constructor(
+  private editorService: EditorService)
+  {
+      this.startConnection();
+  }
 
   public async startConnection(): Promise<void> {
     const token = localStorage.getItem('token');
@@ -34,6 +41,7 @@ export class ServiceSignalR {
     this.addToAllGroups();
     this.addTransferDataListener();
     this.addBroadcastDataListener();
+    this.recieveGraph();
     // }).catch(function (err) {
     //   return console.error(err.toString());
     // });
@@ -83,6 +91,20 @@ export class ServiceSignalR {
     })
   }
 
+
+  public sendGraph(xml){
+    this.hubConnection.invoke('UpdateGraph', xml)
+    .catch(err => console.error(err));
+  }
+  public recieveGraph = () => {
+    this.hubConnection.on('MindMapGraph', (xml) => {
+      // debugger;
+      // render
+      this.editorService.renderGraphFromXml(xml);
+      // save to local storage
+      window.localStorage.setItem('autosaveXml', xml);
+    })
+  }
 }
 
 
