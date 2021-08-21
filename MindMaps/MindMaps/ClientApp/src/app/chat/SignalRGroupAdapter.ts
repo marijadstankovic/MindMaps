@@ -6,10 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import * as signalR from "@aspnet/signalr";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ServiceSignalR } from '../_services/ServiceSignalR';
+import { ListRoomService } from '../_services/list-room.service';
 // import { MessageType } from 'ng-chat/ng-chat/core/message-type.enum';
 
 export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapter {
   public userId: string;
+
+  public participants: IChatParticipant[] = [];
 
   private hubConnection: signalR.HubConnection
   public static serverBaseUrl: string = "https://localhost:5001/";
@@ -18,7 +21,8 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
   jwtHelper = new JwtHelperService();
   
   constructor(private http: HttpClient,
-    private serviceSignalR: ServiceSignalR) {
+    private serviceSignalR: ServiceSignalR,
+    private listRoomService: ListRoomService) {
     super();
     const userT = localStorage.getItem('token');
     const decodedToken = this.jwtHelper.decodeToken(userT);
@@ -43,14 +47,47 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
 //   }
 
   private initializeListeners(): void {
+    
+    this.listRoomService.getChats().subscribe( (response: any[]) => {
+      response.forEach(element => {
+        // const group = new Group ([{
+        //   participantType: ChatParticipantType.User,
+        //   id: 1001,
+        //   displayName: "Cersei Lannister",
+        //   avatar: null,
+        //   status: ChatParticipantStatus.Online
+        // }]);
+        // group.displayName = element.roomName;
+        // group.id = element.id;
+
+        // this.participants.push(group);
+        this.participants.push( 
+          {
+          avatar: null,
+          displayName: element.roomName,
+          id: element.id,
+          participantType: ChatParticipantType.User,
+          status: ChatParticipantStatus.Away
+        })
+      });
+      console.log(response);
+    } );
 
     this.serviceSignalR.messageEvent$.subscribe(messageObject => {
+        // const participant: IChatParticipant = {
+        //   participantType: ChatParticipantType.User,
+        //   id: 1001,
+        //   displayName: "Cersei Lannister",
+        //   avatar: null,
+        //   status: ChatParticipantStatus.Online
+        // }
+
         const participant: IChatParticipant = {
-            participantType: ChatParticipantType.Group,
-            id: messageObject.chatId,
-            status: null,
-            avatar: null,
-            displayName: messageObject.chatId
+          participantType: ChatParticipantType.User,
+          id: messageObject.chatId,
+          displayName: "Ime2",
+          avatar: null,
+          status: ChatParticipantStatus.Online
         }
 
         const message: Message = {
@@ -113,6 +150,7 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
   groupCreated(group: Group): void {
     // this.hubConnection.send("groupCreated", group);
     //TODO
+    console.log("group created");
   }
 
 
@@ -183,21 +221,24 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
       status: ChatParticipantStatus.Online
     },
     {
-      participantType: ChatParticipantType.User,
+      participantType: ChatParticipantType.Group,
       id: 1010,
       displayName: "Theon Greyjoy",
-      avatar: "https://thumbnail.myheritageimages.com/502/323/78502323/000/000114_884889c3n33qfe004v5024_C_64x64C.jpg",
+      avatar: null, // "https://thumbnail.myheritageimages.com/502/323/78502323/000/000114_884889c3n33qfe004v5024_C_64x64C.jpg",
       status: ChatParticipantStatus.Away
     }];
 
   listFriends(): Observable<ParticipantResponse[]> {
-    return of(SignalRGroupAdapter.mockedParticipants.map(user => {
+
+    // this.listRoomService.getChats();
+
+    return of(this.participants.map(user => { //this.participants  //SignalRGroupAdapter.mockedParticipants
       let participantResponse = new ParticipantResponse();
 
       participantResponse.participant = user;
-      participantResponse.metadata = {
-        totalUnreadMessages: Math.floor(Math.random() * 10)
-      }
+      // participantResponse.metadata = {
+      //   totalUnreadMessages: Math.floor(Math.random() * 10)
+      // }
 
       return participantResponse;
     }));

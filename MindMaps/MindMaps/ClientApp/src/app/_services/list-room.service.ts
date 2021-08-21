@@ -25,4 +25,14 @@ export class ListRoomService {
        // console.log(this.user);
       });
   }
+
+  getChats() {
+    const userT = localStorage.getItem('token');
+    this.decodedToken = this.jwtHelper.decodeToken(userT);
+    this.userModel.UserUid = +this.decodedToken.nameid;
+    return this.http.get(this.baseUrl + "Chats/GetChatsForLoggedUser?uid=" + this.userModel.UserUid);
+    // .subscribe(res => {
+    //   console.log(res);
+    // });
+  }
 }

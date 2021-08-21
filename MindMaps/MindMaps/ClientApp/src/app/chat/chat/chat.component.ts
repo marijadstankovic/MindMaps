@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ChatAdapter } from 'ng-chat';
 import { SignalRGroupAdapter } from '../SignalRGroupAdapter';
+import { ListRoomService } from 'src/app/_services/list-room.service';
 
 @Component({
   selector: 'app-chat',
@@ -15,10 +16,10 @@ export class ChatComponent implements OnInit {
 
   public adapter: SignalRGroupAdapter;
 
-  constructor(public serviceSignalR: ServiceSignalR, private http: HttpClient) {}
+  constructor(public serviceSignalR: ServiceSignalR, private http: HttpClient, private listRoomService: ListRoomService) {}
 
   ngOnInit() {
-    this.adapter = new SignalRGroupAdapter(this.http, this.serviceSignalR);
+    this.adapter = new SignalRGroupAdapter(this.http, this.serviceSignalR, this.listRoomService);
    /* const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:5001/ChatHub',
@@ -58,7 +59,7 @@ export class ChatComponent implements OnInit {
   public onClick = (event) => {
     const message: string = (document.getElementById("text") as HTMLInputElement).value;
     console.log("Kliknuto" + message);
-    this.serviceSignalR.broadcastData(1001, message);
+    this.serviceSignalR.broadcastData(1101, message);
   }
 
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MindMaps.Data.Entities;
 using MindMaps.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using MindMaps.DTOs;
 
 namespace MindMaps.Repository
 {
@@ -26,12 +27,19 @@ namespace MindMaps.Repository
             //return null;
         }
 
-        public async Task<List<int>> ChatsByUserID(int uid)
+        public async Task<List<ChatDTO>> ChatsByUserID(int uid)
         {
-            var result = await context.Rooms
-                .Where(y => context.RoomUsers.Where(x => x.UserID == uid).Select(x => x.RoomID).Contains(y.ChatID))
-                .Select(y => y.ChatID).ToListAsync();
-            return result;
+            var rooms = await context.RoomUsers.Where(x => x.UserID == uid) // 
+                                                                      // .ToList()
+                .Join(context.Rooms,
+                x => x.RoomID,
+                y => y.Id,
+                (x, y) => new ChatDTO { Id = y.ChatID, RoomName = y.Name }).ToListAsync();
+            //var result = await context.Rooms
+            //    .Where(y => context.RoomUsers.Where(x => x.UserID == uid)
+            //        .Select(x => x.RoomID).Contains(y.ChatID))
+            //    .Select(y => new ChatDTO{ Id= y.ChatID, RoomName = y.Name}).ToListAsync();
+            return rooms;
         }
     }
 }

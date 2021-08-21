@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MindMaps.Data.Context;
 using MindMaps.Data.Entities;
+using MindMaps.DTOs;
 using MindMaps.Repository;
 
 namespace MindMaps.Controllers
@@ -29,7 +30,7 @@ namespace MindMaps.Controllers
             return await _repository.GetAll();
         }
         [HttpGet(nameof(GetChatsForLoggedUser))]
-        public async Task<ActionResult<IEnumerable<int>>> GetChatsForLoggedUser(int uid)
+        public async Task<ActionResult<IEnumerable<ChatDTO>>> GetChatsForLoggedUser(int uid)
         {
             return await _repository.ChatsByUserID(uid);
         }
