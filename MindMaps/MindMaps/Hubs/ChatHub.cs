@@ -85,7 +85,7 @@ namespace MindMaps.Hubs
             // save to db :D
 
             //send to all
-            await Clients.All.SendAsync("MindMapGraph", graphXML); // AllExcept(Context.ConnectionId)
+            await Clients.Others.SendAsync("MindMapGraph", graphXML); // AllExcept(Context.ConnectionId)
         }
     }
 }

@@ -963,7 +963,7 @@ export class UtilService {
     const { graph, callback } = config;
 // debugger;
     const mgr: mxgraph.mxAutoSaveManager = new mx.mxAutoSaveManager (graph); //eslint-disable-line
-    mgr.autoSaveDelay = 0; // 自动保存延迟时间设为0       // TODO: was not commented
+    mgr.autoSaveDelay = 1; // 自动保存延迟时间设为0       // TODO: was not commented
     mgr.save = () => {
       const xml = this.getGraphXml({
         graph,

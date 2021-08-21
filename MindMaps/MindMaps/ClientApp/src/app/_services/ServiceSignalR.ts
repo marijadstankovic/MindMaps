@@ -97,6 +97,7 @@ export class ServiceSignalR {
     .catch(err => console.error(err));
   }
   public recieveGraph = () => {
+    // debugger;
     this.hubConnection.on('MindMapGraph', (xml) => {
       // debugger;
       // render
