@@ -70,7 +70,6 @@ namespace MindMaps
             services.AddScoped<CommentRepository>();
             services.AddScoped<MessageRepository>();
             services.AddScoped<MindMapRepository>();
-            services.AddScoped<NodeRepository>();
             services.AddScoped<RoomRepository>();
             services.AddScoped<RoomUserRepository>();
             services.AddScoped<UserRepository>();

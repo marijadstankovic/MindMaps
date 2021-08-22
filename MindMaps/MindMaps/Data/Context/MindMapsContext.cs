@@ -16,7 +16,6 @@ namespace MindMaps.Data.Context
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<MindMap> MindMaps { get; set; }
-        public DbSet<Node> Nodes { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
         public MindMapsContext(DbContextOptions<MindMapsContext> options) : base(options)
@@ -74,24 +73,24 @@ namespace MindMaps.Data.Context
 
 
 
-            modelBuilder.Entity<Node>().HasData(
-                new Node 
-                { 
-                    Id = 1,
-                    XMLID = 2,
-                    MindMapID = 1,
-                    XMLText = "<Rect label='Rectangle' href='' id='2'> < mxCell vertex = '1' parent = '1' >   < mxGeometry x = '120' y = '140' width = '80' height = '40' as= 'geometry' /></ mxCell ></ Rect > ",
-                    UserID = 1
-                },
-                new Node
-                {
-                    Id = 2,
-                    XMLID = 3,
-                    MindMapID = 1,
-                    XMLText = " <Shape label='Shape' href='' id='3'> < mxCell style = 'ellipse' vertex = '1' parent = '1' >  < mxGeometry x = '340' y = '160' width = '60' height = '60' as= 'geometry' />  </ mxCell >    </ Shape > ",
-                    UserID = 1,
-                }
-                );
+            //modelBuilder.Entity<Node>().HasData(
+            //    new Node 
+            //    { 
+            //        Id = 1,
+            //        XMLID = 2,
+            //        MindMapID = 1,
+            //        XMLText = "<Rect label='Rectangle' href='' id='2'> < mxCell vertex = '1' parent = '1' >   < mxGeometry x = '120' y = '140' width = '80' height = '40' as= 'geometry' /></ mxCell ></ Rect > ",
+            //        UserID = 1
+            //    },
+            //    new Node
+            //    {
+            //        Id = 2,
+            //        XMLID = 3,
+            //        MindMapID = 1,
+            //        XMLText = " <Shape label='Shape' href='' id='3'> < mxCell style = 'ellipse' vertex = '1' parent = '1' >  < mxGeometry x = '340' y = '160' width = '60' height = '60' as= 'geometry' />  </ mxCell >    </ Shape > ",
+            //        UserID = 1,
+            //    }
+            //    );
         }
     }
 }

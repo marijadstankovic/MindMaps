@@ -11,5 +11,6 @@ namespace MindMaps.Data.Entities
         public String Name;
         public Room Room { set; get; }
         public DateTime DateOfCreation { set; get; }
+        public string XMLText { get; set; }
     }
 }

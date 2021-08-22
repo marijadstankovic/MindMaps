@@ -27,8 +27,6 @@ namespace MindMaps.Data.Entities
 
         public virtual ICollection<Message> Messages { get; set; }
 
-        public virtual ICollection<Node> Nodes { get; set; }
-
         public virtual ICollection<Comment> Comments { get; set; }
     
     }
