@@ -2,12 +2,11 @@
 <body>
   <app-nav-menu></app-nav-menu>
   <div class="container">
+
     <div #graphContainer id="graphContainer"></div>
 
-    <app-list-rooms></app-list-rooms>
     <app-login [hidden]="loggedin()"></app-login>
-
-    <router-outlet></router-outlet>
+    <router-outlet [hidden]="!loggedin()"></router-outlet>
   </div>
 </body>
-
+ 

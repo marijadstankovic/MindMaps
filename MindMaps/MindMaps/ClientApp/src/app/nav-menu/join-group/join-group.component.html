@@ -1,21 +1,14 @@
-<mat-card>
-
-    <mat-card-content>
-      <form #joinRoomForm="ngForm" (ngSubmit)="join()">
-        <br>
-        <p>
-          <mat-form-field>
-            <input type="text" matInput placeholder="RoomKey" name="RoomKey" required [(ngModel)]="joinRoomModel.RoomKey">
-          </mat-form-field>
-        </p>
-  
-  
-        <div class="button">
-          <button type="submit" mat-button>Join</button>
-        </div>
-  
-      </form>
-    </mat-card-content>
-  
-  </mat-card>
-  
+<h2 mat-dialog-title>Join a group</h2>
+<mat-dialog-content class="join-group-form">
+  <form #joinRoomForm="ngForm" (ngSubmit)="join()">
+    <p>
+      <mat-form-field>
+        <input type="text" matInput placeholder="RoomKey" name="RoomKey" required [(ngModel)]="joinRoomModel.RoomKey">
+      </mat-form-field>
+    </p>
+    <div class="buttons">
+      <button type="submit" mat-button>Join</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+  </form>
+</mat-dialog-content>

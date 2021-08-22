@@ -15,10 +15,7 @@ import { AuthService } from './_services/auth.service';
 import { MaterialModule } from './login/material.module';
 import { NavMenuModule } from './nav-menu/nav-menu.module'; 
 import { MenuComponent } from './nav-menu/menu/menu.component';
-import { FormRoomComponent } from './nav-menu/form-room/form-room.component';
-import { FormProfileComponent } from './nav-menu/form-profile/form-profile.component';
 import { CommonModule } from '@angular/common';
-import { JoinGroupComponent } from './nav-menu/join-group/join-group.component';
 import { ListRoomsComponent } from './list-rooms/list-rooms.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -27,6 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { NgChatModule } from 'ng-chat';
 import { EditorComponent } from './editor/editor.component';
 import { SidebarComponent } from './editor/sidebar/sidebar.component';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -36,8 +34,6 @@ import { SidebarComponent } from './editor/sidebar/sidebar.component';
     ChatComponent,
     LoginComponent,
     MenuComponent,
-    FormRoomComponent,
-    JoinGroupComponent,
     ListRoomsComponent,
     EditorComponent,
     SidebarComponent
@@ -59,7 +55,11 @@ import { SidebarComponent } from './editor/sidebar/sidebar.component';
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule
+  ],
+  exports: [
+    MatDialogModule
   ],
   providers: [
     AuthService

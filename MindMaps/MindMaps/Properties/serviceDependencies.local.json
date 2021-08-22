@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "secrets1": {
+      "resourceId": null,
+      "type": "secrets.user",
+      "connectionId": null,
+      "secretStore": null
+    },
     "mssql1": {
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/ser-mind-map/databases/dbMindMap",
       "type": "mssql.azure",
@@ -11,12 +17,6 @@
       "type": "mssql.local",
       "connectionId": "LBconnMindMaps",
       "secretStore": "LocalSecretsFile"
-    },
-    "secrets1": {
-      "resourceId": null,
-      "type": "secrets.user",
-      "connectionId": null,
-      "secretStore": null
     }
   }
 }

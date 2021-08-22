@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RoomService } from '../../_services/room.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { error } from '@angular/compiler/src/util';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-form-room',
