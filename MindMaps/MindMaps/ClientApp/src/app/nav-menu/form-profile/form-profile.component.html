@@ -1,10 +1,8 @@
 <h2 mat-dialog-title>My Profile</h2>
 <mat-dialog-content *ngIf="this.user !== undefined" class="profile-form">
   <div [hidden]="this.editHidden === false">
-
     <h2>{{this.user?.name}} {{this.user?.lastName}}</h2>
     <h5>{{this.user?.email}}</h5>
-    
     <div class="button">
       <button type="button" (click)="edit()" mat-button>Edit</button>
     </div>
@@ -29,5 +27,4 @@
       </div>
     </form>
   </div>
-
 </mat-dialog-content>

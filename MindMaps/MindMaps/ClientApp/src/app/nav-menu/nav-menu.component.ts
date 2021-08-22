@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from '../_services/auth.service';
 
 
 @Component({
@@ -8,6 +9,8 @@ import { Component, Input } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  constructor(public authService: AuthService) {
+  }
 
   collapse() {
     this.isExpanded = false;
@@ -15,5 +18,9 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  loggedin() {
+    return this.authService.loggedin();
   }
 }

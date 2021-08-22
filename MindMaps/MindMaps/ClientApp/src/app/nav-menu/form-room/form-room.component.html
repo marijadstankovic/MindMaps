@@ -1,20 +1,14 @@
-<mat-card>
-
-  <mat-card-content>
-    <form #addRoomForm="ngForm" (ngSubmit)="add()">
-      <br>
-      <p>
-        <mat-form-field>
-          <input type="text" matInput placeholder="name" name="name" required [(ngModel)]="roomModel.RoomName">
-        </mat-form-field>
-      </p>
-
-
-      <div class="button">
-        <button type="submit" mat-button>Add</button>
-      </div>
-
-    </form>
-  </mat-card-content>
-
-</mat-card>
+<h2 mat-dialog-title>Add new room</h2>
+<mat-dialog-content class="add-room-form">
+  <form #addRoomForm="ngForm" (ngSubmit)="add()">
+    <p>
+      <mat-form-field>
+        <input type="text" matInput placeholder="name" name="name" required [(ngModel)]="roomModel.RoomName">
+      </mat-form-field>
+    </p>
+    <div class="buttons">
+      <button type="submit" mat-button>Add</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+  </form>
+</mat-dialog-content>

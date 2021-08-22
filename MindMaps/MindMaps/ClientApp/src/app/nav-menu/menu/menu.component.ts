@@ -3,6 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { FormProfileComponent } from '../form-profile/form-profile.component';
 // import { ServiceSignalR } from '../../_services/ServiceSignalR';
 import { ChatHubService } from 'src/app/_services/chat-hub.service';
+import { FormRoomComponent } from '../form-room/form-room.component';
+import { JoinGroupComponent } from '../join-group/join-group.component';
 
 
 @Component({
@@ -11,9 +13,8 @@ import { ChatHubService } from 'src/app/_services/chat-hub.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  hideAddGroupForm = true;
-  hideJoinGroupForm = true;
-  constructor(public serviceSignalR: ChatHubService, public dialogProfile: MatDialog) { }
+
+  constructor(public serviceSignalR: ChatHubService, public dialogProfile: MatDialog, public dialogAddGroup: MatDialog) { }
 
   ngOnInit() {
   }
@@ -24,7 +25,9 @@ export class MenuComponent implements OnInit {
   }
 
   openAddGroupForm() {
-    this.hideAddGroupForm = false;
+    //this.hideAddGroupForm = false;
+    const dialogConfig = new MatDialogConfig();
+    this.dialogAddGroup.open(FormRoomComponent, dialogConfig);
   }
   
   openProfile() {
@@ -41,6 +44,7 @@ export class MenuComponent implements OnInit {
   }
 
   joinGroupForm(){
-    this.hideJoinGroupForm = false;
+    const dialogConfig = new MatDialogConfig();
+    this.dialogAddGroup.open(JoinGroupComponent, dialogConfig);
   }
 }
