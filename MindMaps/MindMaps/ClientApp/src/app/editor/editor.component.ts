@@ -1,8 +1,10 @@
 import { style } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import Editor from '../_config/editor-base';
+import { ChatHubService } from '../_services/chat-hub.service';
+import { EditorHubService } from '../_services/editor-hub.service';
 import { EditorService } from '../_services/editor.service';
-import { ServiceSignalR } from '../_services/ServiceSignalR';
+// import { ServiceSignalR } from '../_services/ServiceSignalR';
 import { UtilService } from '../_services/util.service';
 // import util from 'mxgraph-editor/common/util';
 // import factory from 'mxgraph';
@@ -39,7 +41,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     // private utilService: UtilService,
     private editorService: EditorService,
-    private signalRService: ServiceSignalR
+    private editorHubService: EditorHubService
     ) {
   }
 
@@ -190,7 +192,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     const oDOM = oParser.parseFromString(xml, 'application/xml');
 
     // window.autoSaveXmlDom = oDOM;
-    this.signalRService.sendGraph(xml);
+    this.editorHubService.sendGraph(xml);
     window.localStorage.setItem('autosaveXml', xml);
   };
 

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { ServiceSignalR } from './_services/ServiceSignalR';
+//import { ServiceSignalR } from './_services/ServiceSignalR';
 import { AuthService } from './_services/auth.service';
+import { ChatHubService } from './_services/chat-hub.service';
 // import * as mx from 'mxgraph';
 //declare var mxGraph: any;
 //declare var mxHierarchicalLayout: any;
@@ -15,7 +16,7 @@ import { AuthService } from './_services/auth.service';
 export class AppComponent implements AfterViewInit {
   @ViewChild('graphContainer', { static: true }) graphContainer: ElementRef;
 
-  constructor(private authService: AuthService, private serviceSignalR: ServiceSignalR) {
+  constructor(private authService: AuthService, private serviceSignalR: ChatHubService) {
     // if (typeof (mx.mxLoadResources) == 'undefined') {
     //   console.log("Text");
     // }

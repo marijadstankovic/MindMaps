@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { FormProfileComponent } from '../form-profile/form-profile.component';
-import { ServiceSignalR } from '../../_services/ServiceSignalR';
+// import { ServiceSignalR } from '../../_services/ServiceSignalR';
+import { ChatHubService } from 'src/app/_services/chat-hub.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ServiceSignalR } from '../../_services/ServiceSignalR';
 export class MenuComponent implements OnInit {
   hideAddGroupForm = true;
   hideJoinGroupForm = true;
-  constructor(public serviceSignalR: ServiceSignalR, public dialogProfile: MatDialog) { }
+  constructor(public serviceSignalR: ChatHubService, public dialogProfile: MatDialog) { }
 
   ngOnInit() {
   }

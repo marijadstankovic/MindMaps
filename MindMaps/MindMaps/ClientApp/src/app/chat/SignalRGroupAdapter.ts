@@ -5,8 +5,9 @@ import { HttpClient } from '@angular/common/http';
 
 import * as signalR from "@aspnet/signalr";
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ServiceSignalR } from '../_services/ServiceSignalR';
+// import { ServiceSignalR } from '../_services/ServiceSignalR';
 import { ListRoomService } from '../_services/list-room.service';
+import { ChatHubService } from '../_services/chat-hub.service';
 // import { MessageType } from 'ng-chat/ng-chat/core/message-type.enum';
 
 export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapter {
@@ -21,7 +22,7 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
   jwtHelper = new JwtHelperService();
   
   constructor(private http: HttpClient,
-    private serviceSignalR: ServiceSignalR,
+    private serviceSignalR: ChatHubService,
     private listRoomService: ListRoomService) {
     super();
     const userT = localStorage.getItem('token');

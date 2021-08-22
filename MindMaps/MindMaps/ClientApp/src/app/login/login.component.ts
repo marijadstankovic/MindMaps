@@ -7,7 +7,8 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { ServiceSignalR } from '../_services/ServiceSignalR';
+// import { ServiceSignalR } from '../_services/ServiceSignalR';
+import { ChatHubService } from '../_services/chat-hub.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginModel: any = {};
   registerModel: any = {};
-  constructor(private authService: AuthService, private _snackBar: MatSnackBar, private serviceSignalR: ServiceSignalR) { }
+  constructor(private authService: AuthService, private _snackBar: MatSnackBar, private serviceSignalR: ChatHubService) { }
 
   form: FormGroup = new FormGroup({
     username: new FormControl(''),

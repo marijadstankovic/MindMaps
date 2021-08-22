@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
-import { ServiceSignalR } from 'src/app/_services/ServiceSignalR';
+// import { ServiceSignalR } from 'src/app/_services/ServiceSignalR';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ChatAdapter } from 'ng-chat';
 import { SignalRGroupAdapter } from '../SignalRGroupAdapter';
 import { ListRoomService } from 'src/app/_services/list-room.service';
+import { ChatHubService } from 'src/app/_services/chat-hub.service';
 
 @Component({
   selector: 'app-chat',
@@ -16,7 +17,7 @@ export class ChatComponent implements OnInit {
 
   public adapter: SignalRGroupAdapter;
 
-  constructor(public serviceSignalR: ServiceSignalR, private http: HttpClient, private listRoomService: ListRoomService) {}
+  constructor(public serviceSignalR: ChatHubService, private http: HttpClient, private listRoomService: ListRoomService) {}
 
   ngOnInit() {
     this.adapter = new SignalRGroupAdapter(this.http, this.serviceSignalR, this.listRoomService);

@@ -57,7 +57,8 @@ namespace MindMaps
                         {
                             var accessToken = context.Request.Query["access_token"];
                             var path = context.HttpContext.Request.Path;
-                            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/ChatHub"))
+                            if (!string.IsNullOrEmpty(accessToken) 
+                                && (path.StartsWithSegments("/ChatHub") || path.StartsWithSegments("/EditorHub")))
                             {
                                 context.Token = accessToken;
                             }
@@ -116,6 +117,7 @@ namespace MindMaps
                         pattern: "{controller}/{action=Index}/{id?}");
 
                 endpoints.MapHub<ChatHub>("/ChatHub");
+                endpoints.MapHub<EditorHub>("/EditorHub");
             });
 
             app.UseSpa(spa =>
