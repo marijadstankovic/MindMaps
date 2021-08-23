@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MindMaps.Data.Entities;
 using MindMaps.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace MindMaps.Repository
 {
@@ -11,6 +12,16 @@ namespace MindMaps.Repository
     {
         public MindMapRepository(MindMapsContext context) : base(context)
         {
+        }
+
+        public async Task UpdateMap(int mapId, string textXML)
+        {
+            var map = await context.MindMaps.FirstOrDefaultAsync(x => x.Id == mapId);
+            if (map == null)
+                return;
+            map.XMLText = textXML;
+            context.MindMaps.Update(map);
+            await context.SaveChangesAsync();
         }
     }
 }

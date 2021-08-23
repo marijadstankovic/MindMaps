@@ -50,7 +50,7 @@ import { MatDialogModule } from '@angular/material';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'chat', component: ChatComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'editor', component: EditorComponent}
+      { path: 'editor/:id', component: EditorComponent}
     ]),
     BrowserAnimationsModule,
     MatTableModule,

@@ -15,5 +15,9 @@ export class RoomService {
   join(model: any) {
     return this.http.post(this.baseUrl + "roomusers", model);
   }
+
+  getMindMap(mapId: number) {
+    return this.http.get(this.baseUrl + "MindMaps/" + mapId);
+  }
 }
 

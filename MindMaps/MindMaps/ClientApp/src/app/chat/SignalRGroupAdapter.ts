@@ -96,6 +96,7 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
             fromId: messageObject.userId,
             toId: this.userId,
             message: messageObject.message,
+            dateSent: new Date(),
         }
     
         this.onMessageReceived(participant, message);

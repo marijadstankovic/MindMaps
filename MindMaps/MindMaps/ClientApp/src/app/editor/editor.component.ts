@@ -1,9 +1,11 @@
 import { style } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import Editor from '../_config/editor-base';
 import { ChatHubService } from '../_services/chat-hub.service';
 import { EditorHubService } from '../_services/editor-hub.service';
 import { EditorService } from '../_services/editor.service';
+import { RoomService } from '../_services/room.service';
 // import { ServiceSignalR } from '../_services/ServiceSignalR';
 import { UtilService } from '../_services/util.service';
 // import util from 'mxgraph-editor/common/util';
@@ -38,14 +40,21 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   state: any;
   graphContainerClickCount: number;
 
+  private mapId: number;
   constructor(
     // private utilService: UtilService,
+    private roomService: RoomService,
     private editorService: EditorService,
-    private editorHubService: EditorHubService
+    private editorHubService: EditorHubService,
+    private route: ActivatedRoute
     ) {
   }
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
+
+    await this.editorHubService.startConnection();
+    this.getMingMap();
+    // join group for this mind map
     this.state = {
       editor: null
     };
@@ -102,6 +111,18 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(){
     // this.mounted = false;
     this.editor.removeEventListeners();
+    //remove self from this group ...
+    this.editorHubService.removeFromGroup(this.mapId);
+  }
+
+  getMingMap() {
+    this.mapId = + this.route.snapshot.paramMap.get('id');
+    
+    this.roomService.getMindMap(this.mapId).subscribe( (map : any) => {
+      window.localStorage.setItem('autosaveXml', map.XMLText);
+    })
+    
+    this.editorHubService.addToGroup(this.mapId);
   }
   // ngAfterViewInit() {
   //   // // const options: any = {
@@ -192,7 +213,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     const oDOM = oParser.parseFromString(xml, 'application/xml');
 
     // window.autoSaveXmlDom = oDOM;
-    this.editorHubService.sendGraph(xml);
+    this.editorHubService.sendGraph(this.mapId, xml);
     window.localStorage.setItem('autosaveXml', xml);
   };
 
