@@ -13,5 +13,10 @@ namespace MindMaps.Repository
         {
 
         }
+
+        public async Task<IEnumerable<Message>>  GetMessageHistory(int chatId, int size, int page)
+        {
+            return null;
+        }
     }
 }

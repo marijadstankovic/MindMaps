@@ -29,6 +29,12 @@ namespace MindMaps.Controllers
             return await _repository.GetAll();
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Message>>> GetMessageHistory(int chatId, int size, int page)
+        {
+            return await _repository.GetAll();
+        }
+
         // GET: api/Messages/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Message>> GetMessage(int id)
