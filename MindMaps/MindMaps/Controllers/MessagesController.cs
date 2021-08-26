@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MindMaps.Data.Context;
 using MindMaps.Data.Entities;
+using MindMaps.DTOs;
 using MindMaps.Repository;
 
 namespace MindMaps.Controllers
@@ -30,9 +31,10 @@ namespace MindMaps.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Message>>> GetMessageHistory(int chatId, int size, int page)
+        [Route("GetMessageHistory/{chatId}/{size}/{page}")]
+        public async Task<ActionResult<IEnumerable<MessageDTO>>> GetMessageHistory(int chatId, int size, int page)
         {
-            return await _repository.GetAll();
+            return await _repository.GetMessageHistory(chatId, size, page);
         }
 
         // GET: api/Messages/5

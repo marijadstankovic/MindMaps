@@ -8,9 +8,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 // import { ServiceSignalR } from '../_services/ServiceSignalR';
 import { ListRoomService } from '../_services/list-room.service';
 import { ChatHubService } from '../_services/chat-hub.service';
+import { RoomService } from '../_services/room.service';
 // import { MessageType } from 'ng-chat/ng-chat/core/message-type.enum';
 
-export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements IChatGroupAdapter {
+export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements IChatGroupAdapter {// extends ChatAdapter implements IChatGroupAdapter {//
   public userId: string;
 
   public participants: Group[] = [];
@@ -23,13 +24,16 @@ export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements ICha
   
   constructor(private http: HttpClient,
     private serviceSignalR: ChatHubService,
-    private listRoomService: ListRoomService) {
+    private listRoomService: ListRoomService,
+    private roomService: RoomService) {
     super();
     const userT = localStorage.getItem('token');
     const decodedToken = this.jwtHelper.decodeToken(userT);
     this.username = decodedToken.unique_name;
     this.initializeListeners();
-    this.userId = decodedToken.nameid
+    this.userId = decodedToken.nameid;
+
+    this.getMessageHistory("1002");
   }
 
 //   private initializeConnection(): void {
@@ -110,7 +114,7 @@ export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements ICha
         participant.displayName = 'Ime2';
         participant.id = messageObject.chatId;
         const participant2 = this.participants.find(x => x.id == messageObject.chatId);
-
+// participant2.participantType = 
         const message: Message = {
             type: 1,
             fromId: messageObject.userId, //21, // messageObject.chatId, // //
@@ -159,11 +163,31 @@ export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements ICha
   getMessageHistory(destinataryId: any): Observable<Message[]> {
     // This could be an API call to your web application that would go to the database
     // and retrieve a N amount of history messages between the users.
+    console.log('getMessageHistory');
+    const message: Message = {
+      type: 1,
+      fromId: 1, // messageObject.chatId, // // messageObject.userId, //
+      toId: this.userId,
+      message: 'messageObject.message',
+      dateSent: new Date(),
+    }
+    return of([message]);
+    
     return of([]);
   }
 
   getMessageHistoryByPage(destinataryId: any, size: number, page: number): Observable<Message[]> {
-    return of([]);
+    // console.log('getMessageHistoryByPage');
+    // const message: Message = {
+    //   type: 1,
+    //   fromId: 1, // messageObject.chatId, // // messageObject.userId, //
+    //   toId: this.userId,
+    //   message: 'messageObject.message',
+    //   dateSent: new Date(),
+    // }
+    // return of([message]);
+    const response = this.roomService.getChatHistory(destinataryId, size, page);
+    return response as Observable<Message[]>;
   }
 
   sendMessage(message: Message): void {
