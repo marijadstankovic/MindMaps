@@ -13,7 +13,7 @@ const mx = mxgraphFactory({
 })
 export class EditorService {
   containerEle: any;
-  graph: any;
+  public graph: any;
   cellCreatedFunc: any;
   valueChangeFunc: any;
 

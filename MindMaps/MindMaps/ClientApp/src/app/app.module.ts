@@ -26,6 +26,7 @@ import { EditorComponent } from './editor/editor.component';
 import { SidebarComponent } from './editor/sidebar/sidebar.component';
 import { MatDialogModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ToolbarComponent } from './editor/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MenuComponent,
     ListRoomsComponent,
     EditorComponent,
-    SidebarComponent
+    SidebarComponent,
+    ToolbarComponent
   ],
   imports: [
     MaterialModule,
