@@ -25,6 +25,7 @@ import { NgChatModule } from 'ng-chat';
 import { EditorComponent } from './editor/editor.component';
 import { SidebarComponent } from './editor/sidebar/sidebar.component';
 import { MatDialogModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { MatDialogModule } from '@angular/material';
     MatDialogModule
   ],
   exports: [
+    MatProgressBarModule,
     MatDialogModule
   ],
   providers: [

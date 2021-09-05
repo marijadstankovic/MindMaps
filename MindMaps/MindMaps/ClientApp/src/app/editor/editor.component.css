@@ -1,13 +1,14 @@
-
+#graphContainer {
+    display: inline-flex;
+}
 
 a {
-    color: #333;
-    text-decoration: none;
+  color: #333;
+  text-decoration: none;
 }
-    a:hover {
-      color: #333;
-    }
-  
+a:hover {
+   color: #333;
+}
   
   .editor-container {
     position: relative;

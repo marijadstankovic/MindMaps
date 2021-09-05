@@ -83,7 +83,7 @@ namespace MindMaps.Controllers
         public async Task<ActionResult<RoomUser>> PostRoomUser(AddUserToRoomDto roomUser)
         {
             var keys = roomUser.RoomKey.Split('.');
-           // string roomName = keys[0];
+            // string roomName = keys[0];
             string roomIdCoded = keys[1]; // dodaj i ostale npr ako je konverzijom 1004 ispalo as.2 to je keys[1-2]
             //onda tu mora enkodiranje
             int roomId = int.Parse(roomIdCoded);
@@ -94,9 +94,9 @@ namespace MindMaps.Controllers
                 return null;
             }
 
-            var RoomUser = new RoomUser() { RoomID = roomId, UserID = roomUser.UserUid}; // treba proveriti i da li ovi postoje i da li postoji njihova kombinacija
+            var RoomUser = new RoomUser() { RoomID = roomId, UserID = roomUser.UserUid }; // treba proveriti i da li ovi postoje i da li postoji njihova kombinacija
             await _roomUserRepository.Add(RoomUser);
-            
+
             return null;
             //return CreatedAtAction("GetRoomUser", new { id = roomUser.Id }, roomUser);
         }
@@ -117,6 +117,30 @@ namespace MindMaps.Controllers
         private bool RoomUserExists(int id)
         {
             return (_roomUserRepository.Get(id) != null);
+        }
+
+
+        [HttpGet("Rooms/{userID}")]
+        public async Task<ActionResult<List<RoomViewDto>>> GetRoomsByUserID(int userID)
+        {
+            var rooms = await _roomUserRepository.FindUsersRooms(userID);
+
+            if (rooms == null)
+            {
+                return NotFound();
+            }
+
+            var res =  new List<RoomViewDto>();
+
+            foreach (var room in rooms)
+            {
+                res.Add(new RoomViewDto { 
+                    Id = room.Id,
+                    Name = room.Name,
+                    DateOfCreation = room.DateOfCreation
+                });
+            }
+            return res;
         }
     }
 }

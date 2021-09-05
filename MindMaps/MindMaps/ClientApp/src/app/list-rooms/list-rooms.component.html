@@ -12,6 +12,11 @@
       <td mat-cell *matCellDef="let row">{{row.name}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="dateOfCreation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of creation</th>
+      <td mat-cell *matCellDef="let row">{{row.dateOfCreation | date:'short'}}</td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
@@ -19,7 +24,7 @@
   <mat-paginator #paginator
       [length]="dataSource?.data.length"
       [pageIndex]="0"
-      [pageSize]="50"
-      [pageSizeOptions]="[25, 50, 100, 250]">
+      [pageSize]="25"
+      [pageSizeOptions]="[10, 25, 50]">
   </mat-paginator>
 </div>
