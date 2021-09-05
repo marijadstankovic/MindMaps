@@ -1,4 +1,4 @@
-import { ChatAdapter, IChatGroupAdapter, User, Group, Message, ChatParticipantStatus, ParticipantResponse, ParticipantMetadata, ChatParticipantType, IChatParticipant } from 'ng-chat';
+import { ChatAdapter, IChatGroupAdapter, User, Group, Message, ChatParticipantStatus, ParticipantResponse, ParticipantMetadata, ChatParticipantType, IChatParticipant, PagedHistoryChatAdapter } from 'ng-chat';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -8,12 +8,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 // import { ServiceSignalR } from '../_services/ServiceSignalR';
 import { ListRoomService } from '../_services/list-room.service';
 import { ChatHubService } from '../_services/chat-hub.service';
+import { RoomService } from '../_services/room.service';
 // import { MessageType } from 'ng-chat/ng-chat/core/message-type.enum';
 
-export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapter {
+export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements IChatGroupAdapter {// extends ChatAdapter implements IChatGroupAdapter {//
   public userId: string;
 
-  public participants: IChatParticipant[] = [];
+  public participants: Group[] = [];
 
   private hubConnection: signalR.HubConnection
   public static serverBaseUrl: string = "https://localhost:5001/";
@@ -23,13 +24,16 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
   
   constructor(private http: HttpClient,
     private serviceSignalR: ChatHubService,
-    private listRoomService: ListRoomService) {
+    private listRoomService: ListRoomService,
+    private roomService: RoomService) {
     super();
     const userT = localStorage.getItem('token');
     const decodedToken = this.jwtHelper.decodeToken(userT);
     this.username = decodedToken.unique_name;
     this.initializeListeners();
-    this.userId = decodedToken.nameid
+    this.userId = decodedToken.nameid;
+
+    this.getMessageHistory("1002");
   }
 
 //   private initializeConnection(): void {
@@ -49,29 +53,38 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
 
   private initializeListeners(): void {
     
-    this.listRoomService.getChats().subscribe( (response: any[]) => {
-      response.forEach(element => {
-        // const group = new Group ([{
-        //   participantType: ChatParticipantType.User,
-        //   id: 1001,
-        //   displayName: "Cersei Lannister",
-        //   avatar: null,
-        //   status: ChatParticipantStatus.Online
-        // }]);
-        // group.displayName = element.roomName;
-        // group.id = element.id;
-
-        // this.participants.push(group);
-        this.participants.push( 
-          {
-          avatar: null,
-          displayName: element.roomName,
-          id: element.id,
-          participantType: ChatParticipantType.User,
-          status: ChatParticipantStatus.Away
-        })
+    this.listRoomService.getChats().subscribe( (response: Group[]) => {
+      // debugger;
+      this.participants = response.map(x => {
+        x.status = ChatParticipantStatus.Online;
+        return x;
       });
-      console.log(response);
+      // response.forEach(element => {
+      //   // const group = new Group ([{
+      //   //   participantType: ChatParticipantType.User,
+      //   //   id: 21,
+      //   //   displayName: "Cersei Lannister",
+      //   //   avatar: null,
+      //   //   status: ChatParticipantStatus.Online
+      //   // }]);
+      //   // group.displayName = element.roomName;
+      //   // group.id = element.id;
+
+      //   //element.par
+      //   element.status = ChatParticipantStatus.Online;
+      //   element.avatar = null;
+
+      //   this.participants.push(element);
+      //   // this.participants.push( 
+      //   //   {
+      //   //   avatar: null,
+      //   //   displayName: element.roomName,
+      //   //   id: element.id,
+      //   //   participantType: ChatParticipantType.User,
+      //   //   status: ChatParticipantStatus.Away
+      //   // })
+      // });
+      // console.log(response);
     } );
 
     this.serviceSignalR.messageEvent$.subscribe(messageObject => {
@@ -83,22 +96,34 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
         //   status: ChatParticipantStatus.Online
         // }
 
-        const participant: IChatParticipant = {
+        // const participant: IChatParticipant = {
+        //   participantType: ChatParticipantType.Group,
+        //   id: messageObject.chatId,
+        //   displayName: "Ime2",
+        //   avatar: null,
+        //   status: ChatParticipantStatus.Online
+        // }
+
+        const participant = new Group ([{
           participantType: ChatParticipantType.User,
-          id: messageObject.chatId,
-          displayName: "Ime2",
+          id: 21,
+          displayName: "Cersei Lannister",
           avatar: null,
           status: ChatParticipantStatus.Online
-        }
-
+        }]);
+        participant.displayName = 'Ime2';
+        participant.id = messageObject.chatId;
+        const participant2 = this.participants.find(x => x.id == messageObject.chatId);
+// participant2.participantType = 
         const message: Message = {
             type: 1,
-            fromId: messageObject.userId,
+            fromId: messageObject.userId, //21, // messageObject.chatId, // //
             toId: this.userId,
             message: messageObject.message,
+            dateSent: new Date(),
         }
     
-        this.onMessageReceived(participant, message);
+        this.onMessageReceived(participant2, message);
     })
 
     // this.hubConnection.on("generatedUserId", (userId) => {
@@ -138,7 +163,31 @@ export class SignalRGroupAdapter extends ChatAdapter implements IChatGroupAdapte
   getMessageHistory(destinataryId: any): Observable<Message[]> {
     // This could be an API call to your web application that would go to the database
     // and retrieve a N amount of history messages between the users.
+    console.log('getMessageHistory');
+    const message: Message = {
+      type: 1,
+      fromId: 1, // messageObject.chatId, // // messageObject.userId, //
+      toId: this.userId,
+      message: 'messageObject.message',
+      dateSent: new Date(),
+    }
+    return of([message]);
+    
     return of([]);
+  }
+
+  getMessageHistoryByPage(destinataryId: any, size: number, page: number): Observable<Message[]> {
+    // console.log('getMessageHistoryByPage');
+    // const message: Message = {
+    //   type: 1,
+    //   fromId: 1, // messageObject.chatId, // // messageObject.userId, //
+    //   toId: this.userId,
+    //   message: 'messageObject.message',
+    //   dateSent: new Date(),
+    // }
+    // return of([message]);
+    const response = this.roomService.getChatHistory(destinataryId, size, page);
+    return response as Observable<Message[]>;
   }
 
   sendMessage(message: Message): void {

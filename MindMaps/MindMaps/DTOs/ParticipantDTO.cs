@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 
 namespace MindMaps.DTOs
 {
-    public class ChatDTO
+    public class ParticipantDTO
     {
         public int Id { get; set; }
         public string DisplayName { get; set; }
 
-        public List<ParticipantDTO> ChattingTo { get; set; }
-        public int ParticipantType { get; set; } = 1;
+        public int participantType { get; set; } = 0;
+        //public string Avatar { get; set; } = null;
+        //public string Status { get; set; } = null;
     }
 }

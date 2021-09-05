@@ -29,17 +29,36 @@ namespace MindMaps.Repository
 
         public async Task<List<ChatDTO>> ChatsByUserID(int uid)
         {
-            var rooms = await context.RoomUsers.Where(x => x.UserID == uid) // 
+            var chats = await context.RoomUsers.Where(x => x.UserID == uid) // 
                                                                       // .ToList()
                 .Join(context.Rooms,
                 x => x.RoomID,
                 y => y.Id,
-                (x, y) => new ChatDTO { Id = y.ChatID, RoomName = y.Name }).ToListAsync();
+                (x, y) => new ChatDTO { Id = y.ChatID, DisplayName = y.Name })
+                .ToListAsync();
+
+            foreach(var chat in chats)
+            {
+                //context.RoomUsers.Where(x => x.RoomID == )
+                chat.ChattingTo = await context.Rooms.Where(x => x.ChatID == chat.Id)
+                    .Join(context.RoomUsers,
+                    x => x.Id,
+                    y => y.RoomID,
+                    (x, y) => y.UserID)
+
+                    .Join(context.User,
+                    x => x,
+                    y => y.Id,
+                    (x, y) => new ParticipantDTO { Id = y.Id, DisplayName = y.Name + " " + y.LastName })
+
+                    .ToListAsync();
+
+            }
             //var result = await context.Rooms
             //    .Where(y => context.RoomUsers.Where(x => x.UserID == uid)
             //        .Select(x => x.RoomID).Contains(y.ChatID))
             //    .Select(y => new ChatDTO{ Id= y.ChatID, RoomName = y.Name}).ToListAsync();
-            return rooms;
+            return chats;
         }
     }
 }

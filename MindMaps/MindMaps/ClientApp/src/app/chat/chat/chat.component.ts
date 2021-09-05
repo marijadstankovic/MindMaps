@@ -7,6 +7,7 @@ import { ChatAdapter } from 'ng-chat';
 import { SignalRGroupAdapter } from '../SignalRGroupAdapter';
 import { ListRoomService } from 'src/app/_services/list-room.service';
 import { ChatHubService } from 'src/app/_services/chat-hub.service';
+import { RoomService } from 'src/app/_services/room.service';
 
 @Component({
   selector: 'app-chat',
@@ -17,10 +18,10 @@ export class ChatComponent implements OnInit {
 
   public adapter: SignalRGroupAdapter;
 
-  constructor(public serviceSignalR: ChatHubService, private http: HttpClient, private listRoomService: ListRoomService) {}
+  constructor(public serviceSignalR: ChatHubService, private http: HttpClient, private listRoomService: ListRoomService, private roomService: RoomService) {}
 
   ngOnInit() {
-    this.adapter = new SignalRGroupAdapter(this.http, this.serviceSignalR, this.listRoomService);
+    this.adapter = new SignalRGroupAdapter(this.http, this.serviceSignalR, this.listRoomService, this.roomService);
    /* const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:5001/ChatHub',

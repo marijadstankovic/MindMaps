@@ -21,6 +21,20 @@ export class RoomService {
   getRoomsByUserID(userId: any) {
     return this.http.get(this.baseUrl + "RoomUsers/Rooms/" + userId);
   }
+  
+  getMindMap(mapId: number) {
+    return this.http.get(this.baseUrl + "MindMaps/" + mapId);
+  }
+
+  getChatHistory(destinataryId: any, size: number, page: number) {
+    // return this.http.get(this.baseUrl + "GetMessageHistory?chatId=" + destinataryId 
+    //   + "&size=" + size
+    //   + "&page=" + page);
+
+    return this.http.get(this.baseUrl + "Messages/GetMessageHistory/" + destinataryId 
+      + "/" + size
+      + "/" + page);
+  }
 }
 
 

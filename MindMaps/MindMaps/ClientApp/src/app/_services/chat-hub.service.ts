@@ -28,7 +28,7 @@ export class ChatHubService {
   constructor(
     private editorService: EditorService)
     {
-        this.startConnection();
+        // this.startConnection();
     }
   
     public async startConnection(): Promise<void> {

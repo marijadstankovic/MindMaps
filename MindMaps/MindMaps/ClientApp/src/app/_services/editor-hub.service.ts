@@ -11,7 +11,7 @@ export class EditorHubService {
 
   constructor(
     private editorService: EditorService) { 
-      this.startConnection();
+      // this.startConnection();
     }
 
 
@@ -39,8 +39,20 @@ export class EditorHubService {
     // this.emitter = new EventEmitter();
   }
 
-  public sendGraph(xml){
-    this.hubConnection.invoke('UpdateGraph', xml)
+  public addToGroup(mapId: number){
+    this.hubConnection.invoke('AddToGroup', mapId)
+    .then(a => console.log('added to a group ' + a))
+    .catch(err => console.log(err));
+  }
+
+  public removeFromGroup(mapId: number) {
+    this.hubConnection.invoke('RemoveFromGroup', mapId)
+    .then(a => console.log('removed from a group ' + a))
+    .catch(err => console.log(err));
+  }
+
+  public sendGraph(mapId: number, xml){
+    this.hubConnection.invoke('UpdateGraph', mapId, xml)
     .catch(err => console.error(err));
   }
 
@@ -49,6 +61,7 @@ export class EditorHubService {
     this.hubConnection.on('MindMapGraph', (xml) => {
       // debugger;
       // render
+      console.log('recieved a graph');
       this.editorService.renderGraphFromXml(xml);
       // save to local storage
       window.localStorage.setItem('autosaveXml', xml);

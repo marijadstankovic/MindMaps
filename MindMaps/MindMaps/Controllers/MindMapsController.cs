@@ -29,7 +29,7 @@ namespace MindMaps.Controllers
             return await _repository.GetAll();
         }
 
-        // GET: api/MindMaps/5
+        // GET: api/MindMaps/1001
         [HttpGet("{id}")]
         public async Task<ActionResult<MindMap>> GetMindMap(int id)
         {
