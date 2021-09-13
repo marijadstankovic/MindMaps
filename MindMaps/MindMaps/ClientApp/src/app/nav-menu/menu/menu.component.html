@@ -1,4 +1,7 @@
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<button mat-button [matMenuTriggerFor]="menu">
+    <h6>{{user == null? "" : user.name}}</h6>
+    <i class="fa fa-user-circle"></i>
+</button>
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="openProfile()">My Profile</button>
   <button mat-menu-item (click)="openAddGroupForm()">Add group</button>

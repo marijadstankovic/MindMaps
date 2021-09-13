@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { RoomService } from '../_services/room.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export interface ListRoomsItem {
   id: number;
@@ -17,17 +18,31 @@ export interface ListRoomsItem {
  * (including sorting, pagination, and filtering).
  */
 export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
-  data: ListRoomsItem[]; // = []
+  data: ListRoomsItem[];
   paginator: MatPaginator;
   sort: MatSort;
+  UserUid: any;
+  decodedToken: any;
+  jwtHelper = new JwtHelperService();
+  lenght: number;
 
-  constructor(roomService: RoomService) {
+  constructor(private roomService: RoomService) {
     super();
-    roomService.getRoomsByUserID(1).subscribe(res => {
+    const userT = localStorage.getItem('token');
+    this.decodedToken = this.jwtHelper.decodeToken(userT);
+    this.UserUid = +this.decodedToken.nameid;
+    this.roomService.getRoomsByUserID(this.UserUid).subscribe(res => {
+      //this.data.push.apply(this.data, res as ListRoomsItem[]);
       this.data = res as ListRoomsItem[];
     });
+    debugger;
+    if (typeof this.data === undefined) {
+      this.lenght = 0;
+    }
+    else {
+      this.lenght = this.data.length;
+    }
   }
-
   /**
    * Connect this data source to the table. The table will only update when
    * the returned stream emits new items.

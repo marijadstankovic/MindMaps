@@ -38,21 +38,14 @@ export class FormProfileComponent implements OnInit {
     this.userModel.UserUid = +this.decodedToken.nameid;
     console.log("Token: "+ this.decodedToken);
    
-    this.http.get(this.baseUrl + "Users/" + this.userModel.UserUid)
+    this.profileService.getUser(this.userModel.UserUid)
       .subscribe(res => {
         this.user = res;
         this.editUser = res;
-        console.log(this.user);
       });
-    
-
-    //this.userModel = this.profileService.getUser(this.userModel.UserUid);
-    //console.log("Ngfdgt:" + this.userModel);
-    //console.log(this.user);
   }
 
   edit() {
-    //console.log(this.editUser);
     this.snackBarService.openSnackBar("Edit profile", "OK");
 
     this.editHidden = !this.editHidden;

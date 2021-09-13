@@ -15,21 +15,29 @@ export class ListRoomsComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<ListRoomsItem>;
   dataSource: ListRoomsDataSource;
-  roomService: RoomService;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name', 'dateOfCreation'];
+  lenght: any;
 
-  constructor(roomService: RoomService) {
-    this.roomService = roomService;
+  constructor(private roomService: RoomService) {
   }
 
   ngOnInit() {
     this.dataSource = new ListRoomsDataSource(this.roomService);
+    console.log(this.dataSource );
+    //if (typeof this.dataSource.data === undefined) {
+    //  this.lenght = 0;
+    //}
+    //else {
+    //  this.lenght = this.dataSource.data.length;
+    //}
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+
+    this.ngOnInit();
   }
 }

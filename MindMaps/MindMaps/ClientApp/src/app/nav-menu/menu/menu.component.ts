@@ -5,6 +5,8 @@ import { FormProfileComponent } from '../form-profile/form-profile.component';
 import { ChatHubService } from 'src/app/_services/chat-hub.service';
 import { FormRoomComponent } from '../form-room/form-room.component';
 import { JoinGroupComponent } from '../join-group/join-group.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { ProfileService } from '../../_services/profile.service';
 
 
 @Component({
@@ -13,10 +15,22 @@ import { JoinGroupComponent } from '../join-group/join-group.component';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  decodedToken: any;
+  jwtHelper = new JwtHelperService();
+  user: any;
 
-  constructor(public serviceSignalR: ChatHubService, public dialogProfile: MatDialog, public dialogAddGroup: MatDialog) { }
+  constructor(public serviceSignalR: ChatHubService, public dialogProfile: MatDialog, public dialogAddGroup: MatDialog, private profileService: ProfileService) { }
 
   ngOnInit() {
+    const user = localStorage.getItem('token');
+    this.decodedToken = this.jwtHelper.decodeToken(user);
+    var userId: any = +this.decodedToken.nameid;
+
+    this.profileService.getUser(userId)
+      .subscribe(res => {
+        this.user = res;
+        console.log(this.user);
+      });
   }
 
   logout(){

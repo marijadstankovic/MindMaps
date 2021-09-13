@@ -6,11 +6,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProfileService {
   baseUrl = "https://localhost:5001/api/";
+    user: any;
   constructor(private http: HttpClient) { }
 
-  getUser(index: any) {
-    return this.http.get(this.baseUrl + "Users/" + index)
-      .subscribe(res => { return res; })
+  getUser(index: any): any {
+    return this.http.get(this.baseUrl + "Users/" + index);
   }
-
 }
