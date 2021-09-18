@@ -24,7 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { NgChatModule } from 'ng-chat';
 import { EditorComponent } from './editor/editor.component';
 import { SidebarComponent } from './editor/sidebar/sidebar.component';
-import { MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ToolbarComponent } from './editor/toolbar/toolbar.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -61,7 +61,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatButtonModule
   ],
   exports: [
     MatProgressBarModule,

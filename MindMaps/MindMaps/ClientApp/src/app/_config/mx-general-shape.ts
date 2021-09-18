@@ -63,10 +63,10 @@ export default {
       type: 'vertex',
       style: 'shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;',
     },
-    Trapezoid: {
-      type: 'vertex',
-      style: 'shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;',
-    },
+    // Trapezoid: {
+    //   type: 'vertex',
+    //   style: 'shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;',
+    // },
     Tape: {
       type: 'vertex',
       style: 'shape=tape;whiteSpace=wrap;html=1;',

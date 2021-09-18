@@ -53,7 +53,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   async ngOnInit(): Promise<void> {
 
     await this.editorHubService.startConnection();
-    this.getMingMap();
     // join group for this mind map
     this.state = {
       editor: null
@@ -73,9 +72,11 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit(): Promise<void> {
     // this.mounted = tr ue;
-    
+
+    await this.getMingMap();
+
     this.editorService.init(
     // const editor = new Editor(
       // this.utilService,
@@ -115,11 +116,12 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     this.editorHubService.removeFromGroup(this.mapId);
   }
 
-  getMingMap() {
+  async getMingMap() {
     this.mapId = + this.route.snapshot.paramMap.get('id');
-    
-    this.roomService.getMindMap(this.mapId).subscribe( (map : any) => {
-      window.localStorage.setItem('autosaveXml', map.XMLText);
+    const request = this.roomService.getMindMap(this.mapId);
+    await request;
+    var x = await request.subscribe((map: any) => {
+      window.localStorage.setItem('autosaveXml', map.xmlText);
     })
     
     this.editorHubService.addToGroup(this.mapId);

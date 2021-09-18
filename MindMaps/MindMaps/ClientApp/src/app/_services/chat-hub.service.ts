@@ -20,13 +20,11 @@ export class ChatHubService {
   public data: ChatModel;
   public bradcastedData: ChatModel[];
   public tekst: string;
-  private emitter: EventEmitter;
   public messageEvent$ = new BehaviorSubject<any>({});
 
   private hubConnection: signalR.HubConnection
 
-  constructor(
-    private editorService: EditorService)
+  constructor()
     {
         // this.startConnection();
     }
@@ -40,7 +38,7 @@ export class ChatHubService {
             skipNegotiation: true,
             transport: signalR.HttpTransportType.WebSockets,
             accessTokenFactory: () => token
-          }) //44377
+          })
         .build();
       
       await this.hubConnection.start().catch(err => console.error(err.toString()));
@@ -48,11 +46,7 @@ export class ChatHubService {
       this.addToAllGroups();
       this.addTransferDataListener();
       this.addBroadcastDataListener();
-      // this.recieveGraph();
-      // }).catch(function (err) {
-      //   return console.error(err.toString());
-      // });
-      this.emitter = new EventEmitter();
+      
     }
   
     public stopConnection() {
@@ -84,8 +78,7 @@ export class ChatHubService {
     }
     public addBroadcastDataListener = () => {
       this.hubConnection.on('BroadcastMessage', (userId, message, chatId) => {
-        //this.bradcastedData = data;
-        // OVDE SE DODAJE FILTER? ? ? ? ? ? ?
+        
         this.messageEvent$.next(
           {
             userId,
@@ -94,23 +87,7 @@ export class ChatHubService {
           }
         );
         console.log('message received' + userId + " " + message + " " + chatId);
-        // this.emitter.emit(chatId, message);
+        
       })
     }
-  
-  
-    // public sendGraph(xml){
-    //   this.hubConnection.invoke('UpdateGraph', xml)
-    //   .catch(err => console.error(err));
-    // }
-    // public recieveGraph = () => {
-    //   // debugger;
-    //   this.hubConnection.on('MindMapGraph', (xml) => {
-    //     // debugger;
-    //     // render
-    //     this.editorService.renderGraphFromXml(xml);
-    //     // save to local storage
-    //     window.localStorage.setItem('autosaveXml', xml);
-    //   })
-    // }
 }

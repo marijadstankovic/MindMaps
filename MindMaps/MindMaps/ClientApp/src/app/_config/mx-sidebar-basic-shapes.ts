@@ -13,13 +13,13 @@ export default [
       width: 120,
       height: 60,
     },
-    {
-      name: 'trapezoid',
-      key: 'Trapezoid',
-      logo: 'https://img.alicdn.com/tfs/TB1nEXPokvoK1RjSZPfXXXPKFXa-33-26.svg',
-      width: 120,
-      height: 60,
-    },
+    // {
+    //   name: 'trapezoid',
+    //   key: 'Trapezoid',
+    //   logo: 'https://img.alicdn.com/tfs/TB1nEXPokvoK1RjSZPfXXXPKFXa-33-26.svg',
+    //   width: 120,
+    //   height: 60,
+    // },
     {
       name: 'circle',
       key: 'Circle',

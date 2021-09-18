@@ -1,9 +1,12 @@
 
-<div #graphContainer id="graphContainer">
-  <app-toolbar></app-toolbar>
+<div #graphContainer id="graphContainer" style="width: 100%;">
   <app-sidebar></app-sidebar>
 
-  <div class="graph-content"></div>
+  <div style="display: flex; flex-direction: column; width: 100%;">
+    <app-toolbar></app-toolbar>
+
+    <div class="graph-content"></div>
+  </div>
 
 </div>
 <!-- <mxEditor></mxEditor> -->

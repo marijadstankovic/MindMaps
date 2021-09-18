@@ -39,7 +39,7 @@ export class EditorService {
       const graph = new mx.mxGraph(containerEle); // eslint-disable-line
       const parent = graph.getDefaultParent();
       graph.getModel().beginUpdate();
-      const vertex1 = graph.insertVertex(parent, '1', 'Vertex 1', 0, 0, 200, 80);
+      // const vertex1 = graph.insertVertex(parent, '1', 'Vertex 1', 0, 0, 200, 80);
 
       graph.getModel().endUpdate();
       new mx.mxHierarchicalLayout(graph).execute(graph.getDefaultParent());

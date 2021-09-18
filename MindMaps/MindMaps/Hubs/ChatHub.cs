@@ -31,6 +31,10 @@ namespace MindMaps.Hubs
             await Clients.Group(chatId.ToString()).SendAsync("Coonected", "client added to group");
         }
 
+        public async Task RemoveFromGroup()
+        {
+
+        }
         //public async Task OnConnectedAsync()
         //{
         //    int userID;
@@ -76,5 +80,15 @@ namespace MindMaps.Hubs
 
         }
 
+
+        public async Task MemberAdded()
+        {
+
+        }
+
+        public async Task MemberRemoved()
+        {
+
+        }
     }
 }

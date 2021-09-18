@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MindMaps.Data.Context;
 using MindMaps.Data.Entities;
+using MindMaps.DTOs;
 using MindMaps.Repository;
 
 namespace MindMaps.Controllers
@@ -16,10 +17,12 @@ namespace MindMaps.Controllers
     public class MindMapsController : ControllerBase
     {
         private readonly MindMapRepository _repository;
+        private readonly RoomRepository _roomRepository;
 
-        public MindMapsController(MindMapRepository context)
+        public MindMapsController(MindMapRepository context, RoomRepository roomRepository)
         {
             _repository = context;
+            _roomRepository = roomRepository;
         }
 
         // GET: api/MindMaps
@@ -78,11 +81,24 @@ namespace MindMaps.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<MindMap>> PostMindMap(MindMap mindMap)
+        public async Task<ActionResult<MindMap>> PostMindMap(MindMapDTO mindMap)
         {
-            await _repository.Add(mindMap);
+            var room = await _roomRepository.Get(mindMap.RoomId);
+            if(room == null)
+            {
+                return BadRequest();
+            }
 
-            return CreatedAtAction("GetChat", new { id = mindMap.Id }, mindMap);
+            var doc = new MindMap
+            {
+                DateOfCreation = DateTime.UtcNow,
+                Name = mindMap.Name,
+                Room = room,
+            };
+
+            await _repository.Add(doc);
+
+            return Ok(); //  CreatedAtAction("GetChat", new { id = mindMap.Id }, mindMap);
         }
 
         // DELETE: api/MindMaps/5
