@@ -17,3 +17,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.profile-view-name {
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+}

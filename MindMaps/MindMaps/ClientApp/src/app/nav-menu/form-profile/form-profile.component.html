@@ -1,11 +1,21 @@
-<h2 mat-dialog-title>My Profile</h2>
+<h2 mat-dialog-title [hidden]="this.editHidden === true">Edit Profile</h2>
 <mat-dialog-content *ngIf="this.user !== undefined" class="profile-form">
-  <div [hidden]="this.editHidden === false">
-    <h2>{{this.user?.name}} {{this.user?.lastName}}</h2>
-    <h5>{{this.user?.email}}</h5>
-    <div class="button">
+  <div [hidden]="this.editHidden === false" class="profile-view">
+    <div class="profile-view-name">
+      <div>
+        <h3>{{this.user?.name}} {{this.user?.lastName}}</h3>
+        <h5>{{this.user?.email}}</h5>
+      </div>
+      <div>
+        <button mat-button (click)="edit()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <!--<div class="button">
       <button type="button" (click)="edit()" mat-button>Edit</button>
+    </div>-->
     </div>
+    <mat-divider></mat-divider>
   </div>
   <div class="con-form" [hidden]="this.editHidden === true">
     <form #editProfileForm="ngForm" (ngSubmit)="save()">
@@ -22,8 +32,8 @@
         </mat-form-field>
       </p>
       <div class="buttons">
-        <button type="submit"  mat-button>Save</button>
-        <button type="button" mat-button (click)="cancal()" >Cancel</button>
+        <button type="submit" mat-button>Save</button>
+        <button type="button" mat-button (click)="cancal()">Cancel</button>
       </div>
     </form>
   </div>

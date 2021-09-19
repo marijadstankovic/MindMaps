@@ -16,10 +16,10 @@ export class ListRoomsComponent implements AfterViewInit, OnInit {
   @ViewChild(MatTable, { static: false }) table: MatTable<ListRoomsItem>;
   dataSource: ListRoomsDataSource;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'dateOfCreation'];
+  displayedColumns = ['id', 'name', 'dateOfCreation','actions'];
   lenght: any;
 
-  constructor(private roomService: RoomService) {
+  constructor(public roomService: RoomService) {
   }
 
   ngOnInit() {

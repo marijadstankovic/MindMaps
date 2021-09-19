@@ -16,7 +16,6 @@ export class FormProfileComponent implements OnInit {
   user: any;
   jwtHelper = new JwtHelperService();
   decodedToken: any;
-  baseUrl = "https://localhost:5001/api/";
 
   editHidden: boolean;
   editUser: any;
@@ -27,7 +26,6 @@ export class FormProfileComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
   });
-
 
   constructor(private profileService: ProfileService, private http: HttpClient, public dialogRef: MatDialogRef<FormProfileComponent>, private snackBarService: SnackBarService) { }
 
@@ -59,7 +57,7 @@ export class FormProfileComponent implements OnInit {
   }
 
   save() {
-    this.http.put<any>(this.baseUrl + "Users/" + this.userModel.UserUid, this.editUser)
+    this.profileService.updateUser(this.userModel.UserUid, this.editUser)
       .subscribe(res => {
         console.log("Sacuvane su promene usera!!!");
       });

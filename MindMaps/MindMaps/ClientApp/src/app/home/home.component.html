@@ -2,16 +2,19 @@
 <div [hidden]="!loggedin()">
 
   <i class="fa fa-user"></i>
+  
+  <mat-icon>group</mat-icon>
   <i class="fa fa-user-friends"></i>
   <i class="fa fa-user-plus"></i>
   <mat-card class="user-card">
     <mat-card-header>
-      <h1>Hello, {{user == null? "" : user.name}}!</h1>
+      <h2>Hello, {{user == null? "" : user.name}}!</h2>
+      <br />
     </mat-card-header>
     <mat-card-content>
-     
+      <mat-divider></mat-divider>
+      <br />
       <app-list-rooms></app-list-rooms>
-
     </mat-card-content>
   </mat-card>
 </div>

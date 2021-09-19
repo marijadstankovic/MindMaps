@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
   jwtHelper = new JwtHelperService();
   user: any;
 
-  constructor(public serviceSignalR: ChatHubService, public dialogProfile: MatDialog, public dialogAddGroup: MatDialog, private profileService: ProfileService) { }
+  constructor(public serviceSignalR: ChatHubService, public dialogProfile: MatDialog, private profileService: ProfileService) { }
 
   ngOnInit() {
     const user = localStorage.getItem('token');
@@ -29,7 +29,6 @@ export class MenuComponent implements OnInit {
     this.profileService.getUser(userId)
       .subscribe(res => {
         this.user = res;
-        console.log(this.user);
       });
   }
 
@@ -38,12 +37,6 @@ export class MenuComponent implements OnInit {
     this.serviceSignalR.stopConnection();
   }
 
-  openAddGroupForm() {
-    //this.hideAddGroupForm = false;
-    const dialogConfig = new MatDialogConfig();
-    this.dialogAddGroup.open(FormRoomComponent, dialogConfig);
-  }
-  
   openProfile() {
     const dialogConfig = new MatDialogConfig();
 
@@ -57,8 +50,5 @@ export class MenuComponent implements OnInit {
    // });
   }
 
-  joinGroupForm(){
-    const dialogConfig = new MatDialogConfig();
-    this.dialogAddGroup.open(JoinGroupComponent, dialogConfig);
-  }
+
 }
