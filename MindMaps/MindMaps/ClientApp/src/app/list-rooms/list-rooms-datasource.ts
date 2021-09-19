@@ -18,13 +18,13 @@ export interface ListRoomsItem {
  * (including sorting, pagination, and filtering).
  */
 export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
-  data: ListRoomsItem[];
+  data: ListRoomsItem[] = [];
   paginator: MatPaginator;
   sort: MatSort;
   UserUid: any;
   decodedToken: any;
   jwtHelper = new JwtHelperService();
-  lenght: number;
+  lenght: number = 0;
 
   constructor(private roomService: RoomService) {
     super();
@@ -34,14 +34,8 @@ export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
     this.roomService.getRoomsByUserID(this.UserUid).subscribe(res => {
       //this.data.push.apply(this.data, res as ListRoomsItem[]);
       this.data = res as ListRoomsItem[];
-    });
-    debugger;
-    if (typeof this.data === undefined) {
-      this.lenght = 0;
-    }
-    else {
       this.lenght = this.data.length;
-    }
+    });
   }
   /**
    * Connect this data source to the table. The table will only update when

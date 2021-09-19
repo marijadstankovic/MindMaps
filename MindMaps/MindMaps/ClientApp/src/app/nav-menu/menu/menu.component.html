@@ -1,10 +1,25 @@
 <button mat-button [matMenuTriggerFor]="menu">
-    <h6>{{user == null? "" : user.name}}</h6>
-    <i class="fa fa-user-circle"></i>
+  <mat-icon>account_circle</mat-icon>
+    <span style="font-size:16px">   {{user == null? "" : user.name}}</span>
+    <!--<i class="fa fa-user-circle"></i>-->
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="openProfile()">My Profile</button>
-  <button mat-menu-item (click)="openAddGroupForm()">Add group</button>
-  <button mat-menu-item (click)="joinGroupForm()">Join group</button>
-  <button mat-menu-item (click)="logout()">Log out</button>
+  <div class="div-user-details">
+    <h5><b>{{this.user?.name}} {{this.user?.lastName}}</b></h5>
+    {{this.user?.email}}
+  </div>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="openProfile()">
+    <mat-icon>person</mat-icon>
+    My Profile
+  </button>
+  <button mat-menu-item (click)="openProfile()">
+    <mat-icon>edit</mat-icon>
+    Edit profile
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
 </mat-menu>

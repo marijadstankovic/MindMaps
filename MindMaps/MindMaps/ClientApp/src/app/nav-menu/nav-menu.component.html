@@ -25,6 +25,21 @@
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
+          <li style="border-right: solid 1px #dbdbdb">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>group</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openAddGroupForm()">
+                <mat-icon>group_add</mat-icon>
+                Create group
+              </button>
+              <button mat-menu-item (click)="joinGroupForm()">
+                <mat-icon></mat-icon>
+                Join group
+              </button>
+            </mat-menu>
+          </li>
           <!--<li class="nav-item" [routerLinkActive]="['link-active']">
     <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a>
   </li>
