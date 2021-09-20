@@ -8,7 +8,7 @@ namespace MindMaps.Data.Entities
     public class MindMap : IEntity
     {
         public int Id { set; get; }
-        public String Name;
+        public string Name { set; get; }
         public Room Room { set; get; }
         public DateTime DateOfCreation { set; get; }
         public string XMLText { get; set; }
