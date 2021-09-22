@@ -85,17 +85,7 @@ namespace MindMaps.Controllers
         [HttpPost]
         public async Task<ActionResult<Comment>> PostComment(CommentDTO comment)
         {
-            var user = await _userRepository.Get(comment.UserId);
-            var mindMap = await _mindMapRepository.Get(comment.MindMapId);
-
-            var newComment = new Comment
-            {
-                DateTime = DateTime.UtcNow,
-                Text = comment.Text,
-                MindMap = mindMap,
-                User = user
-            };
-            await _repository.Add(newComment);
+            await _repository.Add(comment);
 
             return Ok();
             //return CreatedAtAction("GetChat", new { id = comment.Id }, comment);

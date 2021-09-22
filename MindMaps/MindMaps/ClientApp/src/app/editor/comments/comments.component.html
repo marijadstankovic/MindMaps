@@ -1,0 +1,14 @@
+<div class="comment-wrapper" >
+  <mat-card *ngFor="let comment of comments">
+    <mat-card-content>
+      {{comment.text}}
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<button mat-fab color="primary" (click)="addComment()">
+  <mat-icon>add</mat-icon>
+</button>
+<button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="removeComment(3)">
+  <mat-icon>close</mat-icon>
+</button>

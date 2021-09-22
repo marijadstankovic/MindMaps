@@ -1,14 +1,41 @@
+<!--<button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addComment()">
+  <mat-icon>add</mat-icon>
+</button>
 
-<div #graphContainer id="graphContainer" style="width: 100%;">
-  <app-sidebar></app-sidebar>
+<button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="removeComment()">
+  <mat-icon>close</mat-icon>
+</button>-->
 
-  <div style="display: flex; flex-direction: column; width: 100%;">
-    <app-toolbar></app-toolbar>
+<mat-drawer-container class="example-container">
 
-    <div class="graph-content"></div>
-  </div>
+  <mat-drawer #drawer [mode]="side">
+    <app-comments></app-comments>
+  </mat-drawer>
 
-</div>
+  <mat-drawer-content>
+    <div #graphContainer id="graphContainer" style="width: 100%;">
+      <app-sidebar></app-sidebar>
+
+      <div style="display: flex; flex-direction: column; width: 100%;">
+        <app-toolbar></app-toolbar>
+
+        <div class="graph-content"></div>
+      </div>
+
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>
+
+
+
+<button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
+<!--<mat-drawer-container class="example-container">
+
+  <mat-drawer-content>
+  </mat-drawer-content>-->
+<!--<mat-drawer #drawer [mode]="side">I'm a drawer</mat-drawer>-->
+<!--</mat-drawer-container>-->
 <!-- <mxEditor></mxEditor> -->
 <!-- <div className="editor-container">
     <Layout>

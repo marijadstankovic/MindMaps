@@ -39,6 +39,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   graph: any;
   state: any;
   graphContainerClickCount: number;
+  counter = 5;
 
   private mapId: number;
   constructor(
@@ -53,6 +54,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   async ngOnInit(): Promise<void> {
 
     await this.editorHubService.startConnection();
+    this.editorHubService.addToGroup(this.mapId);
     // join group for this mind map
     this.state = {
       editor: null
@@ -116,6 +118,8 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     this.editorHubService.removeFromGroup(this.mapId);
   }
 
+
+
   async getMingMap() {
     this.mapId = + this.route.snapshot.paramMap.get('id');
     const request = this.roomService.getMindMap(this.mapId);
@@ -124,7 +128,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       window.localStorage.setItem('autosaveXml', map.xmlText);
     })
     
-    this.editorHubService.addToGroup(this.mapId);
   }
   // ngAfterViewInit() {
   //   // // const options: any = {

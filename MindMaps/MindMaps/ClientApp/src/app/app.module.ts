@@ -29,6 +29,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ToolbarComponent } from './editor/toolbar/toolbar.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
+import { CommentsComponent } from './editor/comments/comments.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { MatDividerModule } from '@angular/material/divider';
     ListRoomsComponent,
     EditorComponent,
     SidebarComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    CommentsComponent
   ],
   imports: [
     MaterialModule,
@@ -64,7 +68,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDialogModule,
     MatGridListModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSidenavModule,
+    MatCardModule
   ],
   exports: [
     MatProgressBarModule,

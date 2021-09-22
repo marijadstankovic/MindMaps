@@ -11,9 +11,13 @@ namespace MindMaps.Repository
 {
     public class CommentRepository: EfCoreRepository<Comment>
     {
-        public CommentRepository(MindMapsContext context) : base(context)
-        {
+        private readonly UserRepository _userRepository;
+        private readonly MindMapRepository _mindMapRepository;
 
+        public CommentRepository(MindMapsContext context, UserRepository userRepository, MindMapRepository mindMapRepository) : base(context)
+        {
+            _mindMapRepository = mindMapRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<List<CommentDTO>> GetAll(int mindMapId)
@@ -29,6 +33,26 @@ namespace MindMaps.Repository
                     Username = $"{x.User.Name} {x.User.LastName}"
                 })
                 .ToListAsync();
+        }
+
+        public async Task<CommentDTO> Add(CommentDTO commentDTO)
+        {
+            var user = await _userRepository.Get(commentDTO.UserId);
+            var mindMap = await _mindMapRepository.Get(commentDTO.MindMapId);
+
+            var newComment = new Comment
+            {
+                DateTime = DateTime.UtcNow,
+                Text = commentDTO.Text,
+                MindMap = mindMap,
+                User = user
+            };
+            await Add(newComment);
+
+            commentDTO.Username = $"{user.Name} {user.LastName}";
+            commentDTO.Id = newComment.Id;
+
+            return commentDTO;
         }
     }
 }

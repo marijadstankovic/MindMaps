@@ -26,6 +26,10 @@ export class RoomService {
     return this.http.get(this.baseUrl + "MindMaps/" + mapId);
   }
 
+  getComments(mapId: number) {
+    return this.http.get(this.baseUrl + "Comments?mindMapId=" + mapId);
+  }
+
   getChatHistory(destinataryId: any, size: number, page: number) {
     // return this.http.get(this.baseUrl + "GetMessageHistory?chatId=" + destinataryId 
     //   + "&size=" + size

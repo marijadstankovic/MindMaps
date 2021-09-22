@@ -25,15 +25,16 @@ namespace MindMaps.Hubs
             _roomUserRepository = roomUserRepository;
         }
 
-        public async Task AddToGroup(int chatId)
+        public async Task AddToGroup(int chatId) // new parameter: participants
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, chatId.ToString());
-            await Clients.Group(chatId.ToString()).SendAsync("Coonected", "client added to group");
+            await Clients.Group(chatId.ToString()).SendAsync("UpdateChatList", "client added to group"); // send participants ...
         }
 
-        public async Task RemoveFromGroup()
+        public async Task RemoveFromGroup(int chatId) // new parameter: participants...
         {
-
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, chatId.ToString());
+            await Clients.Group(chatId.ToString()).SendAsync("UpdateChatList", "client removed from group"); // add data
         }
         //public async Task OnConnectedAsync()
         //{
@@ -80,15 +81,5 @@ namespace MindMaps.Hubs
 
         }
 
-
-        public async Task MemberAdded()
-        {
-
-        }
-
-        public async Task MemberRemoved()
-        {
-
-        }
     }
 }
