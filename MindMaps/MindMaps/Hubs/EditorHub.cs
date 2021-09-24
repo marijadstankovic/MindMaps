@@ -50,14 +50,14 @@ namespace MindMaps.Hubs
             };
             commentDTO = await _commentRepository.Add(commentDTO);
 
-            await Clients.GroupExcept(mapId.ToString(), Context.ConnectionId).SendAsync("CommentAdded", commentDTO);
+            await Clients.Group(mapId.ToString()).SendAsync("CommentAdded", commentDTO);
         }
 
         public async Task RemoveComment(int commentId, int mapId)
         {
             await _commentRepository.Delete(commentId);
 
-            await Clients.GroupExcept(mapId.ToString(), Context.ConnectionId).SendAsync("CommentRemoved", commentId);
+            await Clients.Group(mapId.ToString()).SendAsync("CommentRemoved", commentId);
         }
     }
 }

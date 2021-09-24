@@ -26,6 +26,9 @@ export class CommentsComponent implements OnInit, OnDestroy {
   commentAddedSub: Subscription;
   commentRemovedSub: Subscription;
 
+  newComment = false;
+  text: string;
+
   constructor(private route: ActivatedRoute,
     private roomService: RoomService,
     private editorHubService: EditorHubService,
@@ -53,22 +56,23 @@ export class CommentsComponent implements OnInit, OnDestroy {
   }
 
   addComment() {
-    this.editorHubService.addComment("texty", this.mapId, 1);
+    console.log(this.text);
+    this.editorHubService.addComment(this.text, this.mapId, 1);
+    this.newComment = false;
   }
   removeComment(commentId: number) {
     this.editorHubService.deleteComment(commentId, this.mapId);
+    // this.comments = this.comments.filter(c => c.id !== commentId);
   }
 
   commentAdded() {
     this.commentAddedSub = this.editorHubService.commentAdded.subscribe((obj) => {
-      console.log("in da c" + obj);
       this.comments.push(obj as comment);
     })
   }
 
   commentRemoved() {
     this.commentRemovedSub = this.editorHubService.commentRemoved.subscribe((obj) => {
-      console.log("in da c" + obj);
       this.comments = this.comments.filter(c => c.id !== obj as number);
     })
   }

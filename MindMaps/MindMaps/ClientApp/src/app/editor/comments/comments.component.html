@@ -1,14 +1,35 @@
-<div class="comment-wrapper" >
+<div class="comment-wrapper">
   <mat-card *ngFor="let comment of comments">
+    <!--<mat-card-title>
+      {{comment.text}}
+    </mat-card-title>-->
+    <mat-card-subtitle>
+      {{comment.username}}
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      {{comment.dateTime  | date :'short'}}
+    </mat-card-subtitle>
     <mat-card-content>
       {{comment.text}}
     </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-icon-button color="primary" (click)="removeComment(comment.id)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card *ngIf="newComment">
+    <!--<form *ngIf="newComment">
+    <mat-form-field>-->
+    <textarea matInput [(ngModel)]="text" (keydown.enter)="$event.preventDefault(); addComment()"></textarea>
+    <!--</mat-form-field>
+    </form>-->
   </mat-card>
 </div>
-
-<button mat-fab color="primary" (click)="addComment()">
+<button mat-mini-fab color="primary" (click)="newComment = !newComment">
   <mat-icon>add</mat-icon>
 </button>
-<button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="removeComment(3)">
+<!--<button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="removeComment(3)">
   <mat-icon>close</mat-icon>
-</button>
+</button>-->
