@@ -24,7 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { NgChatModule } from 'ng-chat';
 import { EditorComponent } from './editor/editor.component';
 import { SidebarComponent } from './editor/sidebar/sidebar.component';
-import { MatButtonModule, MatDialogModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ToolbarComponent } from './editor/toolbar/toolbar.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -32,6 +32,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CommentsComponent } from './editor/comments/comments.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
+import { LeaveGroupComponent } from './dialogs/leave-group/leave-group.component';
+import { ChangeRoomNameComponent } from './dialogs/change-room-name/change-room-name.component';
+import { RoomDetailsDialogComponent } from './dialogs/room-details-dialog/room-details-dialog.component';
+import { ListUsersComponent } from './list-users/list-users.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { MatCardModule } from '@angular/material/card';
     EditorComponent,
     SidebarComponent,
     ToolbarComponent,
-    CommentsComponent
+    CommentsComponent,
+    LeaveGroupComponent,
+    ChangeRoomNameComponent,
+    RoomDetailsDialogComponent,
+    ListUsersComponent
   ],
   imports: [
     MaterialModule,
@@ -71,11 +79,15 @@ import { MatCardModule } from '@angular/material/card';
     MatDividerModule,
     MatSidenavModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatProgressBarModule,
     MatDialogModule
+  ],
+  entryComponents: [
+    ChangeRoomNameComponent
   ],
   providers: [
     AuthService

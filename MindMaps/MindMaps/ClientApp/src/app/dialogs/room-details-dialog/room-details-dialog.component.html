@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Room details</h2>
+<mat-dialog-content class="mat-typography">
+  <table>
+    <tr class="basic-info">
+      <td>
+        Name: <strong>{{room.name}}</strong>
+        Date of creation: <strong>{{row.dateOfCreation | date:'short'}}</strong>
+      </td>
+      <td>
+        ID: <strong>{{room.id}}</strong>
+      </td>
+    </tr>
+    <mat-divider></mat-divider>
+
+    <tr>
+      <td>
+        <h5>Documents:</h5>
+        <app-list-documents [showActionButtons]="showBtns" [room]="room"></app-list-documents>
+      </td>
+      <td>
+        <h5>Users:</h5>
+      </td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</div>

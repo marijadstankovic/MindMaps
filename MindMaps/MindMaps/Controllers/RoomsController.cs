@@ -116,5 +116,36 @@ namespace MindMaps.Controllers
         {
             return (_roomRepository.Get(id) != null);
         }
+
+        [HttpPut("RoomName/{id}")]
+        public async Task<IActionResult> ChangeRoomName(int id, [FromBody] string name)
+        {
+            var room = await _roomRepository.Get(id);
+
+            if (room == null)
+            {
+                return NotFound();
+            }
+
+            room.Name = name;
+
+            try
+            {
+                await _roomRepository.Update(room);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RoomExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
     }
 }

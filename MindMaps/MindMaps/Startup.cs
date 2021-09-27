@@ -77,6 +77,7 @@ namespace MindMaps
 
             services.AddSignalR();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

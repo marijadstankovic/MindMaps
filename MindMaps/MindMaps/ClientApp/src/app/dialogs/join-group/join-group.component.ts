@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ChatHubService } from '../../_services/chat-hub.service';
 import { RoomService } from '../../_services/room.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class JoinGroupComponent implements OnInit {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
 
-  constructor(private roomService: RoomService) { }
+  constructor(private roomService: RoomService, private chatHubService: ChatHubService) { }
 
   ngOnInit() {
   }
@@ -23,10 +24,11 @@ export class JoinGroupComponent implements OnInit {
     this.decodedToken = this.jwtHelper.decodeToken(user);
     this.joinRoomModel.UserUid = +this.decodedToken.nameid;
     // 
-    this.roomService.join(this.joinRoomModel).subscribe(() => {
+    this.roomService.join(this.joinRoomModel).subscribe((roomUser: any) => {
       console.log('Joined room');
+      this.chatHubService.addToGroup(roomUser.roomID);
     }, error => {
-        console.log(error);
+      console.log(error);
     });
   }
 

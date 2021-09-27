@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AuthService } from '../_services/auth.service';
-import { FormRoomComponent } from './form-room/form-room.component';
-import { JoinGroupComponent } from './join-group/join-group.component';
+import { FormRoomComponent } from '../dialogs/form-room/form-room.component';
+import { JoinGroupComponent } from '../dialogs/join-group/join-group.component';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { JoinGroupComponent } from './join-group/join-group.component';
 })
 export class NavMenuComponent {
   isExpanded = false;
-  constructor(public authService: AuthService, public dialogAddGroup: MatDialog) {
+  constructor(public authService: AuthService, public dialog: MatDialog) {
   }
 
   collapse() {
@@ -30,11 +30,11 @@ export class NavMenuComponent {
   openAddGroupForm() {
     //this.hideAddGroupForm = false;
     const dialogConfig = new MatDialogConfig();
-    this.dialogAddGroup.open(FormRoomComponent, dialogConfig);
+    this.dialog.open(FormRoomComponent, dialogConfig);
   }
 
   joinGroupForm() {
     const dialogConfig = new MatDialogConfig();
-    this.dialogAddGroup.open(JoinGroupComponent, dialogConfig);
+    this.dialog.open(JoinGroupComponent, dialogConfig);
   }
 }

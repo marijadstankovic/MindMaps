@@ -1,11 +1,5 @@
 
 <div [hidden]="!loggedin()">
-
-  <i class="fa fa-user"></i>
-  
-  <mat-icon>group</mat-icon>
-  <i class="fa fa-user-friends"></i>
-  <i class="fa fa-user-plus"></i>
   <mat-card class="user-card">
     <mat-card-header>
       <h2>Hello, {{user == null? "" : user.name}}!</h2>

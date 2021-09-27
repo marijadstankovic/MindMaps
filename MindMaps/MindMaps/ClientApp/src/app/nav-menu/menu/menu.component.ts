@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { FormProfileComponent } from '../form-profile/form-profile.component';
+import { FormProfileComponent } from '../../dialogs/form-profile/form-profile.component';
 // import { ServiceSignalR } from '../../_services/ServiceSignalR';
 import { ChatHubService } from 'src/app/_services/chat-hub.service';
-import { FormRoomComponent } from '../form-room/form-room.component';
-import { JoinGroupComponent } from '../join-group/join-group.component';
+import { FormRoomComponent } from '../../dialogs/form-room/form-room.component';
+import { JoinGroupComponent } from '../../dialogs/join-group/join-group.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ProfileService } from '../../_services/profile.service';
 
@@ -37,17 +37,13 @@ export class MenuComponent implements OnInit {
     this.serviceSignalR.stopConnection();
   }
 
-  openProfile() {
+  openProfile(isedit: boolean) {
     const dialogConfig = new MatDialogConfig();
 
     //dialogConfig.disableClose = true;
     //dialogConfig.autoFocus = true;
 
-    const dialogRef = this.dialogProfile.open(FormProfileComponent, dialogConfig);
-
-    //dialogRef.afterClosed().subscribe(res => {
-      console.log('Dialog result');
-   // });
+    const dialogRef = this.dialogProfile.open(FormProfileComponent, { data: isedit });
   }
 
 

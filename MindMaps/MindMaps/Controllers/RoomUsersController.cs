@@ -102,7 +102,7 @@ namespace MindMaps.Controllers
         }
 
         // DELETE: api/RoomUsers/5
-        [HttpDelete]
+        [HttpDelete("{roomID}/{userID}")]
         public async Task<ActionResult<RoomUser>> DeleteRoomUser(int roomID, int userID)
         {
             int id = (await _roomUserRepository.Filter(roomID, userID)).Id;
@@ -138,6 +138,30 @@ namespace MindMaps.Controllers
                     Id = room.Id,
                     Name = room.Name,
                     DateOfCreation = room.DateOfCreation
+                });
+            }
+            return res;
+        }
+
+        [HttpGet("Users/{roomID}")]
+        public async Task<ActionResult<List<UserViewDTO>>> GetUsersByRoomID(int roomID)
+        {
+            var users = await _roomUserRepository.FindUsersInRoom(roomID);
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            var res = new List<UserViewDTO>();
+
+            foreach (var user in users)
+            {
+                res.Add(new UserViewDTO
+                {
+                    Name = user.Name,
+                    LastName = user.LastName,
+                    Email = user.Email
                 });
             }
             return res;

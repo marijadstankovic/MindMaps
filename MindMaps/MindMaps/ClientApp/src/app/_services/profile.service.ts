@@ -16,4 +16,8 @@ export class ProfileService {
   updateUser(userUid: any, editUser: any) {
     return this.http.put<any>(this.baseUrl + "Users/" + userUid, editUser);
   }
+
+  GetUsersByRoomID(roomId: any): any {
+    return this.http.get(this.baseUrl + "RoomUsers/Users/" + roomId);
+  }
 }

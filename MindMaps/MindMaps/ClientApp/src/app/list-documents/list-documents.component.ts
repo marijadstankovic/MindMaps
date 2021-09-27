@@ -1,25 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTable } from '@angular/material';
+import { RoomService } from '../_services/room.service';
 import { SnackBarService } from '../_services/snack-bar.service';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
+import { ListMindMapsDataSource, ListMindMapsItem } from './list-documents-datasource';
 
 @Component({
   selector: 'app-list-documents',
@@ -27,11 +10,25 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./list-documents.component.css']
 })
 export class ListDocumentsComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-  constructor(private snackBarService: SnackBarService) { }
+  @Input() showActionButtons = true;
+  @Input() room: any;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatTable, { static: false }) table: MatTable<ListMindMapsItem>;
+  dataSource: ListMindMapsDataSource;
+  displayedColumns = ['id', 'name', 'dateOfCreation', 'actions'];
+  lenght: any;
+
+  constructor(private snackBarService: SnackBarService, private roomService: RoomService) { }
 
   ngOnInit() {
+    this.dataSource = new ListMindMapsDataSource(this.roomService, this.room);
+    this.dataSource.loadData();
   }
- 
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.table.dataSource = this.dataSource;
+  }
 }

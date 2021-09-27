@@ -6,7 +6,7 @@ import { Observable, of as observableOf, merge, BehaviorSubject, of } from 'rxjs
 import { RoomService } from '../_services/room.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-export interface ListRoomsItem {
+export interface ListMindMapsItem {
   id: number;
   DateOfCreation: Date;
   Name: string;
@@ -17,9 +17,9 @@ export interface ListRoomsItem {
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
+export class ListMindMapsDataSource extends DataSource<ListMindMapsItem> {
 
-  data = new BehaviorSubject<ListRoomsItem[]>([]);
+  data = new BehaviorSubject<ListMindMapsItem[]>([]);
   loadingData = new BehaviorSubject<boolean>(false);
 
   public loading$ = this.loadingData.asObservable();
@@ -31,7 +31,7 @@ export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
   jwtHelper = new JwtHelperService();
   lenght: number = 0;
 
-  constructor(private roomService: RoomService) {
+  constructor(private roomService: RoomService, private room:any) {
     super();
   }
   /**
@@ -39,7 +39,7 @@ export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<ListRoomsItem[]> {
+  connect(): Observable<ListMindMapsItem[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -65,7 +65,7 @@ export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: ListRoomsItem[]) {
+  private getPagedData(data: ListMindMapsItem[]) {
 
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
@@ -75,7 +75,7 @@ export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: ListRoomsItem[]) {
+  private getSortedData(data: ListMindMapsItem[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -98,7 +98,7 @@ export class ListRoomsDataSource extends DataSource<ListRoomsItem> {
       catchError(() => of([])),
       finalize(() => this.loadingData.next(false)))
       .subscribe(res => {
-        this.data.next(res as ListRoomsItem[]);
+        this.data.next(res as ListMindMapsItem[]);
         this.lenght = this.data.value.length;
     });
   }

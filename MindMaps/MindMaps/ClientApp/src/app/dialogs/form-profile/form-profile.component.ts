@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ProfileService } from '../../_services/profile.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SnackBarService } from '../../_services/snack-bar.service';
 
 @Component({
@@ -27,14 +27,19 @@ export class FormProfileComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(private profileService: ProfileService, private http: HttpClient, public dialogRef: MatDialogRef<FormProfileComponent>, private snackBarService: SnackBarService) { }
+  constructor(
+    private profileService: ProfileService,
+    private http: HttpClient,
+    public dialogRef: MatDialogRef<FormProfileComponent>,
+    private snackBarService: SnackBarService,
+    @Inject(MAT_DIALOG_DATA) public isEdit: boolean) {
+    this.editHidden = !isEdit;
+  }
 
   ngOnInit() {
-    this.editHidden = true;
     const userT = localStorage.getItem('token');
     this.decodedToken = this.jwtHelper.decodeToken(userT);
     this.userModel.UserUid = +this.decodedToken.nameid;
-    console.log("Token: "+ this.decodedToken);
    
     this.profileService.getUser(this.userModel.UserUid)
       .subscribe(res => {

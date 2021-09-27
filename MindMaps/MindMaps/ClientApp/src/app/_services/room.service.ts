@@ -18,6 +18,14 @@ export class RoomService {
     return this.http.post(this.baseUrl + "roomusers", model);
   }
 
+  leave(roomID: any, userID: any) {
+    return this.http.delete(this.baseUrl + "RoomUsers/" + roomID + "/" + userID);
+  }
+
+  changeRoomName(roomID: any, name: any) {
+    return this.http.put<any>(this.baseUrl + "Rooms/RoomName/" + roomID, name);
+  }
+
   getRoomsByUserID(userId: any) {
     return this.http.get(this.baseUrl + "RoomUsers/Rooms/" + userId);
   }

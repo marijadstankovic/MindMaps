@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ListRoomService {
     decodedToken: any;
     userModel: any = {};
     jwtHelper = new JwtHelperService();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private snackBarService: SnackBarService) { }
 
   getRooms() {
     const userT = localStorage.getItem('token');
@@ -34,5 +35,11 @@ export class ListRoomService {
     // .subscribe(res => {
     //   console.log(res);
     // });
+  }
+
+  updateRoomName(roomID: number, name: string) {
+    return this.http.put(this.baseUrl + "RoomName/" + roomID, name).subscribe(res => {
+      this.snackBarService.openSnackBar("Room's name is changed.", "OK");
+    });
   }
 }

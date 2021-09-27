@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { MenuComponent } from "../menu/menu.component";
+import { MenuComponent } from "../../nav-menu/menu/menu.component";
 import { MatInputModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatDividerModule } from "@angular/material";
 import { ListRoomsComponent } from "../../list-rooms/list-rooms.component";
 
