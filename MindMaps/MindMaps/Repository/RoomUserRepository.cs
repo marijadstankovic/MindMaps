@@ -34,15 +34,15 @@ namespace MindMaps.Repository
         //    return await context.RoomUsers.Where(x => x.UserID == userID).Select(x => x.RoomID).ToListAsync();
         //}
 
-        //public async Task<List<User>> FindUsersInRoom(int roomID)
-        //{
-        //    return await context.RoomUsers.Where(x => x.RoomID == roomID)
-        //        .Join(
-        //        context.User,
-        //        roomUser => roomUser.User.Id,
-        //        user => user.Id,
-        //        (roomUser, user) => user).ToListAsync();
-        //}
+        public async Task<List<User>> FindUsersInRoom(int roomID)
+        {
+            return await context.RoomUsers.Where(x => x.RoomID == roomID)
+                .Join(
+                context.User,
+                roomUser => roomUser.User.Id,
+                user => user.Id,
+                (roomUser, user) => user).ToListAsync();
+        }
         //public async Task<List<int>> FindUserIDsInRoom(int roomID)
         //{
         //    return await context.RoomUsers.Where(x => x.RoomID == roomID).Select(x => x.UserID).ToListAsync();
