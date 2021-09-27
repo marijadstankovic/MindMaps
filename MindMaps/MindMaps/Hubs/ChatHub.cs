@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using MindMaps.Data.Entities;
 using MindMaps.Repository;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,9 @@ namespace MindMaps.Hubs
             _roomUserRepository = roomUserRepository;
         }
 
-        public async Task AddToGroup(int chatId) // new parameter: participants
+        public async Task AddToGroup(int roomId) // new parameter: participants
         {
+            var chatId = await _chatRepository.ChatFromRoom(roomId);
             await Groups.AddToGroupAsync(Context.ConnectionId, chatId.ToString());
             await Clients.Group(chatId.ToString()).SendAsync("UpdateChatList", "client added to group"); // send participants ...
         }
