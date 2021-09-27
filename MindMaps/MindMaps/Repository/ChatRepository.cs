@@ -27,6 +27,11 @@ namespace MindMaps.Repository
             //return null;
         }
 
+        public async Task<int> ChatFromRoom(int roomId)
+        {
+            return await context.Rooms.Where(x => x.Id == roomId).Select(x => x.ChatID).FirstOrDefaultAsync();
+        }
+
         public async Task<List<ChatDTO>> ChatsByUserID(int uid)
         {
             var chats = await context.RoomUsers.Where(x => x.UserID == uid) // 

@@ -97,7 +97,7 @@ namespace MindMaps.Controllers
             var RoomUser = new RoomUser() { RoomID = roomId, UserID = roomUser.UserUid }; // treba proveriti i da li ovi postoje i da li postoji njihova kombinacija
             await _roomUserRepository.Add(RoomUser);
 
-            return null;
+            return RoomUser;
             //return CreatedAtAction("GetRoomUser", new { id = roomUser.Id }, roomUser);
         }
 

@@ -39,12 +39,11 @@ export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements ICha
 
 
   private initializeListeners(): void {
-    
-    this.listRoomService.getChats().subscribe( (response: Group[]) => {      
+    this.listRoomService.getChats().subscribe((response: Group[]) => {
       this.participants = response.map(x => {
         x.status = ChatParticipantStatus.Online;
         return x;
-      });      
+      });
     });
 
     this.serviceSignalR.messageEvent$.subscribe(messageObject => {
@@ -59,6 +58,7 @@ export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements ICha
       this.onMessageReceived(participant, message);
     });
 
+    this.serviceSignalR.groupsUpdatedEvent$.subscribe(() => this.changeFriendsList());
     // this.hubConnection.on("generatedUserId", (userId) => {
     //   // With the userId set the chat will be rendered
     //   this.userId = userId;
@@ -72,6 +72,19 @@ export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements ICha
     // });
   }
 
+  private changeFriendsList(): void {
+    this.listRoomService.getChats().subscribe((response: Group[]) => {
+      this.participants = response.map(x => {
+        x.status = ChatParticipantStatus.Online;
+        return x;
+      });
+      this.onFriendsListChanged(this.participants.map(user => {
+        let participantResponse = new ParticipantResponse();
+        participantResponse.participant = user;
+        return participantResponse;
+      }));
+    });
+  }
 
 
   getMessageHistory(destinataryId: any): Observable<Message[]> {
@@ -109,6 +122,14 @@ export class SignalRGroupAdapter extends PagedHistoryChatAdapter implements ICha
 
 
   listFriends(): Observable<ParticipantResponse[]> {
+
+    this.listRoomService.getChats().subscribe((response: Group[]) => {
+      this.participants = response.map(x => {
+        x.status = ChatParticipantStatus.Online;
+        return x;
+      });
+    });
+
 
     return of(this.participants.map(user => { 
       let participantResponse = new ParticipantResponse();
