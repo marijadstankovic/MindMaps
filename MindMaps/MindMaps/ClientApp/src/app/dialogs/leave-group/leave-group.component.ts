@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ChatHubService } from '../../_services/chat-hub.service';
 import { RoomService } from '../../_services/room.service';
 import { SnackBarService } from '../../_services/snack-bar.service';
 
@@ -14,6 +15,7 @@ export class LeaveGroupComponent implements OnInit {
   constructor(
     private roomService: RoomService,
     private snackBarService: SnackBarService,
+    private chatHub: ChatHubService,
     public dialogRef: MatDialogRef<LeaveGroupComponent>,
     @Inject(MAT_DIALOG_DATA) public room: any) { }
 
@@ -31,6 +33,12 @@ export class LeaveGroupComponent implements OnInit {
 
     this.roomService.leave(this.room.id, this.UserUid).subscribe(res => {
       this.snackBarService.openSnackBar("The group is leaved.", "OK");
+      this.chatHub.removeFromGroup(this.room.id);
+      this.dialogRef.close();
     });
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }

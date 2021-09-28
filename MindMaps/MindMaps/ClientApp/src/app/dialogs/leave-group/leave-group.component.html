@@ -1,13 +1,13 @@
 <mat-dialog-content class="leave-group-form">
-  <form #addRoomForm="ngForm" (ngSubmit)="leaveGroup()">
-    <p>
-      <mat-form-field>
-        Are you sure you want to leave group with name: {{room.name}}?
-      </mat-form-field>
-    </p>
+  <!--<form #addRoomForm="ngForm" (ngSubmit)="leaveGroup()">-->
+  <p>
+    <!--<mat-form-field>
+  </mat-form-field>-->
+    Are you sure you want to leave group with name: {{room.name}}?
+  </p>
     <div class="buttons">
-      <button type="submit" mat-button>Yes</button>
-      <button mat-button mat-dialog-close>No</button>
+      <button type="submit" mat-button (click)="leaveGroup()">Yes</button>
+      <button mat-button mat-dialog-close (click)="closeDialog()">No</button>
     </div>
-  </form>
+  <!--</form>-->
 </mat-dialog-content>

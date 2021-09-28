@@ -61,8 +61,13 @@ export class ChatHubService {
     });
   }
 
-  public addToGroup = (chatId: number) => {
-    this.hubConnection.invoke('AddToGroup', chatId)
+  public addToGroup = (roomId: number) => {
+    this.hubConnection.invoke('AddToGroup', roomId)
+      .catch(err => console.error(err));
+  }
+
+  public removeFromGroup = (roomId: number) => {
+    this.hubConnection.invoke('RemoveFromGroup', roomId)
       .catch(err => console.error(err));
   }
 
@@ -77,6 +82,7 @@ export class ChatHubService {
     this.hubConnection.invoke('SendMessage', +user.nameid, chatID, message)
       .catch(err => console.error(err));
   }
+
   public addBroadcastDataListener = () => {
     this.hubConnection.on('BroadcastMessage', (userId, message, chatId) => {
 
