@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@aspnet/signalr';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
