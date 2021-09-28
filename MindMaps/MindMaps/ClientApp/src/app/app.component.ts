@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit {
       this.serviceSignalR.startConnection();
   }
 
-  loggedin(){
+  loggedin() {
     return this.authService.loggedin();
   }
 }

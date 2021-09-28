@@ -5,10 +5,10 @@
 
     <div #graphContainer id="graphContainer"></div>
 
-    <app-login [hidden]="loggedin()"></app-login>
-    <router-outlet [hidden]="!loggedin()"></router-outlet>
+    <app-login *ngIf="!loggedin()" [hidden]="loggedin()"></app-login>
+    <router-outlet *ngIf="loggedin()" [hidden]="!loggedin()"></router-outlet>
 
-    <app-chat></app-chat>
+    <app-chat *ngIf="loggedin()"></app-chat>
   </div>
 </body>
  

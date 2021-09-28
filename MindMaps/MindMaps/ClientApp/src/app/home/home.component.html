@@ -1,5 +1,5 @@
 
-<div [hidden]="!loggedin()">
+<div [hidden]="!loggedin()" *ngIf="loggedin()">
   <mat-card class="user-card">
     <mat-card-header>
       <h2>Hello, {{user == null? "" : user.name}}!</h2>
