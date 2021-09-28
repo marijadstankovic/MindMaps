@@ -1,23 +1,5 @@
 
-<p>chat works!</p>
-
-<input id="text" />
-<button (click)="onClick()">Posalji</button>
-
-
-<!--
-<ul>
-  <li *ngFor="let message of serviceSignalR.bradcastedData">
-
-    <h3>
-      {{ message.Name }}
-    </h3>
-
-  </li>
-</ul>
-
-  -->
-  <ng-chat *ngIf="adapter && adapter.userId"
+<ng-chat *ngIf="adapter && adapter.userId"
   [adapter]="adapter"
   [groupAdapter]="adapter"
   [userId]="adapter.userId"

@@ -65,7 +65,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'chat', component: ChatComponent },
+      //{ path: 'chat', component: ChatComponent },
       { path: 'login', component: LoginComponent },
       { path: 'editor/:id', component: EditorComponent}
     ]),
@@ -87,7 +87,8 @@ import { ListUsersComponent } from './list-users/list-users.component';
     MatDialogModule
   ],
   entryComponents: [
-    ChangeRoomNameComponent
+    ChangeRoomNameComponent,
+    LeaveGroupComponent
   ],
   providers: [
     AuthService
