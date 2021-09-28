@@ -1,0 +1,32 @@
+.full-width-table {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.btn {
+  margin: 10px;
+  border: solid 1px #000000;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.text-choose-group {
+  font-size: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.mat-row:not(mat-row):hover {
+  background: whitesmoke;
+}

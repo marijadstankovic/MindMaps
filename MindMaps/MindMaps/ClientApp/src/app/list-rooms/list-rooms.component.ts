@@ -69,9 +69,7 @@ export class ListRoomsComponent implements AfterViewInit, OnInit {
   }
 
   nextStepForOpenDocument(row: ListRoomsItem) {
-  }
-
-  goToEditor(mapId: number) {
-    this.router.navigate(['/editor', mapId]);
+    localStorage.setItem("roomId", row.id.toString());
+    this.router.navigate(["/documents"]);
   }
 }

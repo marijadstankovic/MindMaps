@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, MatSort, MatTable } from '@angular/material';
 import { CreateMindmapsComponent } from '../dialog/create-mindmaps/create-mindmaps.component';
+import { MatDialog, MatPaginator, MatSort, MatTable } from '@angular/material';
+import { Router } from '@angular/router';
 import { MindmapsService } from '../_services/mindmaps.service';
-import { SnackBarService } from '../_services/snack-bar.service';
 import { ListMindMapsDataSource, ListMindMapsItem } from './list-documents-datasource';
 
 @Component({
@@ -12,17 +12,17 @@ import { ListMindMapsDataSource, ListMindMapsItem } from './list-documents-datas
 })
 export class ListDocumentsComponent implements OnInit {
   @Input() showActionButtons: boolean;
-  @Input() room: any;
+  @Input() roomID: any;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatTable, { static: false }) table: MatTable<ListMindMapsItem>;
   dataSource: ListMindMapsDataSource;
   displayedColumns = ['id', 'name', 'dateOfCreation', 'actions'];
   lenght: any;
 
-  constructor( public dialog: MatDialog) { }
+  constructor(private mindmapsService: MindmapsService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.dataSource = new ListMindMapsDataSource(this.mindmapsService, this.room);
+    this.dataSource = new ListMindMapsDataSource(this.mindmapsService, this.roomID);
     this.dataSource.loadData();
   }
 
@@ -32,6 +32,10 @@ export class ListDocumentsComponent implements OnInit {
   }
 
   addDocumentDialog() {    
-    this.dialog.open(CreateMindmapsComponent, { data: this.room.id });
+    this.dialog.open(CreateMindmapsComponent, { data: this.roomID });
+  }
+
+  goToEditor(mapId: number) {
+    this.router.navigate(['/editor', mapId]);
   }
 }
