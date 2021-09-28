@@ -46,6 +46,18 @@ namespace MindMaps.Controllers
             return mindMap;
         }
 
+        [HttpGet("ByRoomId/{id}")]
+        public async Task<ActionResult<List<MindMap>>> GetMindMapByRoomId(int id)
+        {
+            var room = await _roomRepository.Get(id);
+            if (room == null)
+            {
+                return NotFound();
+            }
+
+            return await _repository.GetMindMapsByRoom(room);
+        }
+
         // PUT: api/MindMaps/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

@@ -3,8 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, BehaviorSubject, of } from 'rxjs';
-import { RoomService } from '../_services/room.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { MindmapsService } from '../_services/mindmaps.service';
 
 export interface ListMindMapsItem {
   id: number;
@@ -26,12 +25,9 @@ export class ListMindMapsDataSource extends DataSource<ListMindMapsItem> {
 
   paginator: MatPaginator;
   sort: MatSort;
-  UserUid: any;
-  decodedToken: any;
-  jwtHelper = new JwtHelperService();
   lenght: number = 0;
 
-  constructor(private roomService: RoomService, private room:any) {
+  constructor(private mindmapsService: MindmapsService, private room:any) {
     super();
   }
   /**
@@ -91,10 +87,7 @@ export class ListMindMapsDataSource extends DataSource<ListMindMapsItem> {
   }
 
   public loadData() {
-    const userT = localStorage.getItem('token');
-    this.decodedToken = this.jwtHelper.decodeToken(userT);
-    this.UserUid = +this.decodedToken.nameid;
-    this.roomService.getRoomsByUserID(this.UserUid).pipe(
+    this.mindmapsService.getMindmapsByRoomID(this.room.id).pipe(
       catchError(() => of([])),
       finalize(() => this.loadingData.next(false)))
       .subscribe(res => {

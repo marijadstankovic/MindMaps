@@ -34,6 +34,7 @@ import { LeaveGroupComponent } from './dialogs/leave-group/leave-group.component
 import { ChangeRoomNameComponent } from './dialogs/change-room-name/change-room-name.component';
 import { RoomDetailsDialogComponent } from './dialogs/room-details-dialog/room-details-dialog.component';
 import { RoomDetailsDialogModule } from './dialogs/room-details-dialog/room-details-dialog.module';
+import { CreateMindmapsComponent } from './dialog/create-mindmaps/create-mindmaps.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { RoomDetailsDialogModule } from './dialogs/room-details-dialog/room-deta
     CommentsComponent,
     LeaveGroupComponent,
     ChangeRoomNameComponent,
-    RoomDetailsDialogComponent
+    RoomDetailsDialogComponent,
+    CreateMindmapsComponent
   ],
   imports: [
     MaterialModule,

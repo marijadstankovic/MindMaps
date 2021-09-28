@@ -23,5 +23,10 @@ namespace MindMaps.Repository
             context.MindMaps.Update(map);
             await context.SaveChangesAsync();
         }
+
+        public async Task<List<MindMap>> GetMindMapsByRoom(Room room)
+        {
+            return await context.MindMaps.Where(x => x.Room == room).ToListAsync();
+        }
     }
 }

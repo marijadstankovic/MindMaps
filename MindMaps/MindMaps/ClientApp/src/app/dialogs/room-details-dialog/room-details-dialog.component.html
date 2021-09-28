@@ -6,7 +6,7 @@
         Name: <strong>{{room.name}}</strong>
       </td>
       <td style="font-size: 14px">
-        ID: <strong>{{room.id}}</strong>
+        Key: <strong>{{room.name}}.{{room.id}}</strong>
       </td>
     </tr>
     <tr>
@@ -17,18 +17,13 @@
       </td>
       <mat-divider></mat-divider>
     </tr>
-
-    <tr>
-      <td>
-        <h5>Documents:</h5>
-          <app-list-documents [showActionButtons]="showBtns" [room]="room"></app-list-documents>
-      </td>
-      <td>
-        <h5>Users:</h5>
-          <app-list-users [roomID]="room.id"></app-list-users>
-      </td>
-    </tr>
   </table>
+  <h3>Documents:</h3>
+  <!--<app-list-documents [showActionButtons]="showBtns" [room]="room"></app-list-documents>-->
+
+  <h3>Users:</h3>
+  <app-list-users [roomID]="room.id"></app-list-users>
+
 </mat-dialog-content>
 <div mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Close</button>

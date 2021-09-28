@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTable } from '@angular/material';
-import { RoomService } from '../_services/room.service';
+import { MindmapsService } from '../_services/mindmaps.service';
 import { SnackBarService } from '../_services/snack-bar.service';
 import { ListMindMapsDataSource, ListMindMapsItem } from './list-documents-datasource';
 
@@ -19,10 +19,10 @@ export class ListDocumentsComponent implements OnInit {
   displayedColumns = ['id', 'name', 'dateOfCreation', 'actions'];
   lenght: any;
 
-  constructor(private snackBarService: SnackBarService, private roomService: RoomService) { }
+  constructor(private mindmapsService: MindmapsService) { }
 
   ngOnInit() {
-    this.dataSource = new ListMindMapsDataSource(this.roomService, this.room);
+    this.dataSource = new ListMindMapsDataSource(this.mindmapsService, this.room);
     this.dataSource.loadData();
   }
 

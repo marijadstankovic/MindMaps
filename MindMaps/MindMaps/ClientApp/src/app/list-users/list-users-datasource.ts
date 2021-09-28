@@ -6,8 +6,8 @@ import { catchError, finalize, map } from "rxjs/operators";
 import { ProfileService } from "../_services/profile.service";
 
 export interface ListUsersItem {
-  Name: number;
-  LastName: Date;
+  Name: string;
+  LastName: string;
   Email: string;
 }
 
@@ -19,7 +19,6 @@ export class ListUsersDataSource extends DataSource<ListUsersItem> {
   public loading$ = this.loadingData.asObservable();
 
   paginator: MatPaginator;
-  sort: MatSort;
   UserUid: any;
   decodedToken: any;
   jwtHelper = new JwtHelperService();
@@ -32,11 +31,10 @@ export class ListUsersDataSource extends DataSource<ListUsersItem> {
   connect(): Observable<ListUsersItem[]> {
      const dataMutations = [
       this.data.asObservable(),
-      this.paginator.page,
-      this.sort.sortChange
+      this.paginator.page
     ];
     return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data.value]));
+      return this.getPagedData([...this.data.value]);
     }));
   }
 
@@ -51,21 +49,6 @@ export class ListUsersDataSource extends DataSource<ListUsersItem> {
     return data.splice(startIndex, this.paginator.pageSize);
   }
 
-  private getSortedData(data: ListUsersItem[]) {
-    if (!this.sort.active || this.sort.direction === '') {
-      return data;
-    }
-
-    return data.sort((a, b) => {
-      const isAsc = this.sort.direction === 'asc';
-      switch (this.sort.active) {
-        case 'name': return compare(a.Name, b.Name, isAsc);
-        case 'lastname': return compare(a.LastName, b.Name, isAsc);
-        case 'email': return compare(a.Email, b.Email, isAsc);
-        default: return 0;
-      }
-    });
-  }
 
   public loadData() {
     const userT = localStorage.getItem('token');
@@ -77,10 +60,10 @@ export class ListUsersDataSource extends DataSource<ListUsersItem> {
       .subscribe(res => {
         this.data.next(res as ListUsersItem[]);
         this.lenght = this.data.value.length;
+
+        console.log(this.data.value);
       });
   }
 }
 
-function compare(a, b, isAsc) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}
+

@@ -11,7 +11,6 @@ import { ListUsersDataSource, ListUsersItem } from './list-users-datasource';
 export class ListUsersComponent implements OnInit {
   @Input() roomID: number;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<ListUsersItem>;
   dataSource: ListUsersDataSource;
   displayedColumns = ['name', 'lastName', 'email'];
@@ -25,7 +24,6 @@ export class ListUsersComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
