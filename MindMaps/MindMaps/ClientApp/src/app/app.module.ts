@@ -90,7 +90,8 @@ import { ListDocumentsPageComponent } from './list-documents-page/list-documents
   entryComponents: [
     ChangeRoomNameComponent,
     LeaveGroupComponent,
-    RoomDetailsDialogComponent
+    RoomDetailsDialogComponent,
+    CreateMindmapsComponent
   ],
   providers: [
     AuthService

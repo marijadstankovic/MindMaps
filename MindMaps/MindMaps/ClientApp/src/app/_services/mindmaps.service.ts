@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,13 @@ export class MindmapsService {
 
   changeName(mapId: number, name: string) {
     this.http.put<any>(this.baseUrl + "MindMaps/Name/" + mapId + "?name=" + name, null);
+  }
+  
+  createMindmap(roomID: number, documentName: string): Observable<any> {
+    const request = {
+      roomId: roomID,
+      name: documentName
+    }
+    return this.http.post(this.baseUrl + "MindMaps", request);
   }
 }

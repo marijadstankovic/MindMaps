@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTable } from '@angular/material';
+import { CreateMindmapsComponent } from '../dialog/create-mindmaps/create-mindmaps.component';
+import { MatDialog, MatPaginator, MatSort, MatTable } from '@angular/material';
 import { Router } from '@angular/router';
 import { MindmapsService } from '../_services/mindmaps.service';
 import { ListMindMapsDataSource, ListMindMapsItem } from './list-documents-datasource';
@@ -18,7 +19,7 @@ export class ListDocumentsComponent implements OnInit {
   displayedColumns = ['id', 'name', 'dateOfCreation', 'actions'];
   lenght: any;
 
-  constructor(private mindmapsService: MindmapsService, private router: Router) { }
+  constructor(private mindmapsService: MindmapsService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource = new ListMindMapsDataSource(this.mindmapsService, this.roomID);
@@ -28,6 +29,10 @@ export class ListDocumentsComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+
+  addDocumentDialog() {    
+    this.dialog.open(CreateMindmapsComponent, { data: this.roomID });
   }
 
   goToEditor(mapId: number) {

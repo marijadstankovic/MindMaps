@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MindMaps.Data.Entities
@@ -9,7 +10,10 @@ namespace MindMaps.Data.Entities
     {
         public int Id { set; get; }
         public string Name { set; get; }
-        public Room Room { set; get; }
+
+        [JsonIgnore]
+        public virtual Room Room { set; get; }
+
         public DateTime DateOfCreation { set; get; }
         public string XMLText { get; set; }
     }
