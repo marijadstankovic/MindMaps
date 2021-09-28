@@ -35,6 +35,7 @@ import { ChangeRoomNameComponent } from './dialogs/change-room-name/change-room-
 import { RoomDetailsDialogComponent } from './dialogs/room-details-dialog/room-details-dialog.component';
 import { RoomDetailsDialogModule } from './dialogs/room-details-dialog/room-details-dialog.module';
 import { CreateMindmapsComponent } from './dialog/create-mindmaps/create-mindmaps.component';
+import { ListDocumentsPageComponent } from './list-documents-page/list-documents-page.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { CreateMindmapsComponent } from './dialog/create-mindmaps/create-mindmap
     LeaveGroupComponent,
     ChangeRoomNameComponent,
     RoomDetailsDialogComponent,
-    CreateMindmapsComponent
+    CreateMindmapsComponent,
+    ListDocumentsPageComponent
   ],
   imports: [
     MaterialModule,
@@ -66,6 +68,7 @@ import { CreateMindmapsComponent } from './dialog/create-mindmaps/create-mindmap
       { path: '', component: HomeComponent, pathMatch: 'full' },
       //{ path: 'chat', component: ChatComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'documents', component: ListDocumentsPageComponent },
       { path: 'editor/:id', component: EditorComponent}
     ]),
     BrowserAnimationsModule,

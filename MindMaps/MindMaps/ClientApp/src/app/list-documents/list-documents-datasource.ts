@@ -65,10 +65,8 @@ export class ListMindMapsDataSource extends DataSource<ListMindMapsItem> {
     return data.splice(startIndex, this.paginator.pageSize);
   }
 
-  
-
   public loadData() {
-    this.mindmapsService.getMindmapsByRoomID(this.room.id).pipe(
+    this.mindmapsService.getMindmapsByRoomID(this.room).pipe(
       catchError(() => of([])),
       finalize(() => this.loadingData.next(false)))
       .subscribe(res => {
