@@ -33,8 +33,9 @@ namespace MindMaps.Hubs
             await Clients.Group(chatId.ToString()).SendAsync("UpdateChatList", "client added to group"); // send participants ...
         }
 
-        public async Task RemoveFromGroup(int chatId) // new parameter: participants...
+        public async Task RemoveFromGroup(int roomId) // new parameter: participants...
         {
+            var chatId = await _chatRepository.ChatFromRoom(roomId);
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, chatId.ToString());
             await Clients.Group(chatId.ToString()).SendAsync("UpdateChatList", "client removed from group"); // add data
         }

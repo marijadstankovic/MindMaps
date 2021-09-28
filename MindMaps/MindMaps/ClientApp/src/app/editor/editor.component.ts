@@ -6,24 +6,8 @@ import { ChatHubService } from '../_services/chat-hub.service';
 import { EditorHubService } from '../_services/editor-hub.service';
 import { EditorService } from '../_services/editor.service';
 import { RoomService } from '../_services/room.service';
-// import { ServiceSignalR } from '../_services/ServiceSignalR';
 import { UtilService } from '../_services/util.service';
-// import util from 'mxgraph-editor/common/util';
-// import factory from 'mxgraph';
-// import Editor from 'mxgraph-editor';
-// import Sidebar from 'mxgraph-editor';
-// import Toolbar from 'mxgraph-editor';
 
-// import IMAGE_SHAPES from 'mxgraph-editor/demo/shape-config/image-shape';
-// import CARD_SHAPES from 'mxgraph-editor/demo/shape-config/card-shape';
-// import SVG_SHAPES from 'mxgraph-editor/demo/shape-config/svg-shape.xml';
-
-// declare var require: any;
-// declare var mxEditor: any;
-// declare var mxGraph: any;
-// declare var mxPerimeter: any;
-// declare var mxConstants: any;
-// declare var mxHierarchicalLayout: any;
 
 @Component({
   selector: 'app-editor',
@@ -52,36 +36,21 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async ngOnInit(): Promise<void> {
-
-    await this.editorHubService.startConnection();
-    this.editorHubService.addToGroup(this.mapId);
-    // join group for this mind map
     this.state = {
       editor: null
     };
-
     this.graphContainerClickCount = 0;
-
-    // const options: any = {
-
-    // }
-
-    
-    // const mx = factory({
-    //   mxBasePath: '',
-    // });
-    // console.log(mx.mxClient.VERSION);
-  
   }
 
   async ngAfterViewInit(): Promise<void> {
-    // this.mounted = tr ue;
-
     await this.getMingMap();
 
+    // join group for this mind map
+    await this.editorHubService.startConnection();
+    this.editorHubService.addToGroup(this.mapId);
+
+
     this.editorService.init(
-    // const editor = new Editor(
-      // this.utilService,
       {
       container: '.graph-content',
       clickFunc: this.clickFunc,
@@ -92,29 +61,19 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       undoFunc: this.undoFunc,
       copyFunc: this.copyFunc,
       valueChangeFunc: this.valueChangeFunc,
-      // IMAGE_SHAPES,
-      // CARD_SHAPES,
-      // SVG_SHAPES
     });
 
-    // this.editor = editor;
-
-    // window['editor'] = editor;
 
     this.editorService.initCustomPort('https://gw.alicdn.com/tfs/TB1PqwZzzDpK1RjSZFrXXa78VXa-200-200.png');
 
     const xml = window.localStorage.getItem('autosaveXml');
 
     this.editorService.renderGraphFromXml(xml);
-
-    // this.state = { editor };
-    
   }
 
   ngOnDestroy(){
-    // this.mounted = false;
     this.editor.removeEventListeners();
-    //remove self from this group ...
+    //remove self from this group 
     this.editorHubService.removeFromGroup(this.mapId);
   }
 
@@ -129,52 +88,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     })
     
   }
-  // ngAfterViewInit() {
-  //   // // const options: any = {
-  //   // //   mxImageBasePath: "./src/images",
-  //   // //   mxBasePath: "./src"
-  //   // // }
-
-  //   // // var mxgraph = require("mxgraph")(options);
-  //   // // var mxEvent = mxgraph.mxEvent;
-  //   // // mxEvent.disableContextMenu(this.graphContainer.nativeElement);
-    
-
-  //   // this.graph = new mxGraph(this.graphContainer.nativeElement);
-
-  //   // // set default styles for graphconst style = this.graph.getStylesheet().getDefaultVertexStyle();
-  //   // style[mxConstants.STYLE_PERIMETER] = mxPerimeter.EllipsePerimeter;
-  //   // style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_ELLIPSE;
-  //   // style[mxConstants.DEFAULT_VALID_COLOR] = '#00FF00';
-  //   // this.graph.getStylesheet().putDefaultVertexStyle (style);
-
-  //   // // add cells
-  //   // try {
-  //   //   const parent = this.graph.getDefaultParent();
-  //   //   this.graph.getModel().beginUpdate();
-  //   //   const vertex1 = this.graph.insertVertex(parent, '1', 'Vertex 1', 0, 0, 200, 80);
-  //   //   const vertex2 = this.graph.insertVertex(parent, '2', 'Vertex 2', 0, 0, 200, 80);
-  //   //   this.graph.insertEdge(parent, '', '', vertex1, vertex2);
-  //   // } finally {
-  //   //   this.graph.getModel().endUpdate();
-  //   //   new mxHierarchicalLayout(this.graph).execute(this.graph.getDefaultParent());
-  //   // }
-  //   // this.graph.gridSize = 30;
-  //   // this.graph.setTooltips(true);
-
-  //   // this.editor = new mxEditor({
-  //   //   container: this.graph,
-  //   //   clickFunc: this.clickFunc,
-  //   //   doubleClickFunc: this.doubleClickFunc,
-  //   //   autoSaveFunc: this.autoSaveFunc,
-  //   //   cellCreatedFunc: this.cellCreatedFunc,
-  //   //   deleteFunc: this.deleteFunc,
-  //   //   valueChangeFunc: this.valueChangeFunc,
-  //   //   // IMAGE_SHAPES,
-  //   //   // CARD_SHAPES,
-  //   //   // SVG_SHAPES
-  //   // });
-  // }
+  
 
   doubleClickFunc = (cell) => {
     console.log('double click', cell);
@@ -212,12 +126,9 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   autoSaveFunc = (xml) => {
-    // window.autosaveXml = xml;
-// debugger;
-    const oParser = new DOMParser (); // eslint-disable-line
+    const oParser = new DOMParser ();
     const oDOM = oParser.parseFromString(xml, 'application/xml');
 
-    // window.autoSaveXmlDom = oDOM;
     this.editorHubService.sendGraph(this.mapId, xml);
     window.localStorage.setItem('autosaveXml', xml);
   };
@@ -236,26 +147,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   updateDiagramData = (data) => {
     console.log(`update diagram: ${data}`);
-
-    // message.info('diagram save success');
   }
 
 }
 
-
-// declare class mxEditor {
-//   init(config);
-//   container;
-//   clickFunc(cell);
-//   doubleClickFunc(cell);
-//   autoSaveFunc(xml);
-//   cellCreatedFunc(currentCell);
-//   deleteFunc(cells);
-//   valueChangeFunc(cell, newValue);
-
-//   getAllCells();
-//   renameCell(name, currentCell);
-//       // IMAGE_SHAPES,
-//       // CARD_SHAPES,
-//       // SVG_SHAPES
-// }

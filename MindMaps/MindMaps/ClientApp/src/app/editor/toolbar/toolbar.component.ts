@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EditorService } from 'src/app/_services/editor.service';
+import { SnackBarService } from '../../_services/snack-bar.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,21 +8,22 @@ import { EditorService } from 'src/app/_services/editor.service';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
+  @Output() showComments = new EventEmitter();
+
   panning = false;
-  constructor(private editor: EditorService) { }
+  constructor(private editor: EditorService, private snackBarService: SnackBarService) { }
 
   ngOnInit() {
   }
 
-
-
-  save(){
+  save() {
     // const diagramXml = window.localStorage.getItem('autosaveXml');
 
     //     updateDiagramData(diagramXml);
+    this.snackBarService.openSnackBar('diagram saved', 'OK');
   }
 
-  group(){
+  group() {
     const cellsSelected = this.editor.graph.getSelectionCells();
 
     if (!(cellsSelected && cellsSelected.length > 1)) {
@@ -66,41 +68,45 @@ export class ToolbarComponent implements OnInit {
 
   }
 
-  ungroup(){
+  ungroup() {
     const cellsSelected = this.editor.graph.getSelectionCells();
 
-          if (!(cellsSelected && cellsSelected.length !== 0)) {
-            return false;
-          }
+    if (!(cellsSelected && cellsSelected.length !== 0)) {
+      return false;
+    }
 
-          this.editor.ungroupCells(cellsSelected);
+    this.editor.ungroupCells(cellsSelected);
 
-          return true;
+    return true;
   }
 
-  zoomOut(){
+  zoomOut() {
     this.editor.graph.zoomOut();
   }
 
-  zoomIn(){
+  zoomIn() {
     this.editor.graph.zoomIn();
   }
 
-  zoomActual(){
+  zoomActual() {
     this.editor.graph.zoomActual();
   }
 
-  move(event){
+  move(event) {
     // e.currentTarget.classList.toggle('active');
 
     var targetEle = event.srcElement.attributes.class;
 
-        this.panning = !this.panning;
+    this.panning = !this.panning;
 
-        if (this.panning) {
-          this.editor.startPanning();
-        } else {
-          this.editor.stopPanning();
-        }
+    if (this.panning) {
+      this.editor.startPanning();
+    } else {
+      this.editor.stopPanning();
+    }
+  }
+
+  comments() {
+    this.showComments.emit();
   }
 }

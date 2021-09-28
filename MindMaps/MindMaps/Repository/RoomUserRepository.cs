@@ -16,7 +16,10 @@ namespace MindMaps.Repository
 
         public async Task<RoomUser> Filter(int roomID, int userID)
         {
-            var result = await context.RoomUsers.Where(x => x.RoomID == roomID && x.UserID == userID).FirstOrDefaultAsync();
+            var result = await context.RoomUsers
+                .Where(x => x.RoomID == roomID && x.UserID == userID)
+                .Include(x => x.Room)
+                .FirstOrDefaultAsync();
             return result;
         }
 
