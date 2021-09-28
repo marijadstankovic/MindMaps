@@ -16,6 +16,7 @@ export class RoomDetailsDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public room: any) { }
 
   ngOnInit() {
+    console.log(this.room);
   }
 
 }

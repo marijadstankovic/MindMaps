@@ -2,15 +2,21 @@
 <mat-dialog-content class="mat-typography">
   <table>
     <tr class="basic-info">
-      <td>
+      <td style="font-size: 14px">
         Name: <strong>{{room.name}}</strong>
-        Date of creation: <strong>{{row.dateOfCreation | date:'short'}}</strong>
       </td>
-      <td>
+      <td style="font-size: 14px">
         ID: <strong>{{room.id}}</strong>
       </td>
     </tr>
-    <mat-divider></mat-divider>
+    <tr>
+      <td style="font-size: 14px">
+        Date of creation: <strong>{{room.dateOfCreation | date:'short'}}</strong>
+      </td>
+      <td>
+      </td>
+      <mat-divider></mat-divider>
+    </tr>
 
     <tr>
       <td>

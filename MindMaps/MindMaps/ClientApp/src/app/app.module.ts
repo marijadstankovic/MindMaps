@@ -17,8 +17,6 @@ import { NavMenuModule } from './nav-menu/nav-menu.module';
 import { MenuComponent } from './nav-menu/menu/menu.component';
 import { CommonModule } from '@angular/common';
 import { ListRoomsComponent } from './list-rooms/list-rooms.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 //import { ChatComponent } from 'src/app/chat/chat/chat.component';
 import { NgChatModule } from 'ng-chat';
