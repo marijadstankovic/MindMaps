@@ -10,7 +10,7 @@ import { ListMindMapsDataSource, ListMindMapsItem } from './list-documents-datas
   styleUrls: ['./list-documents.component.css']
 })
 export class ListDocumentsComponent implements OnInit {
-  @Input() showActionButtons = true;
+  @Input() showActionButtons: boolean;
   @Input() room: any;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;

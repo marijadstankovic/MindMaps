@@ -118,7 +118,7 @@ namespace MindMaps.Controllers
         }
 
         [HttpPut("RoomName/{id}")]
-        public async Task<IActionResult> ChangeRoomName(int id, [FromBody] string name)
+        public async Task<IActionResult> ChangeRoomName(int id, string name)
         {
             var room = await _roomRepository.Get(id);
 

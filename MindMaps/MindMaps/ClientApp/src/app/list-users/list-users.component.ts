@@ -9,7 +9,7 @@ import { ListUsersDataSource, ListUsersItem } from './list-users-datasource';
   styleUrls: ['./list-users.component.css']
 })
 export class ListUsersComponent implements OnInit {
-  @Input() room: any;
+  @Input() roomID: number;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<ListUsersItem>;
@@ -20,7 +20,7 @@ export class ListUsersComponent implements OnInit {
   constructor(private profileService: ProfileService) { }
 
   ngOnInit() {
-    this.dataSource = new ListUsersDataSource(this.profileService, this.room);
+    this.dataSource = new ListUsersDataSource(this.profileService, this.roomID);
     this.dataSource.loadData();
   }
 
