@@ -15,12 +15,15 @@
       </td>
       <td>
       </td>
-      <mat-divider></mat-divider>
     </tr>
   </table>
+
+  <mat-divider></mat-divider>
   <h3>Documents:</h3>
+
   <app-list-documents [showActionButtons]="showBtns" [room]="room"></app-list-documents>
 
+  <mat-divider></mat-divider>
   <h3>Users:</h3>
   <app-list-users [roomID]="room.id"></app-list-users>
 

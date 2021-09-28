@@ -14,7 +14,6 @@ export class ListDocumentsComponent implements OnInit {
   @Input() showActionButtons: boolean;
   @Input() room: any;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<ListMindMapsItem>;
   dataSource: ListMindMapsDataSource;
   displayedColumns = ['id', 'name', 'dateOfCreation', 'actions'];
@@ -28,7 +27,6 @@ export class ListDocumentsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
