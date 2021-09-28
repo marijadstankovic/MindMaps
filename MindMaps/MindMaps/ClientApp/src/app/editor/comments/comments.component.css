@@ -1,3 +1,8 @@
 .comment-wrapper > * {
   margin: 15px;
 }
+
+.add-comment {
+  position: absolute;
+  bottom: 10px;
+}

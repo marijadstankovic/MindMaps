@@ -33,3 +33,7 @@ a:hover {
     overflow: hidden;
    
 }
+
+.mat-drawer-width {
+  min-width: 40%;
+}

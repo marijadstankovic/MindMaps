@@ -83,7 +83,7 @@ namespace MindMaps.Controllers
         public async Task<ActionResult<RoomUser>> PostRoomUser(AddUserToRoomDto roomUser)
         {
             var keys = roomUser.RoomKey.Split('.');
-            // string roomName = keys[0];
+            string roomName = keys[0];
             string roomIdCoded = keys[1]; // dodaj i ostale npr ako je konverzijom 1004 ispalo as.2 to je keys[1-2]
             //onda tu mora enkodiranje
             int roomId = int.Parse(roomIdCoded);
@@ -93,6 +93,8 @@ namespace MindMaps.Controllers
             {//korisnik je vec u sobi
                 return null;
             }
+            if (exits.Room.Name != roomName)
+                return NotFound();
 
             var RoomUser = new RoomUser() { RoomID = roomId, UserID = roomUser.UserUid }; // treba proveriti i da li ovi postoje i da li postoji njihova kombinacija
             await _roomUserRepository.Add(RoomUser);
