@@ -89,6 +89,35 @@ namespace MindMaps.Controllers
             return NoContent();
         }
 
+        [HttpPut("Name/{id}")]
+        public async Task<IActionResult> ChangeName(int id, string name)
+        {
+            var mindMap = await _repository.Get(id);
+            if (mindMap == null)
+            {
+                return NotFound();
+            }
+            mindMap.Name = name;
+
+            try
+            {
+                await _repository.Update(mindMap);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MindMapExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/MindMaps
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

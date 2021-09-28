@@ -12,4 +12,8 @@ export class MindmapsService {
   getMindmapsByRoomID(roomID: any): any {
     return this.http.get(this.baseUrl + "MindMaps/ByRoomId/" + roomID);
   }
+
+  changeName(mapId: number, name: string) {
+    this.http.put<any>(this.baseUrl + "MindMaps/Name/" + mapId + "?name=" + name, null);
+  }
 }
