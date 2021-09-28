@@ -12,10 +12,7 @@ import { SnackBarService } from '../../_services/snack-bar.service';
 export class RoomDetailsDialogComponent implements OnInit {
   showBtns: boolean = false;
   constructor(
-    private profileService: RoomService,
-    private http: HttpClient,
     public dialogRef: MatDialogRef<RoomDetailsDialogComponent>,
-    private snackBarService: SnackBarService,
     @Inject(MAT_DIALOG_DATA) public room: any) { }
 
   ngOnInit() {

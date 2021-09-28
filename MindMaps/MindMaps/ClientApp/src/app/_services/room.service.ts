@@ -23,7 +23,7 @@ export class RoomService {
   }
 
   changeRoomName(roomID: any, name: any) {
-    return this.http.put<any>(this.baseUrl + "Rooms/RoomName/" + roomID, name);
+    return this.http.put<any>(this.baseUrl + "Rooms/RoomName/" + roomID + "?name=" + name, name);
   }
 
   getRoomsByUserID(userId: any) {

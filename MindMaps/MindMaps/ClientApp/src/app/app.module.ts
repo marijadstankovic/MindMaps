@@ -35,7 +35,7 @@ import { MatCardModule } from '@angular/material/card';
 import { LeaveGroupComponent } from './dialogs/leave-group/leave-group.component';
 import { ChangeRoomNameComponent } from './dialogs/change-room-name/change-room-name.component';
 import { RoomDetailsDialogComponent } from './dialogs/room-details-dialog/room-details-dialog.component';
-import { ListUsersComponent } from './list-users/list-users.component';
+import { RoomDetailsDialogModule } from './dialogs/room-details-dialog/room-details-dialog.module';
 
 @NgModule({
   declarations: [
@@ -52,8 +52,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
     CommentsComponent,
     LeaveGroupComponent,
     ChangeRoomNameComponent,
-    RoomDetailsDialogComponent,
-    ListUsersComponent
+    RoomDetailsDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -70,8 +69,6 @@ import { ListUsersComponent } from './list-users/list-users.component';
       { path: 'editor/:id', component: EditorComponent}
     ]),
     BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
     MatGridListModule,
@@ -80,7 +77,8 @@ import { ListUsersComponent } from './list-users/list-users.component';
     MatSidenavModule,
     MatCardModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RoomDetailsDialogModule
   ],
   exports: [
     MatProgressBarModule,
@@ -88,7 +86,8 @@ import { ListUsersComponent } from './list-users/list-users.component';
   ],
   entryComponents: [
     ChangeRoomNameComponent,
-    LeaveGroupComponent
+    LeaveGroupComponent,
+    RoomDetailsDialogComponent
   ],
   providers: [
     AuthService
