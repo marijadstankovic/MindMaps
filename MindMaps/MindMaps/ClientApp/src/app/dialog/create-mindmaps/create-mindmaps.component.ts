@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
+import { MindmapsService } from '../../_services/mindmaps.service';
 
 @Component({
   selector: 'app-create-mindmaps',
@@ -7,11 +9,30 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./create-mindmaps.component.css']
 })
 export class CreateMindmapsComponent implements OnInit {
+  documentName: string;
 
-  constructor(public dialogRef: MatDialogRef<CreateMindmapsComponent>,
+  constructor(
+    private mindMapService: MindmapsService,
+    private router: Router,
+    public dialogRef: MatDialogRef<CreateMindmapsComponent>,
     @Inject(MAT_DIALOG_DATA) public roomId: any) { }
+
 
   ngOnInit() {
   }
 
+  createDocument() {
+    this.mindMapService.createMindmap(1002, this.documentName)
+      .subscribe((mapId) => {
+        close();
+        debugger;
+        this.router.navigate(['/editor', mapId]);
+      });
+    console.log(this.documentName);
+    
+  }
+
+  close() {
+    this.dialogRef.close();
+  }
 }

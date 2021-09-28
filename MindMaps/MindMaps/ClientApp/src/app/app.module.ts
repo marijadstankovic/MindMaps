@@ -87,7 +87,8 @@ import { CreateMindmapsComponent } from './dialog/create-mindmaps/create-mindmap
   entryComponents: [
     ChangeRoomNameComponent,
     LeaveGroupComponent,
-    RoomDetailsDialogComponent
+    RoomDetailsDialogComponent,
+    CreateMindmapsComponent
   ],
   providers: [
     AuthService

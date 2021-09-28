@@ -1,14 +1,14 @@
 <h2 mat-dialog-title>Create new mindmaps</h2>
 <mat-dialog-content class="join-group-form">
-  <form #joinRoomForm="ngForm" (ngSubmit)="join()">
+  <form #joinRoomForm="ngForm" (ngSubmit)="createDocument()">
     <p>
       <mat-form-field>
-        <input type="text" matInput placeholder="RoomKey" name="RoomKey" required [(ngModel)]="joinRoomModel.RoomKey">
+        <input type="text" matInput placeholder="Document name" name="documentName" required [(ngModel)]="documentName">
       </mat-form-field>
     </p>
     <div class="buttons">
       <button type="submit" mat-button>Create and Open</button>
-      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button mat-dialog-close (click)="close()">Cancel</button>
     </div>
   </form>
 </mat-dialog-content>

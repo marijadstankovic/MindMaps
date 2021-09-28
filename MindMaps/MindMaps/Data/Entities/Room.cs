@@ -22,8 +22,10 @@ namespace MindMaps.Data.Entities
         [JsonIgnore]
         public Chat Chat { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<RoomUser> RoomUsers { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<MindMap> MindMaps { get; set; }
     }
 }
