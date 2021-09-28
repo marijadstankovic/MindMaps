@@ -4,6 +4,7 @@ import { MatDialog, MatPaginator, MatSort, MatTable } from '@angular/material';
 import { Router } from '@angular/router';
 import { MindmapsService } from '../_services/mindmaps.service';
 import { ListMindMapsDataSource, ListMindMapsItem } from './list-documents-datasource';
+import { ChangeRoomNameComponent } from '../dialogs/change-room-name/change-room-name.component';
 
 @Component({
   selector: 'app-list-documents',
@@ -33,6 +34,10 @@ export class ListDocumentsComponent implements OnInit {
 
   addDocumentDialog() {    
     this.dialog.open(CreateMindmapsComponent, { data: this.roomID });
+  }
+
+  changeName(mapId: number) {
+    this.dialog.open(ChangeRoomNameComponent, { data: mapId });
   }
 
   goToEditor(mapId: number) {

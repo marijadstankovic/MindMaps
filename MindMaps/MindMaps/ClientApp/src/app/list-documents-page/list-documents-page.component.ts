@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-documents-page.component.css']
 })
 export class ListDocumentsPageComponent implements OnInit {
-  showBtns: boolean;
-  room: any;
+  showBtns: boolean = true;
+  roomid: any;
+
   constructor() {
-    this.showBtns = true;
-    this.room = parseInt(localStorage.getItem("roomId"));
   }
 
   ngOnInit() {
+    this.roomid = parseInt(localStorage.getItem("roomId"));
   }
 
 }

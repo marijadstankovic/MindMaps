@@ -36,6 +36,7 @@ import { RoomDetailsDialogComponent } from './dialogs/room-details-dialog/room-d
 import { RoomDetailsDialogModule } from './dialogs/room-details-dialog/room-details-dialog.module';
 import { CreateMindmapsComponent } from './dialog/create-mindmaps/create-mindmaps.component';
 import { ListDocumentsPageComponent } from './list-documents-page/list-documents-page.component';
+import { ChangeNameMindmapComponent } from './dialogs/change-name-mindmap/change-name-mindmap.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ListDocumentsPageComponent } from './list-documents-page/list-documents
     ChangeRoomNameComponent,
     RoomDetailsDialogComponent,
     CreateMindmapsComponent,
-    ListDocumentsPageComponent
+    ListDocumentsPageComponent,
+    ChangeNameMindmapComponent
   ],
   imports: [
     MaterialModule,

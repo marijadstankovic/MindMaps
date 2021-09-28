@@ -12,15 +12,12 @@ import { LeaveGroupComponent } from '../leave-group/leave-group.component';
 })
 export class ChangeRoomNameComponent implements OnInit {
 
-  UserUid: any;
-  jwtHelper = new JwtHelperService();
-  decodedToken: any;
   RoomName: string;
 
   constructor(
     private roomService: RoomService,
     private snackBarService: SnackBarService,
-    public dialogRef: MatDialogRef<LeaveGroupComponent>,
+    public dialogRef: MatDialogRef<ChangeRoomNameComponent>,
     @Inject(MAT_DIALOG_DATA) public idRoom: any) { }
 
   ngOnInit() {

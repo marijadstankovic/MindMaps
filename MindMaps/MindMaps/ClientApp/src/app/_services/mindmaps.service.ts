@@ -15,7 +15,7 @@ export class MindmapsService {
   }
 
   changeName(mapId: number, name: string) {
-    this.http.put<any>(this.baseUrl + "MindMaps/Name/" + mapId + "?name=" + name, null);
+    return this.http.put<any>(this.baseUrl + "MindMaps/Name/" + mapId + "?name=" + name, null);
   }
   
   createMindmap(roomID: number, documentName: string): Observable<any> {
