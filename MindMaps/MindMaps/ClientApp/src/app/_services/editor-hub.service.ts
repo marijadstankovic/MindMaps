@@ -22,9 +22,7 @@ export class EditorHubService {
 
   constructor(
     private editorService: EditorService) {
-    // this.startConnection();
   }
-
 
   public async startConnection(): Promise<void> {
     const token = localStorage.getItem('token');
@@ -91,6 +89,5 @@ export class EditorHubService {
       this.commentRemoved.next(obj);
     })
   }
-
 
 }

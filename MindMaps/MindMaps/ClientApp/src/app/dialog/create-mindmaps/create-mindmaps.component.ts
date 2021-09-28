@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class CreateMindmapsComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CreateMindmapsComponent>,
-    @Inject(MAT_DIALOG_DATA) public room: any) { }
+    @Inject(MAT_DIALOG_DATA) public roomId: any) { }
 
   ngOnInit() {
   }
