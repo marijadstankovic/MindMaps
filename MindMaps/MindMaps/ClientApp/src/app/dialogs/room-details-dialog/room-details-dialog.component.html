@@ -1,31 +1,36 @@
-<h2 mat-dialog-title>Room details</h2>
-<mat-dialog-content class="mat-typography">
+<h2 mat-dialog-title>
+  Room details
+  <mat-divider></mat-divider>
+</h2>
+<mat-dialog-content class="details-content">
   <table>
     <tr class="basic-info">
-      <td style="font-size: 14px">
+      <td class="font-20">
         Name: <strong>{{room.name}}</strong>
       </td>
-      <td style="font-size: 14px">
+      <td class="font-20">
         Key: <strong>{{room.name}}.{{room.id}}</strong>
       </td>
     </tr>
     <tr>
-      <td style="font-size: 14px">
+      <td class="font-20">
         Date of creation: <strong>{{room.dateOfCreation | date:'short'}}</strong>
       </td>
       <td>
       </td>
     </tr>
   </table>
-
+  <br />
   <mat-divider></mat-divider>
-  <h3>Documents:</h3>
+  <br />
+  <h5>Documents:</h5>
 
   <app-list-documents [showActionButtons]="showBtns" [roomID]="room.id"></app-list-documents>
 
-
+  <br />
   <mat-divider></mat-divider>
-  <h3>Users:</h3>
+  <br />
+  <h5>Users:</h5>
   <app-list-users [roomID]="room.id"></app-list-users>
 
 </mat-dialog-content>
