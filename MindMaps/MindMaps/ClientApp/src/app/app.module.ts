@@ -68,7 +68,7 @@ import { ChangeNameMindmapComponent } from './dialogs/change-name-mindmap/change
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      //{ path: 'chat', component: ChatComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'documents', component: ListDocumentsPageComponent },
       { path: 'editor/:id', component: EditorComponent}

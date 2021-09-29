@@ -80,7 +80,7 @@ export class EditorHubService {
 
   public recieveComment() {
     this.hubConnection.on('CommentAdded', (obj) => {
-      debugger;
+     // debugger;
       console.log(obj);
       this.commentAdded.next(obj);
     })

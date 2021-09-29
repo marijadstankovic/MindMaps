@@ -22,14 +22,13 @@ export class CreateMindmapsComponent implements OnInit {
   }
 
   createDocument() {
-    this.mindMapService.createMindmap(1002, this.documentName)
+    this.mindMapService.createMindmap(this.roomId, this.documentName)
       .subscribe((mapId) => {
-        close();
-        debugger;
+        console.log("mapId: " + mapId);
         this.router.navigate(['/editor', mapId]);
       });
     console.log(this.documentName);
-    
+    this.dialogRef.close();
   }
 
   close() {

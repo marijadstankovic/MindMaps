@@ -72,7 +72,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(){
-    this.editor.removeEventListeners();
+    //this.editor.removeEventListeners();
     //remove self from this group 
     this.editorHubService.removeFromGroup(this.mapId);
   }

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AuthService } from '../_services/auth.service';
 import { FormRoomComponent } from '../dialogs/form-room/form-room.component';
 import { JoinGroupComponent } from '../dialogs/join-group/join-group.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { JoinGroupComponent } from '../dialogs/join-group/join-group.component';
 })
 export class NavMenuComponent {
   isExpanded = false;
-  constructor(public authService: AuthService, public dialog: MatDialog) {
+  constructor(public authService: AuthService, public dialog: MatDialog, private router: Router) {
   }
 
   collapse() {

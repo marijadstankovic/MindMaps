@@ -93,8 +93,8 @@ namespace MindMaps.Controllers
             {//korisnik je vec u sobi
                 return null;
             }
-            if (exits.Room.Name != roomName)
-                return NotFound();
+            //if (exits.Room.Name != roomName)
+                //return NotFound();
 
             var RoomUser = new RoomUser() { RoomID = roomId, UserID = roomUser.UserUid }; // treba proveriti i da li ovi postoje i da li postoji njihova kombinacija
             await _roomUserRepository.Add(RoomUser);

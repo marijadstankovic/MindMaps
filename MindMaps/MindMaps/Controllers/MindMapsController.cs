@@ -139,7 +139,7 @@ namespace MindMaps.Controllers
 
             var result = await _repository.Add(mindMap);
 
-            return Ok(); //  CreatedAtAction("GetChat", new { id = mindMap.Id }, mindMap);
+            return Ok(result); //  CreatedAtAction("GetChat", new { id = mindMap.Id }, mindMap);
         }
 
         // DELETE: api/MindMaps/5

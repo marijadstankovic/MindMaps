@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ChatHubService } from '../../_services/chat-hub.service';
 import { RoomService } from '../../_services/room.service';
@@ -14,7 +15,7 @@ export class JoinGroupComponent implements OnInit {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
 
-  constructor(private roomService: RoomService, private chatHubService: ChatHubService) { }
+  constructor(private roomService: RoomService, private chatHubService: ChatHubService, public dialogRef: MatDialogRef<JoinGroupComponent>) { }
 
   ngOnInit() {
   }
@@ -30,8 +31,9 @@ export class JoinGroupComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-  }
 
+    this.dialogRef.close();
+  }
 
 }
 
