@@ -124,20 +124,20 @@ namespace MindMaps.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> PostMindMap(MindMapDTO mindMap)
         {
-            var room = await _roomRepository.Get(mindMap.RoomId);
-            if(room == null)
-            {
-                return BadRequest();
-            }
+            //var room = await _roomRepository.Get(mindMap.RoomId);
+            //if(room == null)
+            //{
+            //    return BadRequest();
+            //}
 
-            var doc = new MindMap
-            {
-                DateOfCreation = DateTime.UtcNow,
-                Name = mindMap.Name,
-                Room = room,
-            };
+            //var doc = new MindMap
+            //{
+            //    DateOfCreation = DateTime.UtcNow,
+            //    Name = mindMap.Name,
+            //    Room = room,
+            //};
 
-            await _repository.Add(doc);
+            var result = await _repository.Add(mindMap);
 
             return Ok(); //  CreatedAtAction("GetChat", new { id = mindMap.Id }, mindMap);
         }
